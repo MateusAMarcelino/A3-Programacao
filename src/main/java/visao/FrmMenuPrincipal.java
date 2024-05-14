@@ -26,7 +26,41 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuGerenciamentoGeral = new javax.swing.JMenu();
+        jMenuItemCadastroDeFerramentas = new javax.swing.JMenuItem();
+        jMenuItemCadastroDeAmigos = new javax.swing.JMenuItem();
+        jMenuItemGerenciamentoDeFerramentas = new javax.swing.JMenuItem();
+        jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
+        jMenuSobre = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenuGerenciamentoGeral.setText("Gerenciamento Geral");
+
+        jMenuItemCadastroDeFerramentas.setText("Cadastro de Ferramentas");
+        jMenuGerenciamentoGeral.add(jMenuItemCadastroDeFerramentas);
+
+        jMenuItemCadastroDeAmigos.setText("Cadastro de Amigos");
+        jMenuItemCadastroDeAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroDeAmigosActionPerformed(evt);
+            }
+        });
+        jMenuGerenciamentoGeral.add(jMenuItemCadastroDeAmigos);
+
+        jMenuItemGerenciamentoDeFerramentas.setText("Gerenciamento de Ferramentas");
+        jMenuGerenciamentoGeral.add(jMenuItemGerenciamentoDeFerramentas);
+
+        jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
+        jMenuGerenciamentoGeral.add(jMenuItemEmprestimoDeFerramentas);
+
+        jMenuBar1.add(jMenuGerenciamentoGeral);
+
+        jMenuSobre.setText("Sobre");
+        jMenuBar1.add(jMenuSobre);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -36,11 +70,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemCadastroDeAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroDeAmigosActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItemCadastroDeAmigosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +117,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuGerenciamentoGeral;
+    private javax.swing.JMenuItem jMenuItemCadastroDeAmigos;
+    private javax.swing.JMenuItem jMenuItemCadastroDeFerramentas;
+    private javax.swing.JMenuItem jMenuItemEmprestimoDeFerramentas;
+    private javax.swing.JMenuItem jMenuItemGerenciamentoDeFerramentas;
+    private javax.swing.JMenu jMenuSobre;
     // End of variables declaration//GEN-END:variables
 }
