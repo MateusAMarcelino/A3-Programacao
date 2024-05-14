@@ -42,12 +42,34 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome :");
 
+        CA_Nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CA_NomeActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Telefone:");
 
+        CA_Telefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CA_TelefoneActionPerformed(evt);
+            }
+        });
+
         JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
 
         JBCancelar.setText("Cancelar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,6 +118,23 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void CA_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CA_NomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CA_NomeActionPerformed
+
+    private void CA_TelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CA_TelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CA_TelefoneActionPerformed
+
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
