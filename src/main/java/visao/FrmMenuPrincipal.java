@@ -39,6 +39,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuGerenciamentoGeral.setText("Gerenciamento Geral");
 
         jMenuItemCadastroDeFerramentas.setText("Cadastro de Ferramentas");
+        jMenuItemCadastroDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroDeFerramentasActionPerformed(evt);
+            }
+        });
         jMenuGerenciamentoGeral.add(jMenuItemCadastroDeFerramentas);
 
         jMenuItemCadastroDeAmigos.setText("Cadastro de Amigos");
@@ -50,9 +55,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuGerenciamentoGeral.add(jMenuItemCadastroDeAmigos);
 
         jMenuItemGerenciamentoDeFerramentas.setText("Gerenciamento de Ferramentas");
+        jMenuItemGerenciamentoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGerenciamentoDeFerramentasActionPerformed(evt);
+            }
+        });
         jMenuGerenciamentoGeral.add(jMenuItemGerenciamentoDeFerramentas);
 
         jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
+        jMenuItemEmprestimoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmprestimoDeFerramentasActionPerformed(evt);
+            }
+        });
         jMenuGerenciamentoGeral.add(jMenuItemEmprestimoDeFerramentas);
 
         jMenuBar1.add(jMenuGerenciamentoGeral);
@@ -78,8 +93,30 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemCadastroDeAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroDeAmigosActionPerformed
         // TODO add your handling code here:
+        FrmCadastrarAmigo tela = new FrmCadastrarAmigo();
+
+        tela.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemCadastroDeAmigosActionPerformed
+
+    private void jMenuItemCadastroDeFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroDeFerramentasActionPerformed
+        // TODO add your handling code here:
+        FrmCadastrarFerramenta tela = new FrmCadastrarFerramenta();
+
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroDeFerramentasActionPerformed
+
+    private void jMenuItemGerenciamentoDeFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerenciamentoDeFerramentasActionPerformed
+        // TODO add your handling code here:
+         FrmGerenciamentoDeFerramentas objeto = new FrmGerenciamentoDeFerramentas();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemGerenciamentoDeFerramentasActionPerformed
+
+    private void jMenuItemEmprestimoDeFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmprestimoDeFerramentasActionPerformed
+        // TODO add your handling code here:
+        FrmEmprestimoDeFerramentas objeto = new FrmEmprestimoDeFerramentas();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemEmprestimoDeFerramentasActionPerformed
 
     /**
      * @param args the command line arguments
