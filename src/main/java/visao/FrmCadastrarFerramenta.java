@@ -4,17 +4,20 @@
  */
 package visao;
 
+import model.Ferramenta;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author guiho
  */
 public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmCadastrarFerramenta
-     */
+   private Ferramenta objetoFerramenta;
+   
     public FrmCadastrarFerramenta() {
         initComponents();
+        this.objetoFerramenta = new Ferramenta();
     }
 
     /**
@@ -34,7 +37,7 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         JTFCusto = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
-        JBConfirmar = new javax.swing.JButton();
+        JBCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,8 +52,18 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         jLabel3.setText("Custo:");
 
         JBCancelar.setText("Cancelar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelarActionPerformed(evt);
+            }
+        });
 
-        JBConfirmar.setText("Confirmar");
+        JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +85,7 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
                                     .addComponent(JTFMarca, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JTFNome, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JBConfirmar))
+                            .addComponent(JBCadastrar))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(97, 97, 97)
                             .addComponent(jLabel4))))
@@ -98,12 +111,56 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelar)
-                    .addComponent(JBConfirmar))
+                    .addComponent(JBCadastrar))
                 .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+        // TODO add your handling code here:
+        try{
+          String Nome = "";
+          int Custo = 0;
+          String Marca = "";
+          
+          if(this.JTFNome.getText().length() < 2){
+              throw new Mensagem("Nome deve conter ao menos dois caracteres.");
+          }else {
+            Nome = this.JTFNome.getText();
+          }
+          
+          if(this.JTFCusto.getText().length() <= 0){
+              throw new Mensagem("Custo deve ser maior que zero.");
+          }else{
+           Custo = Integer.parseInt(this.JTFCusto.getText());
+          }
+          if(this.JTFMarca.getText().length() < 2){
+              throw new Mensagem("Marca deve conter dois caracteres.");
+          }else{
+           Marca = this.JTFMarca.getText();
+          }
+          
+          if(this.objetoferramenta.InsertFerramentaBD(Nome, Custo, Marca)){
+              JOptionPane.showMessageDialog(rootPane, "Aluno Cadastrado com Sucesso!");
+              this.JTFNome.setText("");
+              this.JTFCusto.setText("");
+              this.JTFMarca.setText("");
+            }
+            System.out.println(this.objetoferramenta.getMinhaLista().toString());
+            
+        } catch (Mensagem erro){
+            JOptionPane.showMessageDialog(null,erro.getMessage());
+        } catch (NumberFormatException erro2){
+            JOptionPane.showMessageDialog(null, "Informe um número valido.");
+        }
+    }//GEN-LAST:event_JBCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,8 +198,8 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBCancelar;
-    private javax.swing.JButton JBConfirmar;
     private javax.swing.JTextField JTFCusto;
     private javax.swing.JTextField JTFMarca;
     private javax.swing.JTextField JTFNome;
