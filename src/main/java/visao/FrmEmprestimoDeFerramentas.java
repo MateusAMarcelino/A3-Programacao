@@ -4,17 +4,24 @@
  */
 package visao;
 
+import modelo.Ferramenta;
+import modelo.Amigo;
+import javax.swing.JOptionPane;
+import modelo.Emprestimo;
+
 /**
  *
  * @author guiho
  */
 public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
+    private Emprestimo objetoemprestimo;
     /**
      * Creates new form FrmEmprestimoDeFerramentas
      */
     public FrmEmprestimoDeFerramentas() {
         initComponents();
+        this.objetoemprestimo = new Emprestimo();
     }
 
     /**
@@ -60,6 +67,11 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         });
 
         JBConfirmar.setText("Confirmar");
+        JBConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBConfirmarActionPerformed(evt);
+            }
+        });
 
         JBCancelar.setText("Cancelar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +146,42 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
+        // TODO add your handling code here:
+        try{
+            String nome = "";
+            String Nome = "";
+            int date = 0;
+            
+            if(this.JTFNomeAmigo.getText().length() <2){
+                throw new Mensagem("Nome deve conter ao menos dois caracteres.");
+            }else{
+                nome = this.JTFNomeAmigo.getText();
+            }
+            
+            if(this.JTFFerramentaEmprestada.getText().length() <2){
+                throw new Mensagem("O nome da ferramenta emprestada deve conter ao menos dois caracteres.");
+            }else{
+                Nome = this.JTFFerramentaEmprestada.getText();
+            }
+            
+            if(this.JTFDataEmprestimo.getText().length() <6){
+                throw new Mensagem("A data deve conter 6 caracteres");
+            }else{
+                date = Integer.parseInt(this.JTFDataEmprestimo.getText());
+            }
+            
+        } catch (Mensagem erro){
+            JOptionPane.showMessageDialog(null,erro.getMessage());
+        } catch (NumberFormatException erro2){
+            JOptionPane.showMessageDialog(null, "Informe um número valido.");
+        }
+           
+            
+        
+        
+    }//GEN-LAST:event_JBConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
