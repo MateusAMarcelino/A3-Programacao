@@ -1,7 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
-import model.Emprestimo;
+import modelo.Emprestimo;
 
 public class EmprestimoDAO {
     
