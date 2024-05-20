@@ -5,7 +5,7 @@ import model.Amigo;
 
 public class AmigoDAO {
 
-    //Cria ArrayList de Amigos
+    //Cria ArrayList de Amigos:
     public static ArrayList<Amigo> ListaAmigo = new ArrayList<>();
 
     //Métodos Getter e Setter da ArrayList Amigos
