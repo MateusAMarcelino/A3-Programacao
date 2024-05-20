@@ -12,6 +12,7 @@ public class Amigo {
 
     //Construtores
     public Amigo() {
+        
         this("", 0, "", 0);
     }
 
