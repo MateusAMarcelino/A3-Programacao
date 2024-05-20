@@ -4,7 +4,7 @@
  */
 package visao;
 
-import model.Ferramenta;
+import modelo.Ferramenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,6 +49,12 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
         jLabel2.setText("Marca:");
 
+        JTFMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFMarcaActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Custo:");
 
         JBCancelar.setText("Cancelar");
@@ -71,24 +77,24 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(JBCancelar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(JTFCusto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(JTFMarca, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTFNome, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGap(126, 126, 126)
+                            .addComponent(JBCancelar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JBCadastrar))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(97, 97, 97)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,7 +128,11 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
-
+    /**
+     * A variavel 'custo' é diferente da 'valor' em modelo.Ferramenta talvez de algum
+     * problema mas não tenho certeza pq as duas tem o valor de int
+     * @param evt 
+     */
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
         try{
@@ -147,13 +157,13 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
            Marca = this.JTFMarca.getText();
           }
           
-          if(this.objetoferramenta.InsertFerramentaBD(Nome, Custo, Marca)){
+          if(this.objetoFerramenta.insertFerramentaBD(Nome, Marca, Custo)){
               JOptionPane.showMessageDialog(rootPane, "Aluno Cadastrado com Sucesso!");
               this.JTFNome.setText("");
               this.JTFCusto.setText("");
               this.JTFMarca.setText("");
             }
-            System.out.println(this.objetoferramenta.getMinhaLista().toString());
+            System.out.println(this.objetoFerramenta.getListaFerramenta().toString());
             
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null,erro.getMessage());
@@ -161,6 +171,10 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Informe um número valido.");
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
+
+    private void JTFMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFMarcaActionPerformed
 
     /**
      * @param args the command line arguments
