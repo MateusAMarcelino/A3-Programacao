@@ -4,7 +4,7 @@
  */
 package visao;
 
-import model.Ferramenta;
+import modelo.Ferramenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -147,13 +147,13 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
            Marca = this.JTFMarca.getText();
           }
           
-          if(this.objetoferramenta.InsertFerramentaBD(Nome, Custo, Marca)){
+          if(this.objetoFerramenta.insertFerramentaBD(Nome, Marca, Custo)){
               JOptionPane.showMessageDialog(rootPane, "Aluno Cadastrado com Sucesso!");
               this.JTFNome.setText("");
               this.JTFCusto.setText("");
               this.JTFMarca.setText("");
             }
-            System.out.println(this.objetoferramenta.getMinhaLista().toString());
+            System.out.println(this.objetoFerramenta.getListaFerramenta().toString());
             
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null,erro.getMessage());
