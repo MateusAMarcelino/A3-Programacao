@@ -27,7 +27,7 @@ Para melhor compreensão de nosso trabalho, apresentamos a seguir o problema a s
     
 ### Requisitos Funcionais e não funcionais ⬇️
 ```bash
-REQUiSITOS FUNCIONAIS:
+REQUISITOS FUNCIONAIS:
 . RF001 -> Cadastrar as ferramentas com nome, marca e custo.
 . RF002 -> Cadastrar os amigo com nome, telefone e e-mail.
 . RF003 -> Registrar o empréstimo das ferramentas ao amigo, incluindo a data 
