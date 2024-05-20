@@ -28,7 +28,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTableAmigos = new javax.swing.JTable();
+        jTableAmigos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         JTFNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -42,7 +42,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel3.setText("Gerenciador De Amigos");
 
-        JTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -53,12 +53,12 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
                 "ID", "Nome", "Telefone"
             }
         ));
-        JTableAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTableAmigosMouseClicked(evt);
+                jTableAmigosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(JTableAmigos);
+        jScrollPane1.setViewportView(jTableAmigos);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Nome:");
@@ -161,17 +161,17 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFTelefoneActionPerformed
 
-    private void JTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableAmigosMouseClicked
+    private void jTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigosMouseClicked
         // TODO add your handling code here:
-        if (this.JTableAmigos.getSelectedRow() != -1) {
-            String nome = this.JTableAmigos.getValueAt(this.JTableAmigos.getSelectedRow(), 1).toString();
-            String telefone = this.JTableAmigos.getValueAt(this.JTableAmigos.getSelectedRow(), 2).toString();
+        if (this.jTableAmigos.getSelectedRow() != -1) {
+            String nome = this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 1).toString();
+            String telefone = this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 2).toString();
 
             this.JTFNome.setText(nome);
             this.JTFTelefone.setText(telefone);
 
         }
-    }//GEN-LAST:event_JTableAmigosMouseClicked
+    }//GEN-LAST:event_jTableAmigosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -214,10 +214,10 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
     private javax.swing.JButton JBEditar;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JTextField JTFTelefone;
-    private javax.swing.JTable JTableAmigos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableAmigos;
     // End of variables declaration//GEN-END:variables
 }
