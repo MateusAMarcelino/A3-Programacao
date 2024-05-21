@@ -2,9 +2,7 @@ package visao;
 
 public class FrmCadastrarAmigo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmCadastrarAmigo
-     */
+    // Cria nova forma FrmCadastrarAmigo
     public FrmCadastrarAmigo() {
         initComponents();
     }
