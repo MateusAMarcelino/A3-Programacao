@@ -1,10 +1,16 @@
 package visao;
 
+import modelo.Amigo;
+import javax.swing.JOptionPane;
+
 public class FrmCadastrarAmigo extends javax.swing.JFrame {
 
+    //cria o vínculo com amigo
+    private Amigo objetoamigo;
     // Cria nova forma FrmCadastrarAmigo
     public FrmCadastrarAmigo() {
         initComponents();
+        this.objetoamigo = new Amigo();
     }
 
     /**
@@ -139,6 +145,44 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
+        try{
+            //recebendo e validando os dados da interface
+            String nome = "";
+            int telefone = 0;
+            String email = "";
+            
+            if(this.JTFNome.getText().length()<2){
+                throw new Mensagem ("O nome deve possuir ao menos 2 caracteres");
+            } else {
+                nome = this.JTFNome.getText();
+            }
+            
+            if(this.JTFTelefone.getText().length()==9){
+                telefone = Integer.parseInt(this.JTFTelefone.getText());
+            } else {
+                throw new Mensagem ("O número de telefone deve possuir exatamente 9 digitos");
+            }
+            
+            if(this.JTFEmail.getText().length()<11){
+                throw new Mensagem("O email deve conter no mínimo 11 dígitos, como: X@gmail.com");
+            } else {
+                email = this.JTFEmail.getText();
+            }
+            
+            if (this.objetoamigo.insertAmigoBD(nome, telefone, email)){
+                JOptionPane.showMessageDialog(null, "Amigo inserido com sucesso!");
+                //limpa os campos da interface
+                this.JTFNome.setText("");
+                this.JTFTelefone.setText("");
+                this.JTFEmail.setText("");
+            }
+            System.out.println(this.objetoamigo.getListaAmigo().toString());
+            
+        } catch (Mensagem erro){
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2){
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JTFEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFEmailActionPerformed
