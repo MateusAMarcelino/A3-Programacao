@@ -23,6 +23,7 @@ public class Amigo {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+        this.dao = new AmigoDAO();
     }
 
     //Getters and Setters
@@ -63,25 +64,24 @@ public class Amigo {
     }
 
     //Cadastrar nova ferramenta
-    public boolean insertAmigoBD(int Id, String Nome, int telefone, String email) {
-        int id = this.maiorID() + 1;
+    public boolean insertAmigoBD(String Nome, int telefone, String email) {
+        int Id = this.maiorID() + 1;
         Amigo objeto = new Amigo(Id, Nome, telefone, email);
-        dao.ListaAmigo.add(objeto);
+        dao.insertAmigoBD(objeto);
         return true;
     }
 
     //Deleta uma ferramenta
     public boolean deleteAmigoBD(int id) {
         int indice = this.procuraIndice(id);
-        dao.ListaAmigo.remove(indice);
+        dao.deleteAmigoBD(indice);
         return true;
     }
 
     //Editar ferramenta
     public boolean updateAmigoBD(int Id, String Nome, int telefone, String email) {
         Amigo objeto = new Amigo(Id, Nome, telefone, email);
-        int indice = this.procuraIndice(Id);
-        dao.ListaAmigo.set(indice, objeto);
+        dao.updateAmigoBD(objeto);
         return true;
     }
 
@@ -98,8 +98,7 @@ public class Amigo {
 
     //Carrega dados de uma ferramenta especÍfica pelo seu ID
     public Amigo carregaAmigo(int id) {
-        int indice = this.procuraIndice(id);
-        return dao.ListaAmigo.get(indice);
+        return dao.carregaAmigo(id);
     }
 
     //Retorna o maior ID da base de dados
