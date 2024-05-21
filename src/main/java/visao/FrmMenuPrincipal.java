@@ -34,7 +34,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemGerenciadorAmigo = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemRelatorio = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,8 +90,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Relatório das Ferramentas");
-        jMenuRelatorio.add(jMenuItem1);
+        jMenuItemRelatorio.setText("Relatório das Ferramentas");
+        jMenuItemRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelatorioActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jMenuItemRelatorio);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -150,9 +155,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuRelatorioActionPerformed
+
+    private void jMenuItemRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioActionPerformed
+        // TODO add your handling code here:
         FrmRelatorioEmprestimo menu = new FrmRelatorioEmprestimo();
         menu.setVisible (true);
-    }//GEN-LAST:event_jMenuRelatorioActionPerformed
+    }//GEN-LAST:event_jMenuItemRelatorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,12 +201,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGerenciamentoGeral;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastroDeAmigos;
     private javax.swing.JMenuItem jMenuItemCadastroDeFerramentas;
     private javax.swing.JMenuItem jMenuItemEmprestimoDeFerramentas;
     private javax.swing.JMenuItem jMenuItemGerenciadorAmigo;
     private javax.swing.JMenuItem jMenuItemGerenciamentoDeFerramentas;
+    private javax.swing.JMenuItem jMenuItemRelatorio;
     private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JMenu jMenuSobre;
     // End of variables declaration//GEN-END:variables
