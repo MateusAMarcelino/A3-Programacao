@@ -71,8 +71,8 @@ public class AmigoDAO {
 
             // Configurar a conexão
             String server = "localhost"; //caminho do MySQL
-            String database = "tb_amigos";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
+            String database = "emprestimo_ferramentas";
+            String url = "jdbc:mysql://" + server + ":3306/" + database + "?serverTimezone=UTC";
             String user = "root";
             String password = "root";
 
