@@ -9,18 +9,20 @@ public class Amigo {
     private int Id;
     private String email;
     private int telefone;
+    //objeto manipulado pelo amigo
+    private AmigoDAO dao;
 
     //Construtores
     public Amigo() {
         
-        this("", 0, "", 0);
+        this(0, "", 0, "");
     }
 
-    public Amigo(String nome, int Id, String email, int telefone) {
-        this.nome = nome;
+    public Amigo(int Id, String nome, int telefone, String email) {
         this.Id = Id;
-        this.email = email;
+        this.nome = nome;
         this.telefone = telefone;
+        this.email = email;
     }
 
     //Getters and Setters
@@ -57,37 +59,37 @@ public class Amigo {
     }
 
     public ArrayList<Amigo> getListaAmigo() {
-        return AmigoDAO.getListaAmigo();
+        return dao.getListaAmigo();
     }
 
     //Cadastrar nova ferramenta
-    public boolean insertAmigoBD(String Nome, int Id, String email, int telefone) {
+    public boolean insertAmigoBD(int Id, String Nome, int telefone, String email) {
         int id = this.maiorID() + 1;
-        Amigo objeto = new Amigo(Nome, Id, email, telefone);
-        AmigoDAO.ListaAmigo.add(objeto);
+        Amigo objeto = new Amigo(Id, Nome, telefone, email);
+        dao.ListaAmigo.add(objeto);
         return true;
     }
 
     //Deleta uma ferramenta
     public boolean deleteAmigoBD(int id) {
         int indice = this.procuraIndice(id);
-        AmigoDAO.ListaAmigo.remove(indice);
+        dao.ListaAmigo.remove(indice);
         return true;
     }
 
     //Editar ferramenta
-    public boolean updateAmigoBD(int Id, String Nome, String email, int telefone) {
-        Amigo objeto = new Amigo(nome, Id, email, telefone);
+    public boolean updateAmigoBD(int Id, String Nome, int telefone, String email) {
+        Amigo objeto = new Amigo(Id, Nome, telefone, email);
         int indice = this.procuraIndice(Id);
-        AmigoDAO.ListaAmigo.set(indice, objeto);
+        dao.ListaAmigo.set(indice, objeto);
         return true;
     }
 
     //Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
     private int procuraIndice(int id) {
         int indice = -1;
-        for (int i = 0; i < AmigoDAO.ListaAmigo.size(); i++) {
-            if (AmigoDAO.ListaAmigo.get(i).getId() == id) {
+        for (int i = 0; i < dao.ListaAmigo.size(); i++) {
+            if (dao.ListaAmigo.get(i).getId() == id) {
                 indice = i;
             }
         }
@@ -97,12 +99,12 @@ public class Amigo {
     //Carrega dados de uma ferramenta especÍfica pelo seu ID
     public Amigo carregaAmigo(int id) {
         int indice = this.procuraIndice(id);
-        return AmigoDAO.ListaAmigo.get(indice);
+        return dao.ListaAmigo.get(indice);
     }
 
     //Retorna o maior ID da base de dados
     public int maiorID() {
-        return AmigoDAO.maiorID();
+        return dao.maiorID();
 
     }
 }
