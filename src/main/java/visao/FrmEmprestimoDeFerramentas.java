@@ -80,8 +80,14 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             }
         });
 
+        JTFFerramentaEmprestada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFFerramentaEmprestadaActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Ferramenta Emprestada:");
+        jLabel4.setText("ID Ferramenta Emprestada:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +157,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             String nome = "";
-            String Nome = "";
+            int Id = 0;
             int date = 0;
             
             if(this.JTFNomeAmigo.getText().length() <2){
@@ -160,10 +166,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 nome = this.JTFNomeAmigo.getText();
             }
             
-            if(this.JTFFerramentaEmprestada.getText().length() <2){
-                throw new Mensagem("O nome da ferramenta emprestada deve conter ao menos dois caracteres.");
+            if(this.JTFFerramentaEmprestada.getText().length() <=0){
+                throw new Mensagem("O ID da ferramenta emprestada deve ser maior que 0");
             }else{
-                Nome = this.JTFFerramentaEmprestada.getText();
+                Id = Integer.parseInt(this.JTFFerramentaEmprestada.getText());
             }
             
             if(this.JTFDataEmprestimo.getText().length() <6){
@@ -182,6 +188,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_JBConfirmarActionPerformed
+
+    private void JTFFerramentaEmprestadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFFerramentaEmprestadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFFerramentaEmprestadaActionPerformed
 
     /**
      * @param args the command line arguments
