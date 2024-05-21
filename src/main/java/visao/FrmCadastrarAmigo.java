@@ -1,9 +1,5 @@
 package visao;
 
-/**
- *
- * @author guiho
- */
 public class FrmCadastrarAmigo extends javax.swing.JFrame {
 
     /**
