@@ -9,6 +9,7 @@ public class Ferramenta {
     private String Nome;
     private String Marca;
     private int Valor;
+    private FerramentaDAO dao;
     
     //Construtores
     
@@ -21,6 +22,7 @@ public class Ferramenta {
         this.Nome = Nome;
         this.Marca = Marca;
         this.Valor = Valor;
+        this.dao = new FerramentaDAO();
     }
     
     //Getters and Setters
@@ -60,7 +62,7 @@ public class Ferramenta {
      //Chama a lista de ferramentas
      
     public ArrayList<Ferramenta> getListaFerramenta() {
-        return FerramentaDAO.getListaFerramenta();
+        return dao.getListaFerramenta();
     }
     
      //Cadastrar nova ferramenta
@@ -68,7 +70,7 @@ public class Ferramenta {
     public boolean insertFerramentaBD(String Nome, String Marca, int Valor) {
         int id = this.maiorID() + 1;
         Ferramenta objeto = new Ferramenta(Id, Nome, Marca, Valor);
-        FerramentaDAO.ListaFerramenta.add(objeto);
+        dao.ListaFerramenta.add(objeto);
         return true;
     }
 
@@ -76,7 +78,7 @@ public class Ferramenta {
     
     public boolean deleteFerramentaBD(int id) {
         int indice = this.procuraIndice(id);
-        FerramentaDAO.ListaFerramenta.remove(indice);
+        dao.ListaFerramenta.remove(indice);
         return true;
     }
 
@@ -85,7 +87,7 @@ public class Ferramenta {
     public boolean updateFerramentaBD(int Id, String Nome, String Marca, int Valor) {
         Ferramenta objeto = new Ferramenta(Id, Nome, Marca,Valor);
         int indice = this.procuraIndice(Id);
-        FerramentaDAO.ListaFerramenta.set(indice, objeto);
+        dao.ListaFerramenta.set(indice, objeto);
         return true;
     }
 
@@ -94,8 +96,8 @@ public class Ferramenta {
      
     private int procuraIndice(int id) {
         int indice = -1;
-        for (int i = 0; i < FerramentaDAO.ListaFerramenta.size(); i++) {
-            if (FerramentaDAO.ListaFerramenta.get(i).getId() == id) {
+        for (int i = 0; i < dao.ListaFerramenta.size(); i++) {
+            if (dao.ListaFerramenta.get(i).getId() == id) {
                 indice = i;
             }
         }
@@ -107,14 +109,14 @@ public class Ferramenta {
      
     public Ferramenta carregaFerramenta(int id) {
         int indice = this.procuraIndice(id);
-        return FerramentaDAO.ListaFerramenta.get(indice);
+        return dao.ListaFerramenta.get(indice);
     }
     
  
      //Retorna o maior ID da base de dados
      
     public int maiorID(){
-        return FerramentaDAO.maiorID();
+        return dao.maiorID();
         
     }    
 }
