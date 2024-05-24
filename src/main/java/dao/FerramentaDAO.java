@@ -117,7 +117,7 @@ public class FerramentaDAO {
     public boolean deleteFerramentaBD(int IdFerramentas) {
         try {
             Statement stmt = this.getConexaoFerramenta().createStatement();
-            stmt.executeUpdate("DELETE FROM tb_ferramentas WHERE IdFerramenta = " + IdFerramentas);
+            stmt.executeUpdate("DELETE FROM tb_ferramentas WHERE IdFerramentas = " + IdFerramentas);
             stmt.close();
 
         } catch (SQLException erro) {

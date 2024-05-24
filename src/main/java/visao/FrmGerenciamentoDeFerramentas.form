@@ -35,11 +35,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="JTFNome" max="32767" attributes="0"/>
+                      <Component id="JTFNomeAlterar" max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="JTFMarca" alignment="0" max="32767" attributes="0"/>
+                      <Component id="JTFMarcaAlterar" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="JTFCusto" alignment="0" pref="222" max="32767" attributes="0"/>
+                      <Component id="JTFCustoAlterar" alignment="0" pref="222" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="JBCancelar" min="-2" max="-2" attributes="0"/>
@@ -67,15 +67,15 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JTFNome" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTFNomeAlterar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JTFMarca" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTFMarcaAlterar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JTFCusto" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTFCustoAlterar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="JBCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -157,9 +157,9 @@
         <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFNome">
+    <Component class="javax.swing.JTextField" name="JTFNomeAlterar">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFNomeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFNomeAlterarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -170,9 +170,9 @@
         <Property name="text" type="java.lang.String" value="Marca:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFMarca">
+    <Component class="javax.swing.JTextField" name="JTFMarcaAlterar">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFMarcaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFMarcaAlterarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -183,7 +183,7 @@
         <Property name="text" type="java.lang.String" value="Custo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFCusto">
+    <Component class="javax.swing.JTextField" name="JTFCustoAlterar">
     </Component>
     <Component class="javax.swing.JButton" name="JBCancelar">
       <Properties>
@@ -197,11 +197,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBAlterarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBApagar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Apagar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBApagarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

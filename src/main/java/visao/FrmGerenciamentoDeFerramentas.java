@@ -37,11 +37,11 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableFerramentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        JTFNome = new javax.swing.JTextField();
+        JTFNomeAlterar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JTFMarca = new javax.swing.JTextField();
+        JTFMarcaAlterar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        JTFCusto = new javax.swing.JTextField();
+        JTFCustoAlterar = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
         JBAlterar = new javax.swing.JButton();
         JBApagar = new javax.swing.JButton();
@@ -72,18 +72,18 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
 
-        JTFNome.addActionListener(new java.awt.event.ActionListener() {
+        JTFNomeAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNomeActionPerformed(evt);
+                JTFNomeAlterarActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Marca:");
 
-        JTFMarca.addActionListener(new java.awt.event.ActionListener() {
+        JTFMarcaAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFMarcaActionPerformed(evt);
+                JTFMarcaAlterarActionPerformed(evt);
             }
         });
 
@@ -98,8 +98,18 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         });
 
         JBAlterar.setText("Alterar");
+        JBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBAlterarActionPerformed(evt);
+            }
+        });
 
         JBApagar.setText("Apagar");
+        JBApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBApagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,11 +126,11 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JTFNome)
+                        .addComponent(JTFNomeAlterar)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JTFMarca)
+                        .addComponent(JTFMarcaAlterar)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JTFCusto, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                        .addComponent(JTFCustoAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JBCancelar)
                         .addGap(18, 18, 18)
@@ -142,15 +152,15 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTFNomeAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTFMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTFCustoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JBCancelar)
@@ -162,13 +172,13 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeActionPerformed
+    private void JTFNomeAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeAlterarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNomeActionPerformed
+    }//GEN-LAST:event_JTFNomeAlterarActionPerformed
 
-    private void JTFMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaActionPerformed
+    private void JTFMarcaAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaAlterarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFMarcaActionPerformed
+    }//GEN-LAST:event_JTFMarcaAlterarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
         // TODO add your handling code here:
@@ -178,15 +188,91 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
     private void JTableFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableFerramentasMouseClicked
         // TODO add your handling code here:
         if (this.JTableFerramentas.getSelectedRow() != -1) {
-            String Nome = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 1).toString();
+            String NomeFerramenta = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 1).toString();
             String Marca = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 2).toString();
             String Custo = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 3).toString();
             
-            this.JTFNome.setText(Nome);
-            this.JTFMarca.setText(Marca);
-            this.JTFCusto.setText(Custo);
+            this.JTFNomeAlterar.setText(NomeFerramenta);
+            this.JTFMarcaAlterar.setText(Marca);
+            this.JTFCustoAlterar.setText(Custo);
         }
     }//GEN-LAST:event_JTableFerramentasMouseClicked
+
+    private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int IdFerramentas = 0;
+            String NomeFerramenta = "";
+            String Marca = "";
+            int Custo = 0;
+            
+            if (this.JTFNomeAlterar.getText().length() < 2){
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");              
+            }else {
+                NomeFerramenta = this.JTFNomeAlterar.getText();
+            }
+            
+            if (this.JTFMarcaAlterar.getText().length() < 2){
+                throw new Mensagem("A Marca deve conter ao menos 2 caracteres.");              
+            }else {
+                Marca = this.JTFMarcaAlterar.getText();
+            }
+            
+            if (this.JTFCustoAlterar.getText().length() <= 0){
+                throw new Mensagem("O custo deve ser maior que zero.");              
+            }else {
+                Custo = Integer.parseInt(this.JTFCustoAlterar.getText());
+            }
+            if (this.JTableFerramentas.getSelectedRow() == -1){
+                throw new Mensagem ("Primeiro Selecione uma ferramenta para alterar.");
+            }else {
+                IdFerramentas = Integer.parseInt(this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 0).toString());
+            }
+
+            if (this.objetoferramenta.updateFerramentaBD(IdFerramentas, NomeFerramenta, Marca, Custo)){
+                this.JTFNomeAlterar.setText("");
+                this.JTFMarcaAlterar.setText("");
+                this.JTFCustoAlterar.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Ferramenta Alterada com sucesso!");
+                }
+            
+            System.out.println(this.objetoferramenta.getListaFerramenta().toString());
+        } catch (Mensagem erro){
+            JOptionPane.showMessageDialog(null, erro.getMessage());          
+            
+        } catch (NumberFormatException erro2){
+            JOptionPane.showMessageDialog(null, "Informe um número válido"); 
+        } finally {
+            carregarTabela();
+        }
+        
+    }//GEN-LAST:event_JBAlterarActionPerformed
+
+    private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int IdFerramentas = 0;
+            if (this.JTableFerramentas.getSelectedRow() == -1){
+                throw new Mensagem("Primeiro Selecione uma ferramenta para APAGAR.");
+            } else {
+                IdFerramentas = Integer.parseInt(this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(),0).toString());
+            }
+            int respostaUsuario = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja apagar essa ferramenta?");
+            if(respostaUsuario == 0) {
+                if(this.objetoferramenta.deleteFerramentaBD(IdFerramentas)){
+                    this.JTFNomeAlterar.setText("");
+                    this.JTFMarcaAlterar.setText("");
+                    this.JTFCustoAlterar.setText("");
+                    JOptionPane.showMessageDialog(rootPane, "Ferramenta Apagada com sucesso!!");
+                }
+            }
+            System.out.println(this.objetoferramenta.getListaFerramenta().toString());
+        }  catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } finally {
+            carregarTabela();
+        }
+    }//GEN-LAST:event_JBApagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,9 +328,9 @@ public void carregarTabela(){
     private javax.swing.JButton JBAlterar;
     private javax.swing.JButton JBApagar;
     private javax.swing.JButton JBCancelar;
-    private javax.swing.JTextField JTFCusto;
-    private javax.swing.JTextField JTFMarca;
-    private javax.swing.JTextField JTFNome;
+    private javax.swing.JTextField JTFCustoAlterar;
+    private javax.swing.JTextField JTFMarcaAlterar;
+    private javax.swing.JTextField JTFNomeAlterar;
     private javax.swing.JTable JTableFerramentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
