@@ -21,6 +21,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
     public FrmGerenciamentoDeFerramentas() {
         initComponents();
         this.objetoferramenta = new Ferramenta();
+        this.carregarTabela();
     }
 
     /**
@@ -34,7 +35,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTableGerenciamentoDeFerramentas = new javax.swing.JTable();
+        JTableFerramentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         JTFNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -50,7 +51,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Gerenciamento de Ferramentas");
 
-        JTableGerenciamentoDeFerramentas.setModel(new javax.swing.table.DefaultTableModel(
+        JTableFerramentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -61,12 +62,12 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                 "ID", "Nome da Ferramenta", "Marca", "Custo"
             }
         ));
-        JTableGerenciamentoDeFerramentas.addMouseListener(new java.awt.event.MouseAdapter() {
+        JTableFerramentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTableGerenciamentoDeFerramentasMouseClicked(evt);
+                JTableFerramentasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(JTableGerenciamentoDeFerramentas);
+        jScrollPane1.setViewportView(JTableFerramentas);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
@@ -174,18 +175,18 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
-    private void JTableGerenciamentoDeFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableGerenciamentoDeFerramentasMouseClicked
+    private void JTableFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableFerramentasMouseClicked
         // TODO add your handling code here:
-        if (this.JTableGerenciamentoDeFerramentas.getSelectedRow() != -1) {
-            String Nome = this.JTableGerenciamentoDeFerramentas.getValueAt(this.JTableGerenciamentoDeFerramentas.getSelectedRow(), 1).toString();
-            String Marca = this.JTableGerenciamentoDeFerramentas.getValueAt(this.JTableGerenciamentoDeFerramentas.getSelectedRow(), 2).toString();
-            String Custo = this.JTableGerenciamentoDeFerramentas.getValueAt(this.JTableGerenciamentoDeFerramentas.getSelectedRow(), 3).toString();
+        if (this.JTableFerramentas.getSelectedRow() != -1) {
+            String Nome = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 1).toString();
+            String Marca = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 2).toString();
+            String Custo = this.JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 3).toString();
             
             this.JTFNome.setText(Nome);
             this.JTFMarca.setText(Marca);
             this.JTFCusto.setText(Custo);
         }
-    }//GEN-LAST:event_JTableGerenciamentoDeFerramentasMouseClicked
+    }//GEN-LAST:event_JTableFerramentasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -221,7 +222,22 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
             }
         });
     }
-
+public void carregarTabela(){
+    DefaultTableModel modelo = (DefaultTableModel) this.JTableFerramentas.getModel();
+    modelo.setNumRows(0);
+    ArrayList<Ferramenta> ListaFerramenta = objetoferramenta.getListaFerramenta();
+    for (Ferramenta a : ListaFerramenta){
+        modelo.addRow(new Object[]{
+        a.getIdFerramentas(),
+        a.getNomeFerramenta(),
+        a.getMarca(),
+        a.getCusto()
+    });
+}
+}   
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAlterar;
     private javax.swing.JButton JBApagar;
@@ -229,7 +245,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
     private javax.swing.JTextField JTFCusto;
     private javax.swing.JTextField JTFMarca;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTable JTableGerenciamentoDeFerramentas;
+    private javax.swing.JTable JTableFerramentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
