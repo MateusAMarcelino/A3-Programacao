@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Ferramenta {
     
-    private int ID;
-    private String Nome;
+    private int IdFerramentas;
+    private String NomeFerramenta;
     private String Marca;
-    private int Valor;
+    private int Custo;
     private FerramentaDAO dao;
     
     // Construtores
@@ -17,30 +17,30 @@ public class Ferramenta {
         this (0, "", "", 0);
     }
     
-    public Ferramenta (int ID, String Nome, String Marca, int Valor){
-        this.ID = ID;
-        this.Nome = Nome;
+    public Ferramenta (int IdFerramentas, String NomeFerramenta, String Marca, int Custo){
+        this.IdFerramentas = IdFerramentas;
+        this.NomeFerramenta = NomeFerramenta;
         this.Marca = Marca;
-        this.Valor = Valor;
+        this.Custo = Custo;
         this.dao = new FerramentaDAO();
     }
     
     // Getters and Setters
     
-    public int getID() {
-        return ID;
+    public int getIdFerramentas() {
+        return IdFerramentas;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setIdFerramentas(int IdFerramentas) {
+        this.IdFerramentas = IdFerramentas;
     }
 
-    public String getNome() {
-        return Nome;
+    public String getNomeFerramenta() {
+        return NomeFerramenta;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNomeFerramenta(String NomeFerramenta) {
+        this.NomeFerramenta = NomeFerramenta;
     }
 
     public String getMarca() {
@@ -51,12 +51,12 @@ public class Ferramenta {
         this.Marca = Marca;
     }
 
-    public int getValor() {
-        return Valor;
+    public int getCusto() {
+        return Custo;
     }
 
-    public void setValor(int Valor) {
-        this.Valor = Valor;
+    public void setCusto(int Custo) {
+        this.Custo = Custo;
     }   
     
     // Chama a lista de ferramentas
@@ -67,26 +67,26 @@ public class Ferramenta {
     
     // Cadastrar nova ferramenta
     
-    public boolean insertFerramentaBD(String Nome, String Marca, int Valor) {
-        int IdFerramenta = this.maiorID() + 1;
-        Ferramenta objeto = new Ferramenta(ID, Nome, Marca, Valor);
-        dao.ListaFerramenta.add(objeto);
+    public boolean insertFerramentaBD(String NomeFerramenta, String Marca, int Valor) {
+        int IdFerramentas = this.maiorIdFerramenta() + 1;
+        Ferramenta objeto = new Ferramenta(IdFerramentas, NomeFerramenta, Marca, Valor);
+        dao.insertFerramentaBD(objeto);
         return true;
     }
 
     // Deleta uma ferramenta
     
-    public boolean deleteFerramentaBD(int id) {
-        int indice = this.procuraIndice(id);
-        dao.ListaFerramenta.remove(indice);
+    public boolean deleteFerramentaBD(int IdFerramentas) {
+        int indice = this.procuraIndice(IdFerramentas);
+        dao.deleteFerramentaBD(indice);
         return true;
     }
 
     // Editar ferramenta
      
-    public boolean updateFerramentaBD(int ID, String Nome, String Marca, int Valor) {
-        Ferramenta objeto = new Ferramenta(ID, Nome, Marca, Valor);
-        int indice = this.procuraIndice(ID);
+    public boolean updateFerramentaBD(int IdFerramenta, String NomeFerramenta, String Marca, int Valor) {
+        Ferramenta objeto = new Ferramenta(IdFerramenta, NomeFerramenta, Marca, Valor);
+        int indice = this.procuraIndice(IdFerramenta);
         dao.ListaFerramenta.set(indice, objeto);
         return true;
     }
@@ -96,7 +96,7 @@ public class Ferramenta {
     private int procuraIndice(int IdFerramenta) {
         int indice = -1;
         for (int i = 0; i < dao.ListaFerramenta.size(); i++) {
-            if (dao.ListaFerramenta.get(i).getID() == IdFerramenta) {
+            if (dao.ListaFerramenta.get(i).getIdFerramentas() == IdFerramenta) {
                 indice = i;
             }
         }
@@ -112,7 +112,7 @@ public class Ferramenta {
     
     // Retorna o maior ID da base de dados
      
-    public int maiorID(){
-        return dao.maiorID();
+    public int maiorIdFerramenta(){
+        return dao.maiorIdFerramentas();
     }    
 }

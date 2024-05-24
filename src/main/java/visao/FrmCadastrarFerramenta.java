@@ -142,14 +142,14 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
         try{
-          String Nome = "";
+          String NomeFerramenta = "";
           int Valor = 0;
           String Marca = "";
           
           if(this.JTFNomeF.getText().length() < 2){
               throw new Mensagem("Nome deve conter ao menos dois caracteres.");
           }else {
-            Nome = this.JTFNomeF.getText();
+            NomeFerramenta = this.JTFNomeF.getText();
           }
           
           if(this.JTFCustoF.getText().length() <= 0){
@@ -163,8 +163,8 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
            Marca = this.JTFMarcaF.getText();
           }
           
-          if(this.objetoFerramenta.insertFerramentaBD(Nome, Marca, Valor)){
-              JOptionPane.showMessageDialog(rootPane, "Ferramenta Cadastrado com Sucesso!");
+          if(this.objetoFerramenta.insertFerramentaBD(NomeFerramenta, Marca, Valor)){
+              JOptionPane.showMessageDialog(null, "Ferramenta Cadastrado com Sucesso!");
               this.JTFNomeF.setText("");
               this.JTFCustoF.setText("");
               this.JTFMarcaF.setText("");
