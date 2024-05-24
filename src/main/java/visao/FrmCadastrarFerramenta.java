@@ -31,11 +31,11 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        JTFNome = new javax.swing.JTextField();
+        JTFNomeF = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        JTFMarca = new javax.swing.JTextField();
+        JTFMarcaF = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JTFCusto = new javax.swing.JTextField();
+        JTFCustoF = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
 
@@ -47,12 +47,18 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
+        JTFNomeF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFNomeFActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Marca:");
 
-        JTFMarca.addActionListener(new java.awt.event.ActionListener() {
+        JTFMarcaF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFMarcaActionPerformed(evt);
+                JTFMarcaFActionPerformed(evt);
             }
         });
 
@@ -90,11 +96,11 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
                                 .addGap(69, 69, 69)
                                 .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
-                            .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFNomeF, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFMarcaF, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(JTFCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JTFCustoF, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,15 +111,15 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFNomeF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFMarcaF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFCustoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,31 +143,31 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
           String Nome = "";
-          int Custo = 0;
+          int Valor = 0;
           String Marca = "";
           
-          if(this.JTFNome.getText().length() < 2){
+          if(this.JTFNomeF.getText().length() < 2){
               throw new Mensagem("Nome deve conter ao menos dois caracteres.");
           }else {
-            Nome = this.JTFNome.getText();
+            Nome = this.JTFNomeF.getText();
           }
           
-          if(this.JTFCusto.getText().length() <= 0){
+          if(this.JTFCustoF.getText().length() <= 0){
               throw new Mensagem("Custo deve ser maior que zero.");
           }else{
-           Custo = Integer.parseInt(this.JTFCusto.getText());
+           Valor = Integer.parseInt(this.JTFCustoF.getText());
           }
-          if(this.JTFMarca.getText().length() < 2){
+          if(this.JTFMarcaF.getText().length() < 2){
               throw new Mensagem("Marca deve conter dois caracteres.");
           }else{
-           Marca = this.JTFMarca.getText();
+           Marca = this.JTFMarcaF.getText();
           }
           
-          if(this.objetoFerramenta.insertFerramentaBD(Nome, Marca, Custo)){
-              JOptionPane.showMessageDialog(rootPane, "Aluno Cadastrado com Sucesso!");
-              this.JTFNome.setText("");
-              this.JTFCusto.setText("");
-              this.JTFMarca.setText("");
+          if(this.objetoFerramenta.insertFerramentaBD(Nome, Marca, Valor)){
+              JOptionPane.showMessageDialog(rootPane, "Ferramenta Cadastrado com Sucesso!");
+              this.JTFNomeF.setText("");
+              this.JTFCustoF.setText("");
+              this.JTFMarcaF.setText("");
             }
             System.out.println(this.objetoFerramenta.getListaFerramenta().toString());
             
@@ -172,9 +178,13 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
-    private void JTFMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaActionPerformed
+    private void JTFMarcaFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFMarcaActionPerformed
+    }//GEN-LAST:event_JTFMarcaFActionPerformed
+
+    private void JTFNomeFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFNomeFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,9 +224,9 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBCancelar;
-    private javax.swing.JTextField JTFCusto;
-    private javax.swing.JTextField JTFMarca;
-    private javax.swing.JTextField JTFNome;
+    private javax.swing.JTextField JTFCustoF;
+    private javax.swing.JTextField JTFMarcaF;
+    private javax.swing.JTextField JTFNomeF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

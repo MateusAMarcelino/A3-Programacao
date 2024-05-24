@@ -5,34 +5,34 @@ import java.util.ArrayList;
 
 public class Ferramenta {
     
-    private int Id;
+    private int ID;
     private String Nome;
     private String Marca;
     private int Valor;
     private FerramentaDAO dao;
     
-    //Construtores
+    // Construtores
     
     public Ferramenta(){
         this (0, "", "", 0);
     }
     
-    public Ferramenta (int Id, String Nome, String Marca, int Valor){
-        this.Id = Id;
+    public Ferramenta (int ID, String Nome, String Marca, int Valor){
+        this.ID = ID;
         this.Nome = Nome;
         this.Marca = Marca;
         this.Valor = Valor;
         this.dao = new FerramentaDAO();
     }
     
-    //Getters and Setters
+    // Getters and Setters
     
-     public int getId() {
-        return Id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNome() {
@@ -59,22 +59,22 @@ public class Ferramenta {
         this.Valor = Valor;
     }   
     
-     //Chama a lista de ferramentas
+    // Chama a lista de ferramentas
      
     public ArrayList<Ferramenta> getListaFerramenta() {
         return dao.getListaFerramenta();
     }
     
-     //Cadastrar nova ferramenta
+    // Cadastrar nova ferramenta
     
     public boolean insertFerramentaBD(String Nome, String Marca, int Valor) {
-        int id = this.maiorID() + 1;
-        Ferramenta objeto = new Ferramenta(Id, Nome, Marca, Valor);
+        int IdFerramenta = this.maiorID() + 1;
+        Ferramenta objeto = new Ferramenta(ID, Nome, Marca, Valor);
         dao.ListaFerramenta.add(objeto);
         return true;
     }
 
-     //Deleta uma ferramenta
+    // Deleta uma ferramenta
     
     public boolean deleteFerramentaBD(int id) {
         int indice = this.procuraIndice(id);
@@ -82,41 +82,37 @@ public class Ferramenta {
         return true;
     }
 
-    //Editar ferramenta
+    // Editar ferramenta
      
-    public boolean updateFerramentaBD(int Id, String Nome, String Marca, int Valor) {
-        Ferramenta objeto = new Ferramenta(Id, Nome, Marca,Valor);
-        int indice = this.procuraIndice(Id);
+    public boolean updateFerramentaBD(int ID, String Nome, String Marca, int Valor) {
+        Ferramenta objeto = new Ferramenta(ID, Nome, Marca, Valor);
+        int indice = this.procuraIndice(ID);
         dao.ListaFerramenta.set(indice, objeto);
         return true;
     }
 
-    
-     //Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+    // Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
      
-    private int procuraIndice(int id) {
+    private int procuraIndice(int IdFerramenta) {
         int indice = -1;
         for (int i = 0; i < dao.ListaFerramenta.size(); i++) {
-            if (dao.ListaFerramenta.get(i).getId() == id) {
+            if (dao.ListaFerramenta.get(i).getID() == IdFerramenta) {
                 indice = i;
             }
         }
         return indice;
     }
     
-    
-     //Carrega dados de uma ferramenta especÍfica pelo seu ID
+    // Carrega dados de uma ferramenta específica pelo seu ID
      
-    public Ferramenta carregaFerramenta(int id) {
-        int indice = this.procuraIndice(id);
+    public Ferramenta carregaFerramenta(int IdFerramenta) {
+        int indice = this.procuraIndice(IdFerramenta);
         return dao.ListaFerramenta.get(indice);
     }
     
- 
-     //Retorna o maior ID da base de dados
+    // Retorna o maior ID da base de dados
      
     public int maiorID(){
         return dao.maiorID();
-        
     }    
 }
