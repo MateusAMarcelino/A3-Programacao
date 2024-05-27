@@ -38,7 +38,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Empréstimos realizados");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTEmpAtivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -49,9 +49,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Data", "ID"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTEmpAtivos);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        JTEmpRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +62,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Tempo", "ID"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(JTEmpRealizados);
 
         JBCancelar.setText("Cancelar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable JTEmpAtivos;
+    private javax.swing.JTable JTEmpRealizados;
     // End of variables declaration//GEN-END:variables
 }
