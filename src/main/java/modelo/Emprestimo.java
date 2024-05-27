@@ -5,19 +5,23 @@ import java.util.ArrayList;
 
 public class Emprestimo {
 
+    private int idEmprestimo;
     private String nome;
-    private int id;
+    private int idFerramenta;
     private int date;
+    private EmprestimoDAO dao;
   
   public Emprestimo() {
     
-        this("", 0, "", 0);
+        this( 0, "", 0, 0);
     }
 
-    public Emprestimo(String nome, int id, String email, int telefone) {
+    public Emprestimo(int idEmprestimo, String nome, int idFerramenta, int date) {
+        this.idEmprestimo = idEmprestimo;
         this.nome = nome;
-        this.id = id;
+        this.idFerramenta = idFerramenta;
         this.date = date;
+        this.dao = new EmprestimoDAO();
     }
     
     
@@ -29,12 +33,12 @@ public class Emprestimo {
         this.nome = nome;
     }
     
-    public int getId() {
-        return id;
+    public int getIdEmprestimo() {
+        return idEmprestimo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdEmprestimo(int idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
     
 public String getDate() {
@@ -44,21 +48,68 @@ public String getDate() {
     public void setDate(String nome) {
         this.nome = nome;
     }
+    
+    public void setIdFerramenta(int idFerramenta){
+        this.idFerramenta = idFerramenta;
+    }
+    
+    public int getIdFerramenta(){
+        return idFerramenta;
+    }
+    
 public ArrayList<Emprestimo> getListaEmprestimo() {
-        return EmprestimoDAO.getListaEmprestimo();
+        return dao.getListaEmprestimo();
     }
     
  //Cadastrar novo Emprestimo
-    public boolean insertEmprestimoBD(String Nome, int Id, String email, int date) {
-        int id = this.maiorID() + 1;
-        Emprestimo objeto = new Emprestimo(Nome, Id, email, date);
-        EmprestimoDAO.ListaEmprestimo.add(objeto);
+    public boolean insertEmprestimoBD(String nome, int idFerramenta, int date) {
+        int idEmprestimo = this.maiorID() + 1;
+        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, idFerramenta, date);
+        dao.ListaEmprestimo.add(objeto);
         return true;
     }
+    
  //Retorna o maior ID da base de dados
+    
     public int maiorID() {
-        return EmprestimoDAO.maiorID();
+        return dao.maiorID();
 
+    }
+    
+    //deletar emprestimo
+    
+    public boolean deleteEmprestimoBD(int idEmprestimo) {
+        int indice = this.procuraIndice(idEmprestimo);
+        dao.ListaEmprestimo.remove(indice);
+        return true;
+    }
+    
+    // Editar emprestimo
+     
+    public boolean updateFerramentaBD(int idEmprestimo, String nome, int IdFerramenta, int date) {
+        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramenta, date);
+        int indice = this.procuraIndice(idEmprestimo);
+        dao.ListaEmprestimo.set(indice, objeto);
+        return true;
+    }
+    
+    // Carrega dados de um emprestimo específico pelo seu ID
+     
+    public Emprestimo carregaEmprestimo(int idEmprestimo) {
+        int indice = this.procuraIndice(idEmprestimo);
+        return dao.ListaEmprestimo.get(indice);
+    }
+    
+    // Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+     
+    private int procuraIndice(int idEmprestimo) {
+        int indice = -1;
+        for (int i = 0; i < dao.ListaEmprestimo.size(); i++) {
+            if (dao.ListaEmprestimo.get(i).getIdEmprestimo() == idEmprestimo) {
+                indice = i;
+            }
+        }
+        return indice;
     }
 }
 
