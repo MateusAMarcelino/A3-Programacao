@@ -45,7 +45,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         JLID = new javax.swing.JLabel();
         JLId = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        JTFDisponibilidade = new javax.swing.JTextField();
+        JCBDisponibilidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,9 +121,10 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Disponibilidade :");
 
-        JTFDisponibilidade.addActionListener(new java.awt.event.ActionListener() {
+        JCBDisponibilidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponível", "Indisponível" }));
+        JCBDisponibilidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFDisponibilidadeActionPerformed(evt);
+                JCBDisponibilidadeActionPerformed(evt);
             }
         });
 
@@ -143,7 +144,6 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                     .addComponent(JTFNomeAlterar)
                     .addComponent(JTFMarcaAlterar)
                     .addComponent(JTFCustoAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                    .addComponent(JTFDisponibilidade)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +160,8 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(JBApagar))
                             .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(JCBDisponibilidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -189,7 +190,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFDisponibilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JCBDisponibilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JBCancelar)
@@ -223,7 +224,8 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
             JTFNomeAlterar.setText(JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(),1).toString());
             JTFMarcaAlterar.setText(JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(),2).toString());
             JTFCustoAlterar.setText(JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(),3).toString());
-           
+            String disponibilidade = JTableFerramentas.getValueAt(this.JTableFerramentas.getSelectedRow(), 4).toString();
+            JCBDisponibilidade.setSelectedItem(disponibilidade.equals("true") ? "Disponível" : "Indisponível");
             
         }
     }//GEN-LAST:event_JTableFerramentasMouseClicked
@@ -235,7 +237,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
             String NomeFerramentas = "";
             String MarcaFerramentas = "";
             double CustoFerramentas = 0;
-            boolean DisponibilidadeFerramentas = Boolean.parseBoolean(JTFDisponibilidade.getText());
+            boolean DisponibilidadeFerramentas = JCBDisponibilidade.getSelectedItem().toString().equals("Disponível");
             
             if (this.JTFNomeAlterar.getText().length() < 2){
                 throw new Mensagem("Nome deve conter ao menos 2 caracteres.");              
@@ -260,7 +262,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                 JTFNomeAlterar.setText("");
                 JTFMarcaAlterar.setText("");
                 JTFCustoAlterar.setText("");
-                JTFDisponibilidade.setText("");
+                JCBDisponibilidade.setSelectedIndex(0);
                 JOptionPane.showMessageDialog(rootPane, "Ferramenta Alterada com sucesso!");
                 this.CarregaListaFerramenta();
                 }
@@ -285,7 +287,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                     this.JTFNomeAlterar.setText("");
                     this.JTFMarcaAlterar.setText("");
                     this.JTFCustoAlterar.setText("");
-                    this.JTFDisponibilidade.setText("");
+                    this.JCBDisponibilidade.setSelectedIndex(0);
                     JOptionPane.showMessageDialog(rootPane, "Ferramenta Apagada com sucesso!!");
                 }
             }
@@ -297,9 +299,9 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBApagarActionPerformed
 
-    private void JTFDisponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDisponibilidadeActionPerformed
+    private void JCBDisponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBDisponibilidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFDisponibilidadeActionPerformed
+    }//GEN-LAST:event_JCBDisponibilidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,10 +358,10 @@ public void CarregaListaFerramenta(){
     private javax.swing.JButton JBAlterar;
     private javax.swing.JButton JBApagar;
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JComboBox<String> JCBDisponibilidade;
     private javax.swing.JLabel JLID;
     private javax.swing.JLabel JLId;
     private javax.swing.JTextField JTFCustoAlterar;
-    private javax.swing.JTextField JTFDisponibilidade;
     private javax.swing.JTextField JTFMarcaAlterar;
     private javax.swing.JTextField JTFNomeAlterar;
     private javax.swing.JTable JTableFerramentas;
