@@ -1,29 +1,166 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Emprestimo;
 
 public class EmprestimoDAO {
     
-    public static ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
+    public ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
 
-    public static ArrayList<Emprestimo> getListaEmprestimo() {
-        return ListaEmprestimo;
+    public ArrayList<Emprestimo> getListaEmprestimo() {
+        
+       ListaEmprestimo.clear(); //Limpa nosso ArrayList
+       
+       try{
+           Statement stmt = this.getConexaoEmprestimo().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
+            while (res.next()) {
+
+                int id = res.getInt("IdEmprestimo");
+                String nome = res.getString("NomeAmigo");
+                int idFerramenta = res.getInt("IdFerramenta");
+                int data = res.getInt("Data");
+
+                Emprestimo objeto = new Emprestimo(id, nome, idFerramenta, data);
+
+                ListaEmprestimo.add(objeto);
+       }
+            stmt.close();
+    } catch (SQLException ex){
+        System.out.println("Erro: " + ex);
+    }
+       return ListaEmprestimo;
     }
     
-    
-    public static void setListaEmprestimo(ArrayList<Emprestimo> ListaEmprestimo) {
-        EmprestimoDAO.ListaEmprestimo = ListaEmprestimo;
+    public void setListaEmprestimo(ArrayList<Emprestimo> ListaEmprestimo) {
+        this.ListaEmprestimo = ListaEmprestimo;
         
     }
-     public static int maiorID() {
-        int maiorID = 0;
-        for (int i = 0; i < ListaEmprestimo.size(); i++) {
-            if (ListaEmprestimo.get(i).getId() > maiorID) {
-                maiorID = ListaEmprestimo.get(i).getId();
-            }
+     public int maiorID() {
+        int maiorIdEmprestimo = 0;
+        try {
+            Statement stmt = this.getConexaoEmprestimo().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT MAX(IdEmprestimo) IdEmprestimo FROM tb_emprestimos");
+            res.next();
+            maiorIdEmprestimo = res.getInt("IdEmprestimo");
+            stmt.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
         }
-        return maiorID;
+        return maiorIdEmprestimo;
+    }
+     
+     public Connection getConexaoEmprestimo() {
+
+        Connection connection = null;  //instância da conexão
+        try {
+            // Carregamento do JDBC Driver
+            String driver = "com.mysql.cj.jdbc.Driver";
+            Class.forName(driver);
+
+            // Configurar a conexão
+            String server = "localhost"; //caminho do MySQL
+            String database = "db_a3";
+            String url = "jdbc:mysql://" + server + ":3306/" + database + "?serverTimezone=UTC";
+            String user = "root";
+            String password = "root";
+
+            connection = DriverManager.getConnection(url, user, password);
+            // Testando..
+            if (connection != null) {
+                System.out.println("Status: Conectado!");
+            } else {
+                System.out.println("Status: NÃO CONECTADO!");
+            }
+            return connection;
+
+        } catch (ClassNotFoundException e) {  //Driver não encontrado
+            System.out.println("O driver nao foi encontrado. " + e.getMessage());
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Nao foi possivel conectar...");
+            return null;
+        }
+    }
+     
+     public boolean insertEmprestimoBD(Emprestimo objeto) {
+        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramenta,Data) VALUES(?,?,?,?)";
+        try {
+            PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
+
+            stmt.setInt(1, objeto.getIdEmprestimo());
+            stmt.setString(2, objeto.getNome());
+            stmt.setInt(3, objeto.getIdFerramenta());
+            stmt.setInt(4, objeto.getData());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+            throw new RuntimeException(erro);
+        }
     }
     
+     public boolean deleteEmprestimoBD(int idEmprestimo) {
+        try {
+            Statement stmt = this.getConexaoEmprestimo().createStatement();
+            stmt.executeUpdate("DELETE FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
+            stmt.close();
+
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+        }
+        return true;
+    }
+     
+     public boolean updateEmprestimoBD(Emprestimo objeto) {
+
+        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramenta = ? ,Data = ? , WHERE IdEmprestimo = ?";
+
+        try {
+            PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
+
+            stmt.setString(1, objeto.getNome());
+            stmt.setInt(2, objeto.getIdFerramenta());
+            stmt.setInt(3, objeto.getData());
+            stmt.setInt(4, objeto.getIdEmprestimo());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+            throw new RuntimeException(erro);
+        }
+    }
+     
+     public Emprestimo carregaEmprestimo(int idEmprestimo) {
+        Emprestimo objeto = new Emprestimo();
+        objeto.setIdEmprestimo(idEmprestimo);
+        try {
+            Statement stmt = this.getConexaoEmprestimo().createStatement();
+
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
+            res.next();
+
+            objeto.setNome(res.getString("NomeFerramenta"));
+            objeto.setIdFerramenta(res.getInt("IdFerramenta"));
+            objeto.setData(res.getInt("Data"));
+
+            stmt.close();
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+        }
+        return objeto;
+    }
 }
