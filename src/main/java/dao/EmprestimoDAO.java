@@ -24,10 +24,10 @@ public class EmprestimoDAO {
 
                 int id = res.getInt("IdEmprestimo");
                 String nome = res.getString("NomeAmigo");
-                int idFerramenta = res.getInt("IdFerramenta");
+                int idFerramentas = res.getInt("IdFerramentas");
                 int data = res.getInt("Data");
 
-                Emprestimo objeto = new Emprestimo(id, nome, idFerramenta, data);
+                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, data);
 
                 ListaEmprestimo.add(objeto);
        }
@@ -90,13 +90,13 @@ public class EmprestimoDAO {
     }
      
      public boolean insertEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramenta,Data) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,Data) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdEmprestimo());
             stmt.setString(2, objeto.getNome());
-            stmt.setInt(3, objeto.getIdFerramenta());
+            stmt.setInt(3, objeto.getIdFerramentas());
             stmt.setInt(4, objeto.getData());
 
             stmt.execute();
@@ -123,13 +123,13 @@ public class EmprestimoDAO {
      
      public boolean updateEmprestimoBD(Emprestimo objeto) {
 
-        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramenta = ? ,Data = ? , WHERE IdEmprestimo = ?";
+        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,Data = ? , WHERE IdEmprestimo = ?";
 
         try {
             PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
 
             stmt.setString(1, objeto.getNome());
-            stmt.setInt(2, objeto.getIdFerramenta());
+            stmt.setInt(2, objeto.getIdFerramentas());
             stmt.setInt(3, objeto.getData());
             stmt.setInt(4, objeto.getIdEmprestimo());
 
@@ -153,8 +153,8 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
             res.next();
 
-            objeto.setNome(res.getString("NomeFerramenta"));
-            objeto.setIdFerramenta(res.getInt("IdFerramenta"));
+            objeto.setNome(res.getString("NomeAmigo"));
+            objeto.setIdFerramentas(res.getInt("IdFerramentas"));
             objeto.setData(res.getInt("Data"));
 
             stmt.close();
