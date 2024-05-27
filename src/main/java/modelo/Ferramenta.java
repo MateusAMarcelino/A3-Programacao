@@ -57,7 +57,7 @@ public Ferramenta() {
         this.CustoFerramentas = CustoFerramentas;
     }
 
-    public boolean isDisponibilidadeFerramenta() {
+    public boolean getDisponibilidadeFerramenta() {
         return DisponibilidadeFerramentas;
     }
 
@@ -96,5 +96,15 @@ public Ferramenta() {
     }
     public int MaiorId() {
         return dao.MaiorIdFerramentas();
+    }
+    
+    public void emprestar(){
+        if (DisponibilidadeFerramentas) {
+            DisponibilidadeFerramentas = false;
+            System.out.println("Ferramenta" + NomeFerramentas + " Emprestada ");
+                   
+          } else {
+            System.out.println("Essa Ferramenta está indisponivel para empréstimo");
+        }
     }
 }

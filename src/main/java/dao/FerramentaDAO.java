@@ -22,7 +22,7 @@ public class FerramentaDAO {
             Class.forName(driver);
 
             String server = "localhost";
-            String database = "db_emprestimo";
+            String database = "db_a3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String password = "root";
@@ -85,7 +85,7 @@ public class FerramentaDAO {
          return MaiorIdFerramentas;
      }
      public boolean InsertFerramentaDB(Ferramenta ferramenta){
-         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibildiadeFerramentas) values (?,?,?,?,?)";
+         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) values (?,?,?,?,?)";
          try {
              PreparedStatement smt = this.getConexaoFerramenta().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
@@ -109,7 +109,8 @@ public class FerramentaDAO {
              smt.setString(2,ferramenta.getNomeFerramentas());
              smt.setString(3,ferramenta.getMarcaFerramentas());
              smt.setDouble(4,ferramenta.getCustoFerramentas());
-             smt.setBoolean(5, true);
+             smt.setBoolean(5, ferramenta.getDisponibilidadeFerramenta());
+             smt.setInt(6,ferramenta.getIdFerramentas());
              smt.execute();
              smt.close();
              return true;
@@ -122,7 +123,7 @@ public class FerramentaDAO {
      public boolean DeleteFerramentaDB(int IdFerramentas){
          try {
              Statement smt = this.getConexaoFerramenta().createStatement();
-             ResultSet res = smt.executeQuery("delete from tb_ferramentas where IdFerramentas=" + IdFerramentas);
+             int res = smt.executeUpdate(("delete from tb_ferramentas where IdFerramentas=" + IdFerramentas));
              smt.close();
          } catch (SQLException erro) {
              System.out.println("Erro : " + erro);
