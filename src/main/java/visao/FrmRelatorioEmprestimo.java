@@ -1,13 +1,9 @@
 package visao;
 
-/**
- *
- * @author guiho
- */
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmRelatorioEmprestimo
+     * Cria nova forma FrmRelatorioEmprestimo
      */
     public FrmRelatorioEmprestimo() {
         initComponents();
