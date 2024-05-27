@@ -1,5 +1,8 @@
 package visao;
 
+import modelo.Emprestimo;
+import dao.EmprestimoDAO;
+
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
     /**
