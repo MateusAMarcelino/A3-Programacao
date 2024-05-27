@@ -7,7 +7,7 @@ public class Emprestimo {
 
     private int idEmprestimo;
     private String nome;
-    private int idFerramenta;
+    private int idFerramentas;
     private int data;
     private EmprestimoDAO dao;
   
@@ -16,10 +16,10 @@ public class Emprestimo {
         this( 0, "", 0, 0);
     }
 
-    public Emprestimo(int idEmprestimo, String nome, int idFerramenta, int data) {
+    public Emprestimo(int idEmprestimo, String nome, int idFerramentas, int data) {
         this.idEmprestimo = idEmprestimo;
         this.nome = nome;
-        this.idFerramenta = idFerramenta;
+        this.idFerramentas = idFerramentas;
         this.data = data;
         this.dao = new EmprestimoDAO();
     }
@@ -49,12 +49,12 @@ public class Emprestimo {
         this.data = data;
     }
     
-    public void setIdFerramenta(int idFerramenta){
-        this.idFerramenta = idFerramenta;
+    public void setIdFerramentas(int idFerramentas){
+        this.idFerramentas = idFerramentas;
     }
     
-    public int getIdFerramenta(){
-        return idFerramenta;
+    public int getIdFerramentas(){
+        return idFerramentas;
     }
     
 public ArrayList<Emprestimo> getListaEmprestimo() {
@@ -62,9 +62,9 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
     }
     
  //Cadastrar novo Emprestimo
-    public boolean insertEmprestimoBD(String nome, int idFerramenta, int data) {
+    public boolean insertEmprestimoBD(String nome, int idFerramentas, int data) {
         int idEmprestimo = this.maiorID() + 1;
-        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, idFerramenta, data);
+        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, idFerramentas, data);
         dao.ListaEmprestimo.add(objeto);
         return true;
     }
@@ -86,8 +86,8 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
     
     // Editar emprestimo
      
-    public boolean updateFerramentaBD(int idEmprestimo, String nome, int IdFerramenta, int data) {
-        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramenta, data);
+    public boolean updateFerramentaBD(int idEmprestimo, String nome, int IdFerramentas, int data) {
+        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramentas, data);
         int indice = this.procuraIndice(idEmprestimo);
         dao.ListaEmprestimo.set(indice, objeto);
         return true;
