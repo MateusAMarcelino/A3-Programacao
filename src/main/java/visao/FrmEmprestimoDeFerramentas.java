@@ -158,7 +158,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         try{
             String nome = "";
             int Id = 0;
-            int date = 0;
+            int data = 0;
             
             if(this.JTFNomeAmigo.getText().length() <2){
                 throw new Mensagem("Nome deve conter ao menos dois caracteres.");
@@ -175,8 +175,16 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             if(this.JTFDataEmprestimo.getText().length() <6){
                 throw new Mensagem("A data deve conter 6 caracteres");
             }else{
-                date = Integer.parseInt(this.JTFDataEmprestimo.getText());
+                data = Integer.parseInt(this.JTFDataEmprestimo.getText());
             }
+            if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
+                JOptionPane.showMessageDialog(null, "Amigo inserido com sucesso!");
+                //limpa os campos da interface
+                this.JTFNomeAmigo.setText("");
+                this.JTFFerramentaEmprestada.setText("");
+                this.JTFDataEmprestimo.setText("");
+            }
+            System.out.println(this.objetoemprestimo.getListaEmprestimo().toString());
             
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null,erro.getMessage());
