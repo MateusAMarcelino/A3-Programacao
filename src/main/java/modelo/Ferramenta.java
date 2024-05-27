@@ -7,21 +7,21 @@ public class Ferramenta {
     
     private int IdFerramentas;
     private String NomeFerramentas;
-    private String MarcaFerramenta;
-    private double CustoFerramenta;
-    private boolean DisponibilidadeFerramenta;
+    private String MarcaFerramentas;
+    private double CustoFerramentas;
+    private boolean DisponibilidadeFerramentas;
     FerramentaDAO dao;
     
 public Ferramenta() {
     this(0,"","",0.0,true);
 }
 
-    public Ferramenta(int IdFerramentas, String NomeFerramentas, String MarcaFerramenta, double CustoFerramenta, boolean DisponibilidadeFerramenta) {
+    public Ferramenta(int IdFerramentas, String NomeFerramentas, String MarcaFerramentas, double CustoFerramentas, boolean DisponibilidadeFerramentas) {
         this.IdFerramentas = IdFerramentas;
         this.NomeFerramentas = NomeFerramentas;
-        this.MarcaFerramenta = MarcaFerramenta;
-        this.CustoFerramenta = CustoFerramenta;
-        this.DisponibilidadeFerramenta = DisponibilidadeFerramenta;
+        this.MarcaFerramentas = MarcaFerramentas;
+        this.CustoFerramentas = CustoFerramentas;
+        this.DisponibilidadeFerramentas = DisponibilidadeFerramentas;
         this.dao = new FerramentaDAO();
     }
 
@@ -41,32 +41,32 @@ public Ferramenta() {
         this.NomeFerramentas = NomeFerramentas;
     }
 
-    public String getMarcaFerramenta() {
-        return MarcaFerramenta;
+    public String getMarcaFerramentas() {
+        return MarcaFerramentas;
     }
 
-    public void setMarcaFerramenta(String MarcaFerramenta) {
-        this.MarcaFerramenta = MarcaFerramenta;
+    public void setMarcaFerramentas(String MarcaFerramentas) {
+        this.MarcaFerramentas = MarcaFerramentas;
     }
 
-    public double getCustoFerramenta() {
-        return CustoFerramenta;
+    public double getCustoFerramentas() {
+        return CustoFerramentas;
     }
 
-    public void setCustoFerramenta(double CustoFerramenta) {
-        this.CustoFerramenta = CustoFerramenta;
+    public void setCustoFerramenta(double CustoFerramentas) {
+        this.CustoFerramentas = CustoFerramentas;
     }
 
     public boolean isDisponibilidadeFerramenta() {
-        return DisponibilidadeFerramenta;
+        return DisponibilidadeFerramentas;
     }
 
-    public void setDisponibilidadeFerramenta(boolean DisponibilidadeFerramenta) {
-        this.DisponibilidadeFerramenta = DisponibilidadeFerramenta;
+    public void setDisponibilidadeFerramenta(boolean DisponibilidadeFerramentas) {
+        this.DisponibilidadeFerramentas = DisponibilidadeFerramentas;
     }
     
     public ArrayList<Ferramenta> ListaFerramenta(){
-        return dao.getListaFerramenta();
+        return dao.getListaFerramentas();
     }
     public boolean InsertFerramentaDB(String NomeFerramenta, String MarcaFerramenta,double CustoFerramenta){
         int maiorID = dao.maiorIdFerramentas() +1;

@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package visao;
 
 import modelo.Ferramenta;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author guiho
- */
+
+
 public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
    private Ferramenta objetoFerramenta;
@@ -142,35 +136,36 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
         try{
-          String NomeFerramenta = "";
-          int Valor = 0;
-          String Marca = "";
+            
+          Ferramenta ferramenta = new Ferramenta();  
+          String NomeFerramentas = "";
+          int CustoFerrametas = 0;
+          String MarcaFerramentas = "";
           
           if(this.JTFNomeF.getText().length() < 2){
               throw new Mensagem("Nome deve conter ao menos dois caracteres.");
           }else {
-            NomeFerramenta = this.JTFNomeF.getText();
+            NomeFerramentas = this.JTFNomeF.getText();
           }
           
           if(this.JTFCustoF.getText().length() <= 0){
               throw new Mensagem("Custo deve ser maior que zero.");
           }else{
-           Valor = Integer.parseInt(this.JTFCustoF.getText());
+           CustoFerrametas = Integer.parseInt(this.JTFCustoF.getText());
           }
           if(this.JTFMarcaF.getText().length() < 2){
               throw new Mensagem("Marca deve conter dois caracteres.");
           }else{
-           Marca = this.JTFMarcaF.getText();
+           MarcaFerramentas = this.JTFMarcaF.getText();
           }
           
-          if(this.objetoFerramenta.insertFerramentaBD(NomeFerramenta, Marca, Valor)){
+          if(ferramenta.InsertFerramentaDB(NomeFerramentas, MarcaFerramentas, CustoFerrametas)){
               JOptionPane.showMessageDialog(null, "Ferramenta Cadastrado com Sucesso!");
               this.JTFNomeF.setText("");
               this.JTFCustoF.setText("");
               this.JTFMarcaF.setText("");
             }
-            System.out.println(this.objetoFerramenta.getListaFerramenta().toString());
-            
+          
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null,erro.getMessage());
         } catch (NumberFormatException erro2){
