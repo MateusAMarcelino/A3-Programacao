@@ -69,21 +69,21 @@ public Ferramenta() {
         return dao.getListaFerramentas();
     }
     public boolean InsertFerramentaDB(String NomeFerramenta, String MarcaFerramenta,double CustoFerramenta){
-        int maiorID = dao.maiorIdFerramentas() +1;
+        int maiorID = dao.MaiorIdFerramentas() +1;
         boolean DisponibilidadeFerramenta = true;
         Ferramenta ferramenta = new Ferramenta (maiorID, NomeFerramenta, MarcaFerramenta, CustoFerramenta,DisponibilidadeFerramenta);
-        dao.insertFerramentaBD(ferramenta);
+        dao.InsertFerramentaDB(ferramenta);
         return true;
     }
     
     public boolean DeleteFerramentaDB(int IdFerramentas) {
-        dao.deleteFerramentaBD(IdFerramentas);
+        dao.DeleteFerramentaDB(IdFerramentas);
         return true;
     }
     private int procuraIndice(int IdFerramentas){
         int indice = -1;
-        for (int i = 0; i < FerramentaDAO.ListaFerramenta.size(); i++ ) {
-            if (FerramentaDAO.ListaFerramenta.get(i).getIdFerramentas() == IdFerramentas) {
+        for (int i = 0; i < FerramentaDAO.ListaFerramentas.size(); i++ ) {
+            if (FerramentaDAO.ListaFerramentas.get(i).getIdFerramentas() == IdFerramentas) {
                 indice = i;
             } 
         }
@@ -91,10 +91,10 @@ public Ferramenta() {
     }
     public boolean updateFerramentaDB(int IdFerramenta,String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta, boolean DisponibilidadeFerramenta){
         Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta,DisponibilidadeFerramenta);
-        dao.updateFerramentaBD(ferramenta);
+        dao.UpdateFerramentaDB(ferramenta);
         return true;
     }
     public int MaiorId() {
-        return dao.maiorIdFerramentas();
+        return dao.MaiorIdFerramentas();
     }
 }

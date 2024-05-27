@@ -90,8 +90,8 @@ public class FerramentaDAO {
              PreparedStatement smt = this.getConexaoFerramenta().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
              smt.setString(2,ferramenta.getNomeFerramentas());
-             smt.setString(3,ferramenta.getMarcaFerramenta());
-             smt.setDouble(4,ferramenta.getCustoFerramenta());
+             smt.setString(3,ferramenta.getMarcaFerramentas());
+             smt.setDouble(4,ferramenta.getCustoFerramentas());
              smt.setBoolean(5, true);
              smt.execute();
              smt.close();
@@ -101,14 +101,14 @@ public class FerramentaDAO {
              throw new RuntimeException(erro);
          }
      }
-     public boolean UpdateFerrametnaDB(Ferramenta ferramenta){
+     public boolean UpdateFerramentaDB(Ferramenta ferramenta){
          String res = "update tb_ferramentas set IdFerramentas=?,NomeFerramentas=?,MarcaFerramentas=?,CustoFerramentas=?,DisponibilidadeFerramentas=? where IdFerramentas=?";
          try {
              PreparedStatement smt = this.getConexaoFerramenta().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
              smt.setString(2,ferramenta.getNomeFerramentas());
-             smt.setString(3,ferramenta.getMarcaFerramenta());
-             smt.setDouble(4,ferramenta.getCustoFerramenta());
+             smt.setString(3,ferramenta.getMarcaFerramentas());
+             smt.setDouble(4,ferramenta.getCustoFerramentas());
              smt.setBoolean(5, true);
              smt.execute();
              smt.close();
