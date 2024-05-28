@@ -1,7 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +9,9 @@ import modelo.Emprestimo;
 
 public class EmprestimoDAO {
     
+    //chamando o metodo getConexao
+    private Utilitarios ut = new Utilitarios();
+    
     public ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
 
     public ArrayList<Emprestimo> getListaEmprestimo() {
@@ -18,7 +19,7 @@ public class EmprestimoDAO {
        ListaEmprestimo.clear(); //Limpa nosso ArrayList
        
        try{
-           Statement stmt = this.getConexaoEmprestimo().createStatement();
+           Statement stmt = ut.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
             while (res.next()) {
 
@@ -42,10 +43,11 @@ public class EmprestimoDAO {
         this.ListaEmprestimo = ListaEmprestimo;
         
     }
+    
      public int maiorID() {
         int maiorIdEmprestimo = 0;
         try {
-            Statement stmt = this.getConexaoEmprestimo().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(IdEmprestimo) IdEmprestimo FROM tb_emprestimos");
             res.next();
             maiorIdEmprestimo = res.getInt("IdEmprestimo");
@@ -56,43 +58,11 @@ public class EmprestimoDAO {
         return maiorIdEmprestimo;
     }
      
-     public Connection getConexaoEmprestimo() {
-
-        Connection connection = null;  //instância da conexão
-        try {
-            // Carregamento do JDBC Driver
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-
-            // Configurar a conexão
-            String server = "localhost"; //caminho do MySQL
-            String database = "db_a3";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?serverTimezone=UTC";
-            String user = "root";
-            String password = "root";
-
-            connection = DriverManager.getConnection(url, user, password);
-            // Testando..
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: NÃO CONECTADO!");
-            }
-            return connection;
-
-        } catch (ClassNotFoundException e) {  //Driver não encontrado
-            System.out.println("O driver nao foi encontrado. " + e.getMessage());
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
-        }
-    }
      
      public boolean insertEmprestimoBD(Emprestimo objeto) {
         String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,Data) VALUES(?,?,?,?)";
         try {
-            PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
+            PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdEmprestimo());
             stmt.setString(2, objeto.getNome());
@@ -111,7 +81,7 @@ public class EmprestimoDAO {
     
      public boolean deleteEmprestimoBD(int idEmprestimo) {
         try {
-            Statement stmt = this.getConexaoEmprestimo().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
             stmt.close();
 
@@ -126,7 +96,7 @@ public class EmprestimoDAO {
         String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,Data = ? , WHERE IdEmprestimo = ?";
 
         try {
-            PreparedStatement stmt = this.getConexaoEmprestimo().prepareStatement(sql);
+            PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setString(1, objeto.getNome());
             stmt.setInt(2, objeto.getIdFerramentas());
@@ -148,7 +118,7 @@ public class EmprestimoDAO {
         Emprestimo objeto = new Emprestimo();
         objeto.setIdEmprestimo(idEmprestimo);
         try {
-            Statement stmt = this.getConexaoEmprestimo().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
 
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
             res.next();
