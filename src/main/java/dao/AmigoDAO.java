@@ -11,6 +11,8 @@ import modelo.Amigo;
 
 public class AmigoDAO {
 
+    private Utilitarios ut = new Utilitarios();
+    
     //Cria ArrayList de Amigos:
     public ArrayList<Amigo> ListaAmigo = new ArrayList<>();
 
@@ -20,7 +22,7 @@ public class AmigoDAO {
         
        //adicionando objeto amigo ao banco de dados
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos");
             while (res.next()) {
 
@@ -49,7 +51,7 @@ public class AmigoDAO {
     public int maiorID() {
         int maiorID = 0;
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_amigos");
             res.next();
             maiorID = res.getInt("id");
@@ -60,44 +62,10 @@ public class AmigoDAO {
         return maiorID;
     }
     
-    //conexão com o banco de dados 
-    public Connection getConexao() {
-
-        Connection connection = null;  //instância da conexão
-        try {
-            // Carregamento do JDBC Driver
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-
-            // Configurar a conexão
-            String server = "localhost"; //caminho do MySQL
-            String database = "db_a3";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?serverTimezone=UTC";
-            String user = "root";
-            String password = "root";
-
-            connection = DriverManager.getConnection(url, user, password);
-            // Testando..
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: NÃO CONECTADO!");
-            }
-            return connection;
-
-        } catch (ClassNotFoundException e) {  //Driver não encontrado
-            System.out.println("O driver nao foi encontrado. " + e.getMessage());
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
-        }
-    }
-    
     public boolean insertAmigoBD(Amigo objeto) {
         String sql = "INSERT INTO tb_amigos(id,nome,telefone,email) VALUES(?,?,?,?)";
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getId());
             stmt.setString(2, objeto.getNome());
@@ -116,7 +84,7 @@ public class AmigoDAO {
     
     public boolean deleteAmigoBD(int id) {
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_amigos WHERE id = " + id);
             stmt.close();
 
@@ -131,7 +99,7 @@ public class AmigoDAO {
         String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? ,email = ? , WHERE id = ?";
 
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setString(1, objeto.getNome());
             stmt.setInt(2, objeto.getTelefone());
@@ -153,7 +121,7 @@ public class AmigoDAO {
         Amigo objeto = new Amigo();
         objeto.setId(id);
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = ut.getConexao().createStatement();
 
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE id = " + id);
             res.next();
