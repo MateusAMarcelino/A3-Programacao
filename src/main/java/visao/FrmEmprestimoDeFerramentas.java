@@ -178,7 +178,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 data = Integer.parseInt(this.JTFDataEmprestimo.getText());
             }
             if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
-                JOptionPane.showMessageDialog(null, "Amigo inserido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
                 //limpa os campos da interface
                 this.JTFNomeAmigo.setText("");
                 this.JTFFerramentaEmprestada.setText("");
