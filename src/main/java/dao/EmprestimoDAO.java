@@ -26,9 +26,9 @@ public class EmprestimoDAO {
                 int id = res.getInt("IdEmprestimo");
                 String nome = res.getString("NomeAmigo");
                 int idFerramentas = res.getInt("IdFerramentas");
-                int data = res.getInt("Data");
+                int dataEmp = res.getInt("DataEmprestimo");
 
-                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, data);
+                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, dataEmp);
 
                 ListaEmprestimo.add(objeto);
        }
@@ -60,14 +60,14 @@ public class EmprestimoDAO {
      
      
      public boolean insertEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,Data) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdEmprestimo());
             stmt.setString(2, objeto.getNome());
             stmt.setInt(3, objeto.getIdFerramentas());
-            stmt.setInt(4, objeto.getData());
+            stmt.setInt(4, objeto.getDataEmp());
 
             stmt.execute();
             stmt.close();
@@ -93,14 +93,14 @@ public class EmprestimoDAO {
      
      public boolean updateEmprestimoBD(Emprestimo objeto) {
 
-        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,Data = ? , WHERE IdEmprestimo = ?";
+        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,DataEmprestimo = ? , WHERE IdEmprestimo = ?";
 
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setString(1, objeto.getNome());
             stmt.setInt(2, objeto.getIdFerramentas());
-            stmt.setInt(3, objeto.getData());
+            stmt.setInt(3, objeto.getDataEmp());
             stmt.setInt(4, objeto.getIdEmprestimo());
 
             stmt.execute();
@@ -125,7 +125,7 @@ public class EmprestimoDAO {
 
             objeto.setNome(res.getString("NomeAmigo"));
             objeto.setIdFerramentas(res.getInt("IdFerramentas"));
-            objeto.setData(res.getInt("Data"));
+            objeto.setDataEmp(res.getInt("DataEmprestimo"));
 
             stmt.close();
         } catch (SQLException erro) {
