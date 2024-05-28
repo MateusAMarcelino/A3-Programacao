@@ -5,11 +5,11 @@ import dao.EmprestimoDAO;
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
-    /**
-     * Cria nova forma FrmRelatorioEmprestimo
-     */
+    private Emprestimo objetoEmprestimo;
+    
     public FrmRelatorioEmprestimo() {
         initComponents();
+        this.objetoEmprestimo = new Emprestimo();
     }
 
     /**
@@ -121,8 +121,8 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Cancela a ação
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+        // Cancela a ação
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
