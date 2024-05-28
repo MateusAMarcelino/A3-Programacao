@@ -301,6 +301,9 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
 
     private void JCBDisponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBDisponibilidadeActionPerformed
         // TODO add your handling code here:
+        JCBDisponibilidade = new javax.swing.JComboBox<>();
+        JCBDisponibilidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponível", "Indisponível" }));
+        JCBDisponibilidade.setSelectedIndex(0); // Inicializa com "Disponível"
     }//GEN-LAST:event_JCBDisponibilidadeActionPerformed
 
     /**
