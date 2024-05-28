@@ -33,20 +33,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGerenciamentoDeFerramentasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEmprestimoDeFerramentas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Emprestimo de Ferramentas"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEmprestimoDeFerramentasActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemGerenciadorAmigo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciador de Amigos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGerenciadorAmigoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEmprestimoDeFerramentas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Emprestimo de Ferramentas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEmprestimoDeFerramentasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 
 public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
-   private Ferramenta objetoFerramenta;
+   private Ferramenta objetoferramenta;
    
     public FrmCadastrarFerramenta() {
         initComponents();
-        this.objetoFerramenta = new Ferramenta();
+        this.objetoferramenta = new Ferramenta();
     }
 
     /**

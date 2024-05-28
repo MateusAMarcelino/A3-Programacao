@@ -31,8 +31,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItemCadastroDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemCadastroDeAmigos = new javax.swing.JMenuItem();
         jMenuItemGerenciamentoDeFerramentas = new javax.swing.JMenuItem();
-        jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemGerenciadorAmigo = new javax.swing.JMenuItem();
+        jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
         jMenuItemRelatorio = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
@@ -65,14 +65,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuGerenciamentoGeral.add(jMenuItemGerenciamentoDeFerramentas);
 
-        jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
-        jMenuItemEmprestimoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemEmprestimoDeFerramentasActionPerformed(evt);
-            }
-        });
-        jMenuGerenciamentoGeral.add(jMenuItemEmprestimoDeFerramentas);
-
         jMenuItemGerenciadorAmigo.setText("Gerenciador de Amigos");
         jMenuItemGerenciadorAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +72,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuGerenciamentoGeral.add(jMenuItemGerenciadorAmigo);
+
+        jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
+        jMenuItemEmprestimoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmprestimoDeFerramentasActionPerformed(evt);
+            }
+        });
+        jMenuGerenciamentoGeral.add(jMenuItemEmprestimoDeFerramentas);
 
         jMenuBar1.add(jMenuGerenciamentoGeral);
 
@@ -137,7 +137,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void jMenuItemGerenciamentoDeFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerenciamentoDeFerramentasActionPerformed
         // TODO add your handling code here:
          FrmGerenciamentoDeFerramentas objeto = new FrmGerenciamentoDeFerramentas();
-        objeto.setVisible(true);
+         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemGerenciamentoDeFerramentasActionPerformed
 
     private void jMenuItemEmprestimoDeFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmprestimoDeFerramentasActionPerformed
