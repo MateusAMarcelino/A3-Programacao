@@ -28,17 +28,18 @@ Para melhor compreensão de nosso trabalho, apresentamos a seguir o problema a s
 ### Requisitos Funcionais e não funcionais ⬇️
 ```bash
 REQUISITOS FUNCIONAIS:
-. RF001 -> Cadastrar as ferramentas com nome, marca e custo.
-. RF002 -> Cadastrar os amigo com nome, telefone e e-mail.
-. RF003 -> Registrar o empréstimo das ferramentas ao amigo, incluindo a data 
+. RF001 -> O sistema deve ser utilizado com as seguintes versões ; Java 8 [ Linguagem de Programação utilizada para construir o aplicativo. ] , JDK 22 [ Kit de Desenvolvimento necessário para programar em Java. ] , MySQL 8.3.0 [ Sistema utilizado para o gerenciamento do Banco de Dados. ]
+. RF002 -> Cadastrar as ferramentas com nome, marca e custo.
+. RF003 -> Cadastrar os amigo com nome, telefone e e-mail.
+. RF004 -> Registrar o empréstimo das ferramentas ao amigo, incluindo a data 
 de empréstimo e devolução.
-. RF004 -> O software precisa ter uma lista de todas as ferramentas e o valor gasto 
+. RF005 -> O software precisa ter uma lista de todas as ferramentas e o valor gasto 
 nelas.
-. RF005 -> Mostrar o relatório de todos os empréstimos ativos.
-. RF006 -> Mostrar o relatório de todos os empréstimos realizados.
-. RF007 -> Mostrar qual amigo fez mais empréstimos.
-. RF008 -> Mostrar se algum amigo nunca devolveu uma ferramenta.
-. RF009 -> Ao fazer um novo empréstimo, mostrar se o amigo tem alguma
+. RF006 -> Mostrar o relatório de todos os empréstimos ativos.
+. RF007 -> Mostrar o relatório de todos os empréstimos realizados.
+. RF008 -> Mostrar qual amigo fez mais empréstimos.
+. RF009 -> Mostrar se algum amigo nunca devolveu uma ferramenta.
+. RF010 -> Ao fazer um novo empréstimo, mostrar se o amigo tem alguma
 ferramenta não devolvida.
 
 REQUISITOS NÃO FUNCIONAIS:
