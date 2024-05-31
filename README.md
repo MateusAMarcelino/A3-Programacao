@@ -49,3 +49,11 @@ REQUISITOS NÃO FUNCIONAIS:
 . RNF002 -> O programa deve ser conectado a uma base de dados usando mySQL.
 ```
 
+## Configurando o Banco de Dados:
+```bash
+ Usuário ; root
+ Senha ; root
+
+ Os scripts que terão de ser utilizados para criar o Banco de Dados, estão no arquivo [ banco.sql ]
+
+
