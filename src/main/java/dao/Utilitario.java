@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class Utilitarios {
+public class Utilitario {
     
     //conexão com o banco de dados 
     public Connection getConexao() {

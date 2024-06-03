@@ -10,7 +10,7 @@ import modelo.Emprestimo;
 public class EmprestimoDAO {
     
     //chamando o metodo getConexao
-    private Utilitarios ut = new Utilitarios();
+    private Utilitario ut = new Utilitario();
     
     public ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
 

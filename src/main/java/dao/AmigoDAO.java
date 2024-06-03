@@ -9,7 +9,7 @@ import modelo.Amigo;
 
 public class AmigoDAO {
 
-    private Utilitarios ut = new Utilitarios();
+    private Utilitario ut = new Utilitario();
     
     //Cria ArrayList de Amigos:
     public ArrayList<Amigo> ListaAmigo = new ArrayList<>();

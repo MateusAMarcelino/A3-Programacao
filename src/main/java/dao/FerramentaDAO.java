@@ -10,7 +10,7 @@ import modelo.Ferramenta;
 public class FerramentaDAO {
      
     //chamando o metodo getConexao
-    private Utilitarios ut = new Utilitarios();
+    private Utilitario ut = new Utilitario();
     
     public static ArrayList<Ferramenta> ListaFerramentas = new ArrayList<>();
     
