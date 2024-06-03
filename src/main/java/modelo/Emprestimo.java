@@ -24,7 +24,7 @@ public class Emprestimo {
         this.dao = new EmprestimoDAO();
     }
     
-    
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -61,7 +61,7 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
         return dao.getListaEmprestimo();
     }
     
- //Cadastrar novo Emprestimo
+ // Cadastrar novo Emprestimo
     public boolean insertEmprestimoBD(String nome, int idFerramentas, int dataEmp) {
         int idEmprestimo = this.maiorID() + 1;
         Emprestimo objeto = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp);
@@ -69,14 +69,14 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
         return true;
     }
     
- //Retorna o maior ID da base de dados
+ // Retorna o maior ID da base de dados
     
     public int maiorID() {
         return dao.maiorID();
 
     }
     
-    //deletar emprestimo
+    // Deletar emprestimo
     
     public boolean deleteEmprestimoBD(int idEmprestimo) {
         int indice = this.procuraIndice(idEmprestimo);
