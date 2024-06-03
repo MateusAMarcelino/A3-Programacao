@@ -46,7 +46,7 @@ public class Amigo {
 /**
 * Define o nome do amigo.
 * 
-* @param nome O nome a ser definido.
+* @param nome ; O nome a ser definido.
 */
     public void setNome(String nome) {
         this.nome = nome;
@@ -64,7 +64,7 @@ public class Amigo {
 /**
 * Define o Id do amigo.
 * 
-* @param Id O Id a ser definido.
+* @param Id ; O Id a ser definido.
 */
     public void setId(int Id) {
         this.Id = Id;
@@ -82,7 +82,7 @@ public class Amigo {
 /**
 * Define o email do amigo.
 * 
-* @param email O email a ser definido.
+* @param email ; O email a ser definido.
 */
     public void setEmail(String email) {
         this.email = email;
@@ -100,7 +100,7 @@ public class Amigo {
 /**
 * Define o número de telefone do amigo.
 * 
-* @param telefone O número de telefone a ser definido.
+* @param telefone ; O número de telefone a ser definido.
 */
     public void setTelefone(int telefone) {
         this.telefone = telefone;
