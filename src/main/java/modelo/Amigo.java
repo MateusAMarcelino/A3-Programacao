@@ -12,7 +12,15 @@ public class Amigo {
     //Objeto manipulado pelo amigo
     private AmigoDAO dao;
 
-    //Construtores
+/**
+* Construtor para a classe Amigo, inicializa o amigo com nome, Id, email e telefone.
+* 
+* @param Id ; O Id do amigo.
+* @param nome ; O Nome do amigo.
+* @param telefone ; O número de Telefone do amigo.
+* @param email ; O Email do amigo.
+*/
+    
     public Amigo() {
         
         this(0, "", 0, "");
