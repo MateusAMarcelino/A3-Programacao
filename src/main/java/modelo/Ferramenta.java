@@ -165,8 +165,8 @@ public Ferramenta() {
      * @param DisponibilidadeFerramenta é a Disponibilidade da ferramenta a ser atualizada.
      * @return True, caso seja possivel atualizar a ferramenta desejada.
      */
-    public boolean updateFerramentaDB(int IdFerramenta,String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta, boolean DisponibilidadeFerramenta){
-        Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta,DisponibilidadeFerramenta);
+    public boolean updateFerramentaDB(int IdFerramenta,String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta){
+        Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta,DisponibilidadeFerramentas);
         dao.UpdateFerramentaDB(ferramenta);
         return true;
     }
