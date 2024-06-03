@@ -10,7 +10,8 @@ public class Emprestimo {
     private int idFerramentas;
     private int dataEmp;
     private EmprestimoDAO dao;
-  
+
+    // Construtores
   public Emprestimo() {
     
         this( 0, "", 0, 0);
