@@ -9,7 +9,6 @@ public class Amigo {
     private int Id;
     private String email;
     private int telefone;
-    //Objeto manipulado pelo amigo
     private AmigoDAO dao;
 
 /**
@@ -19,8 +18,7 @@ public class Amigo {
 * @param nome ; O Nome do amigo.
 * @param telefone ; O número de Telefone do amigo.
 * @param email ; O Email do amigo.
-*/
-    
+*/ 
     public Amigo() {
         
         this(0, "", 0, "");
@@ -161,7 +159,7 @@ public class Amigo {
 * Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
 * 
 * @param id ; O ID do amigo.
-* @return O objeto Amigo com os dados carregados, ou null se não encontrado.
+* @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
 */
     private int procuraIndice(int id) {
         int indice = -1;
