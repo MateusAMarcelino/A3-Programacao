@@ -34,7 +34,11 @@ public class Amigo {
         this.dao = new AmigoDAO();
     }
 
-    //Getters and Setters
+/**
+* Obtém o nome do amigo.
+* 
+* @return O nome do amigo.
+*/
     public String getNome() {
         return nome;
     }
@@ -43,6 +47,11 @@ public class Amigo {
         this.nome = nome;
     }
 
+/**
+* Obtém o Id do amigo.
+* 
+* @return O Id do amigo.
+*/
     public int getId() {
         return Id;
     }
@@ -51,6 +60,11 @@ public class Amigo {
         this.Id = Id;
     }
 
+/**
+* Obtém o email do amigo.
+* 
+* @return O email do amigo.
+*/
     public String getEmail() {
         return email;
     }
@@ -59,6 +73,11 @@ public class Amigo {
         this.email = email;
     }
 
+/**
+* Obtém o número de telefone do amigo.
+* 
+* @return O número de telefone do amigo.
+*/
     public int getTelefone() {
         return telefone;
     }
