@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import modelo.Amigo;
 import modelo.Emprestimo;
+import modelo.Ferramenta;
 
 /**
  *
@@ -22,6 +23,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
     private Emprestimo objetoemprestimo;
     private Utilitario ut;
+    private Ferramenta fe;
     /**
      * Creates new form FrmEmprestimoDeFerramentas
      */
@@ -29,6 +31,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         initComponents();
         this.objetoemprestimo = new Emprestimo();
         this.ut = new Utilitario();
+        this.fe = new Ferramenta();
         inicializarJBCNomeAmigo();
         inicializarJBCIdFerramenta();
     }
@@ -208,13 +211,16 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             String nome = "" + jCBNomeAmigo.getSelectedIndex();
             int Id = jCBIdFerramenta.getSelectedIndex();
             int data = 0;
+            fe.setDisponibilidadeFerramenta(false);
             
             if(this.JTFDataEmprestimo.getText().length() <6){
                 throw new Mensagem("A data deve conter 6 caracteres");
             }else{
                 data = Integer.parseInt(this.JTFDataEmprestimo.getText());
             }
-            if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
+            if(fe.getDisponibilidadeFerramenta() == false){
+                JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta.");
+            } else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
                 JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
                 //limpa os campos da interfac
                 this.JTFDataEmprestimo.setText("");
