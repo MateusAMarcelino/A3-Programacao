@@ -28,7 +28,8 @@ Para melhor compreensão de nosso trabalho, apresentamos a seguir o problema a s
 ### Requisitos Funcionais e não funcionais ⬇️
 ```bash
 REQUISITOS FUNCIONAIS:
-. RF001 -> O sistema deve ser utilizado com as seguintes versões ; Java 8 [ Linguagem de Programação utilizada para construir o aplicativo. ] , JDK 22 [ Kit de Desenvolvimento necessário para programar em Java. ] , MySQL 8.3.0 [ Sistema utilizado para o gerenciamento do Banco de Dados. ]
+. RF001 -> O sistema deve ser utilizado com as seguintes versões ; Java 8 [ Linguagem de Programação utilizada para construir o aplicativo. ], 
+  JDK 22 [ Kit de Desenvolvimento necessário para programar em Java. ] , MySQL 8.3.0 [ Sistema utilizado para o gerenciamento do Banco de Dados. ]
 . RF002 -> Cadastrar as ferramentas com nome, marca e custo.
 . RF003 -> Cadastrar os amigo com nome, telefone e e-mail.
 . RF004 -> Registrar o empréstimo das ferramentas ao amigo, incluindo a data 
