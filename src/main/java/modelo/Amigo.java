@@ -106,11 +106,23 @@ public class Amigo {
         this.telefone = telefone;
     }
 
+/**
+* Retorna uma lista de todos os amigos.
+* 
+* @return Uma lista de objetos Amigo.
+*/
     public ArrayList<Amigo> getListaAmigo() {
         return dao.getListaAmigo();
     }
 
-    //Cadastrar nova ferramenta
+/**
+* Cadastra um novo amigo.
+* 
+* @param Nome ; O nome do amigo.
+* @param telefone ; O número de telefone do amigo.
+* @param email ; O email do amigo.
+* @return true se o amigo foi inserido com sucesso, false caso contrário.
+*/
     public boolean insertAmigoBD(String Nome, int telefone, String email) {
         int Id = this.maiorID() + 1;
         Amigo objeto = new Amigo(Id, Nome, telefone, email);
@@ -118,21 +130,39 @@ public class Amigo {
         return true;
     }
 
-    //Deleta uma ferramenta
+/**
+* Deleta um amigo pelo ID.
+* 
+* @param id ; O ID do amigo a ser deletado.
+* @return true se o amigo foi deletado com sucesso, false caso contrário.
+*/
     public boolean deleteAmigoBD(int id) {
         int indice = this.procuraIndice(id);
         dao.deleteAmigoBD(indice);
         return true;
     }
 
-    //Editar ferramenta
+/**
+* Atualiza os dados de um amigo no banco de dados.
+* 
+* @param Id ; O ID do amigo.
+* @param Nome ; O nome do amigo.
+* @param telefone ; O número de telefone do amigo.
+* @param email ; O email do amigo.
+* @return true se os dados do amigo foram atualizados com sucesso, false caso contrário.
+*/
     public boolean updateAmigoBD(int Id, String Nome, int telefone, String email) {
         Amigo objeto = new Amigo(Id, Nome, telefone, email);
         dao.updateAmigoBD(objeto);
         return true;
     }
 
-    //Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+/**
+* Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+* 
+* @param id ; O ID do amigo.
+* @return O objeto Amigo com os dados carregados, ou null se não encontrado.
+*/
     private int procuraIndice(int id) {
         int indice = -1;
         for (int i = 0; i < dao.ListaAmigo.size(); i++) {
@@ -143,12 +173,21 @@ public class Amigo {
         return indice;
     }
 
-    //Carrega dados de uma ferramenta especÍfica pelo seu ID
+/**
+* Carrega os dados de um amigo específico pelo seu ID.
+* 
+* @param id ; O Id do amigo.
+* @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
+*/
     public Amigo carregaAmigo(int id) {
         return dao.carregaAmigo(id);
     }
 
-    //Retorna o maior ID da base de dados
+/**
+* Retorna o maior ID existente na base de dados.
+* 
+* @return O maior ID.
+*/
     public int maiorID() {
         return dao.maiorID();
 
