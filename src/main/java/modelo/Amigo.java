@@ -9,10 +9,18 @@ public class Amigo {
     private int Id;
     private String email;
     private int telefone;
-    //objeto manipulado pelo amigo
+    //Objeto manipulado pelo amigo
     private AmigoDAO dao;
 
-    //Construtores
+/**
+* Construtor para a classe Amigo, inicializa o amigo com nome, Id, email e telefone.
+* 
+* @param Id ; O Id do amigo.
+* @param nome ; O Nome do amigo.
+* @param telefone ; O número de Telefone do amigo.
+* @param email ; O Email do amigo.
+*/
+    
     public Amigo() {
         
         this(0, "", 0, "");
@@ -26,35 +34,74 @@ public class Amigo {
         this.dao = new AmigoDAO();
     }
 
-    //Getters and Setters
+/**
+* Obtém o nome do amigo.
+* 
+* @return O nome do amigo.
+*/
     public String getNome() {
         return nome;
     }
 
+/**
+* Define o nome do amigo.
+* 
+* @param nome ; O nome a ser definido.
+*/
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+/**
+* Obtém o Id do amigo.
+* 
+* @return O Id do amigo.
+*/
     public int getId() {
         return Id;
     }
 
+/**
+* Define o Id do amigo.
+* 
+* @param Id ; O Id a ser definido.
+*/
     public void setId(int Id) {
         this.Id = Id;
     }
 
+/**
+* Obtém o email do amigo.
+* 
+* @return O email do amigo.
+*/
     public String getEmail() {
         return email;
     }
 
+/**
+* Define o email do amigo.
+* 
+* @param email ; O email a ser definido.
+*/
     public void setEmail(String email) {
         this.email = email;
     }
 
+/**
+* Obtém o número de telefone do amigo.
+* 
+* @return O número de telefone do amigo.
+*/
     public int getTelefone() {
         return telefone;
     }
 
+/**
+* Define o número de telefone do amigo.
+* 
+* @param telefone ; O número de telefone a ser definido.
+*/
     public void setTelefone(int telefone) {
         this.telefone = telefone;
     }

@@ -44,10 +44,10 @@ nelas.
 ferramenta não devolvida.
 
 REQUISITOS NÃO FUNCIONAIS:
-
-. RNF001 -> O programa deve rodar localmente em um computador pessoal.
-. RNF002 -> O programa deve ser desenvolvido em Java.
-. RNF002 -> O programa deve ser conectado a uma base de dados usando mySQL.
+. RNF001 -> O sistema deve ser utilizado com as seguintes versões ; Java 8,JDK 22, MySQL 8.3.0
+. RNF002 -> O programa deve rodar localmente em um computador pessoal.
+. RNF003 -> O programa deve ser desenvolvido em Java.
+. RNF004 -> O programa deve ser conectado a uma base de dados usando mySQL.
 ```
 
 ## Configurando o Banco de Dados:
