@@ -9,7 +9,7 @@ public class Amigo {
     private int Id;
     private String email;
     private int telefone;
-    //objeto manipulado pelo amigo
+    //Objeto manipulado pelo amigo
     private AmigoDAO dao;
 
     //Construtores
