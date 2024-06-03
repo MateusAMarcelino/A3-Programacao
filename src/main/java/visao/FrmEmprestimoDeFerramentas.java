@@ -4,9 +4,14 @@
  */
 package visao;
 
-import modelo.Ferramenta;
+import dao.AmigoDAO;
+import dao.FerramentaDAO;
+import java.awt.event.*;
+import java.sql.*;
+import dao.Utilitario;
+import java.util.ArrayList;
+import javax.swing.*;
 import modelo.Amigo;
-import javax.swing.JOptionPane;
 import modelo.Emprestimo;
 
 /**
@@ -16,12 +21,16 @@ import modelo.Emprestimo;
 public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
     private Emprestimo objetoemprestimo;
+    private Utilitario ut;
     /**
      * Creates new form FrmEmprestimoDeFerramentas
      */
     public FrmEmprestimoDeFerramentas() {
         initComponents();
         this.objetoemprestimo = new Emprestimo();
+        this.ut = new Utilitario();
+        inicializarJBCNomeAmigo();
+        inicializarJBCIdFerramenta();
     }
 
     /**
@@ -35,13 +44,13 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        JTFNomeAmigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         JTFDataEmprestimo = new javax.swing.JTextField();
         JBConfirmar = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
-        JTFFerramentaEmprestada = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jCBNomeAmigo = new javax.swing.JComboBox<>();
+        jCBIdFerramenta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,12 +59,6 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome do Amigo:");
-
-        JTFNomeAmigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNomeAmigoActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Data do Empréstimo:");
@@ -80,14 +83,20 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             }
         });
 
-        JTFFerramentaEmprestada.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("ID Ferramenta Emprestada:");
+
+        jCBNomeAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFFerramentaEmprestadaActionPerformed(evt);
+                jCBNomeAmigoActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("ID Ferramenta Emprestada:");
+        jCBIdFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBIdFerramentaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,21 +105,28 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(JTFFerramentaEmprestada, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 45, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCBIdFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,18 +135,18 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFFerramentaEmprestada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBIdFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,10 +155,6 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JTFNomeAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeAmigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNomeAmigoActionPerformed
 
     private void JTFDataEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmprestimoActionPerformed
         // TODO add your handling code here:
@@ -153,24 +165,49 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
+    private void inicializarJBCNomeAmigo(){
+        try{
+            //conexao com o banco de dados
+           Statement stmt = ut.getConexao().createStatement();
+           //seleciona a coluna nome da tabela amigos
+            ResultSet res = stmt.executeQuery("SELECT nome FROM tb_amigos");
+            //inserindo os nomes no jComboBox
+            while (res.next()) {
+                String nome = res.getString("nome");
+                jCBNomeAmigo.addItem(nome);
+            }
+            
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+        }
+    }
+    
+    private void inicializarJBCIdFerramenta(){
+        try{
+            //conexao com o banco de dados
+           Statement stmt = ut.getConexao().createStatement();
+           //seleciona a coluna nome da tabela ferramentas
+            ResultSet res = stmt.executeQuery("SELECT IdFerramentas FROM tb_ferramentas");
+            //inserindo os ids no jComboBox
+            while (res.next()) {
+                int IdFerramentas = res.getInt("IdFerramentas");
+                jCBIdFerramenta.addItem(Integer.toString(IdFerramentas));
+            }
+            
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+        }     
+    }
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
         try{
-            String nome = "";
-            int Id = 0;
+            String nome = "" + jCBNomeAmigo.getSelectedIndex();
+            int Id = jCBIdFerramenta.getSelectedIndex();
             int data = 0;
-            
-            if(this.JTFNomeAmigo.getText().length() <2){
-                throw new Mensagem("Nome deve conter ao menos dois caracteres.");
-            }else{
-                nome = this.JTFNomeAmigo.getText();
-            }
-            
-            if(this.JTFFerramentaEmprestada.getText().length() <=0){
-                throw new Mensagem("O ID da ferramenta emprestada deve ser maior que 0");
-            }else{
-                Id = Integer.parseInt(this.JTFFerramentaEmprestada.getText());
-            }
             
             if(this.JTFDataEmprestimo.getText().length() <6){
                 throw new Mensagem("A data deve conter 6 caracteres");
@@ -179,9 +216,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             }
             if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
                 JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
-                //limpa os campos da interface
-                this.JTFNomeAmigo.setText("");
-                this.JTFFerramentaEmprestada.setText("");
+                //limpa os campos da interfac
                 this.JTFDataEmprestimo.setText("");
             }
             System.out.println(this.objetoemprestimo.getListaEmprestimo().toString());
@@ -197,9 +232,13 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
-    private void JTFFerramentaEmprestadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFFerramentaEmprestadaActionPerformed
+    private void jCBNomeAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeAmigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFFerramentaEmprestadaActionPerformed
+    }//GEN-LAST:event_jCBNomeAmigoActionPerformed
+
+    private void jCBIdFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBIdFerramentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBIdFerramentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,8 +279,8 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
     private javax.swing.JTextField JTFDataEmprestimo;
-    private javax.swing.JTextField JTFFerramentaEmprestada;
-    private javax.swing.JTextField JTFNomeAmigo;
+    private javax.swing.JComboBox<String> jCBIdFerramenta;
+    private javax.swing.JComboBox<String> jCBNomeAmigo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
