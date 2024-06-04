@@ -120,8 +120,8 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
   */
     public boolean insertEmprestimoBD(String nome, int idFerramentas, int dataEmp) {
         int idEmprestimo = this.maiorID() + 1;
-        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp);
-        dao.ListaEmprestimo.add(objeto);
+        Emprestimo emprestimo = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp);
+        dao.insertEmprestimoBD(emprestimo);
         return true;
     }
     
@@ -156,7 +156,7 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
      * @return True caso o empréstimo tiver sido atualizado com sucesso, false caso tenha falhado.
      */
      
-    public boolean updateFerramentaBD(int idEmprestimo, String nome, int IdFerramentas, int dataEmp) {
+    public boolean updateEmprestimoBD(int idEmprestimo, String nome, int IdFerramentas, int dataEmp) {
         Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramentas, dataEmp);
         int indice = this.procuraIndice(idEmprestimo);
         dao.ListaEmprestimo.set(indice, objeto);
