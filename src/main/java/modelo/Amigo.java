@@ -3,6 +3,11 @@ package modelo;
 import dao.AmigoDAO;
 import java.util.ArrayList;
 
+
+/**
+ * Classe do Amigo com ; nome, Id, email, telefone.
+ * 
+ */
 public class Amigo {
 
     private String nome;
@@ -11,19 +16,29 @@ public class Amigo {
     private int telefone;
     private AmigoDAO dao;
 
+
 /**
-* Construtor para a classe Amigo, inicializa o amigo com nome, Id, email e telefone.
-* 
-* @param Id ; O Id do amigo.
-* @param nome ; O Nome do amigo.
-* @param telefone ; O número de Telefone do amigo.
-* @param email ; O Email do amigo.
-*/ 
+ * Construtor para a classe Amigo, incializa o amigo com nome e email sendo strings vazias, id e telefone são iniciados com o valor 0.
+ *  */
     public Amigo() {
         
         this(0, "", 0, "");
     }
 
+    
+   /**
+    * 
+    * @param Id
+    * @param nome
+    * @param telefone
+    * @param email
+    * 
+    * Inicializa todos com os valores iniciais acima, que são :
+    * Id = 0
+    * nome = "" ( vazio )
+    * telefone = 0
+    * email = "" ( vazio )
+    */ 
     public Amigo(int Id, String nome, int telefone, String email) {
         this.Id = Id;
         this.nome = nome;
