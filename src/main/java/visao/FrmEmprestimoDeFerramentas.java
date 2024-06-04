@@ -211,7 +211,6 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             String nome = "" + jCBNomeAmigo.getSelectedIndex();
             int Id = jCBIdFerramenta.getSelectedIndex();
             int data = 0;
-            fe.setDisponibilidadeFerramenta(false);
             
             if(this.JTFDataEmprestimo.getText().length() <6){
                 throw new Mensagem("A data deve conter 6 caracteres");
@@ -222,6 +221,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta.");
             } else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
                 JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
+                fe.emprestar();
                 //limpa os campos da interfac
                 this.JTFDataEmprestimo.setText("");
             }
