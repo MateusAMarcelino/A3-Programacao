@@ -171,7 +171,7 @@ public class Amigo {
     }
 
 /**
-* Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+* Procura o INDICE de objeto da ListaAmigo que contem o ID enviado.
 * 
 * @param id ; O ID do amigo.
 * @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
