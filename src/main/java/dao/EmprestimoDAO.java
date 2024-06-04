@@ -12,8 +12,15 @@ public class EmprestimoDAO {
     //chamando o metodo getConexao
     private Utilitario ut = new Utilitario();
     
+    /**
+     * Cria um ArrayList para os emprestimos.
+     */
     public ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
 
+    /**
+     * Obtem as informações dos emprestimos do banco de dados e cria um objeto com essas informações no ArrayList ListaEmprestimo.
+     * @return A lista de emprestimos após a coleta dos dados.
+     */
     public ArrayList<Emprestimo> getListaEmprestimo() {
         
        ListaEmprestimo.clear(); //Limpa nosso ArrayList
@@ -44,6 +51,10 @@ public class EmprestimoDAO {
         
     }
     
+    /**
+     * Procura o maior id entre todos os emprestimos do banco de dados.
+     * @return O maior id encontrado.
+     */
      public int maiorID() {
         int maiorIdEmprestimo = 0;
         try {
@@ -59,6 +70,11 @@ public class EmprestimoDAO {
     }
      
      
+     /**
+      * Adiciona um novo emprestimo ao banco de dados.
+      * @param objeto é o objeto emprestimo, carregando todas as informações como o id, nome, idFerramenta, etc.
+      * @return True se o emprestimo for inserido com sucesso, false caso o processo falhe.
+      */
      public boolean insertEmprestimoBD(Emprestimo objeto) {
         String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo) VALUES(?,?,?,?)";
         try {
@@ -79,6 +95,11 @@ public class EmprestimoDAO {
         }
     }
     
+     /**
+      * Deleta um emprestimo existente do banco de dados pelo seu id.
+      * @param idEmprestimo; O id do emprestimo a ser deletado.
+      * @return True caso o emprestimo for deletado corretamente, false caso o processo falhe.
+      */
      public boolean deleteEmprestimoBD(int idEmprestimo) {
         try {
             Statement stmt = ut.getConexao().createStatement();
@@ -91,6 +112,11 @@ public class EmprestimoDAO {
         return true;
     }
      
+     /**
+      * Atualiza as informações de um emprestimo ativo do banco de dados.
+      * @param objeto; É o objeto emprestimo a ser atualizado.
+      * @return True caso o emprestimo tiver sido atualizado com sucesso, false caso tenha dado algum erro.
+      */
      public boolean updateEmprestimoBD(Emprestimo objeto) {
 
         String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,DataEmprestimo = ? , WHERE IdEmprestimo = ?";
@@ -114,6 +140,11 @@ public class EmprestimoDAO {
         }
     }
      
+     /**
+      * Carrega as informações de um emprestimo por seu id.
+      * @param idEmprestimo; Id do emprestimo a ser carregado.
+      * @return O emprestimo com todas as suas informações, ou nada caso o id do emprestimo nao exista.
+      */
      public Emprestimo carregaEmprestimo(int idEmprestimo) {
         Emprestimo objeto = new Emprestimo();
         objeto.setIdEmprestimo(idEmprestimo);
