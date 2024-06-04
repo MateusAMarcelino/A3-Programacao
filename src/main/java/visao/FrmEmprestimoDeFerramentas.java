@@ -4,14 +4,9 @@
  */
 package visao;
 
-import dao.AmigoDAO;
-import dao.FerramentaDAO;
-import java.awt.event.*;
 import java.sql.*;
 import dao.Utilitario;
-import java.util.ArrayList;
 import javax.swing.*;
-import modelo.Amigo;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
 
@@ -33,7 +28,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         this.ut = new Utilitario();
         this.fe = new Ferramenta();
         inicializarJBCNomeAmigo();
-        inicializarJBCIdFerramenta();
+        inicializarJBCNomeFerramenta();
     }
 
     /**
@@ -53,7 +48,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         JBCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jCBNomeAmigo = new javax.swing.JComboBox<>();
-        jCBIdFerramenta = new javax.swing.JComboBox<>();
+        jCBNomeFerramenta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +82,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("ID Ferramenta Emprestada:");
+        jLabel4.setText("Nome da Ferramenta:");
 
         jCBNomeAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,9 +90,9 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             }
         });
 
-        jCBIdFerramenta.addActionListener(new java.awt.event.ActionListener() {
+        jCBNomeFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBIdFerramentaActionPerformed(evt);
+                jCBNomeFerramentaActionPerformed(evt);
             }
         });
 
@@ -128,7 +123,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                             .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCBIdFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addContainerGap())
         );
@@ -144,7 +139,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBIdFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -187,16 +182,16 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         }
     }
     
-    private void inicializarJBCIdFerramenta(){
+    private void inicializarJBCNomeFerramenta(){
         try{
             //conexao com o banco de dados
            Statement stmt = ut.getConexao().createStatement();
            //seleciona a coluna nome da tabela ferramentas
-            ResultSet res = stmt.executeQuery("SELECT IdFerramentas FROM tb_ferramentas");
+            ResultSet res = stmt.executeQuery("SELECT NomeFerramentas FROM tb_ferramentas");
             //inserindo os ids no jComboBox
             while (res.next()) {
-                int IdFerramentas = res.getInt("IdFerramentas");
-                jCBIdFerramenta.addItem(Integer.toString(IdFerramentas));
+                String NomeFerramentas = res.getString("NomeFerramentas");
+                jCBNomeFerramenta.addItem(NomeFerramentas);
             }
             
             stmt.close();
@@ -209,7 +204,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             String nome = "" + jCBNomeAmigo.getSelectedIndex();
-            int Id = jCBIdFerramenta.getSelectedIndex();
+            int Id = jCBNomeFerramenta.getSelectedIndex();
             int data = 0;
             
             if(this.JTFDataEmprestimo.getText().length() <6){
@@ -242,9 +237,9 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBNomeAmigoActionPerformed
 
-    private void jCBIdFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBIdFerramentaActionPerformed
+    private void jCBNomeFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeFerramentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCBIdFerramentaActionPerformed
+    }//GEN-LAST:event_jCBNomeFerramentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,8 +280,8 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
     private javax.swing.JTextField JTFDataEmprestimo;
-    private javax.swing.JComboBox<String> jCBIdFerramenta;
     private javax.swing.JComboBox<String> jCBNomeAmigo;
+    private javax.swing.JComboBox<String> jCBNomeFerramenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
