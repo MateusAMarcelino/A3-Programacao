@@ -30,16 +30,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuGerenciamentoGeral = new javax.swing.JMenu();
         jMenuItemCadastroDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemCadastroDeAmigos = new javax.swing.JMenuItem();
+        jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jMenuItemGerenciamentoDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemGerenciadorAmigo = new javax.swing.JMenuItem();
-        jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
-        jMenuRelatorio = new javax.swing.JMenu();
         jMenuItemRelatorio = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenuGerenciamentoGeral.setText("Gerenciamento Geral");
+        jMenuGerenciamentoGeral.setText("Cadastrar");
 
         jMenuItemCadastroDeFerramentas.setText("Cadastro de Ferramentas");
         jMenuItemCadastroDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
@@ -57,22 +57,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuGerenciamentoGeral.add(jMenuItemCadastroDeAmigos);
 
-        jMenuItemGerenciamentoDeFerramentas.setText("Gerenciamento de Ferramentas");
-        jMenuItemGerenciamentoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGerenciamentoDeFerramentasActionPerformed(evt);
-            }
-        });
-        jMenuGerenciamentoGeral.add(jMenuItemGerenciamentoDeFerramentas);
-
-        jMenuItemGerenciadorAmigo.setText("Gerenciador de Amigos");
-        jMenuItemGerenciadorAmigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGerenciadorAmigoActionPerformed(evt);
-            }
-        });
-        jMenuGerenciamentoGeral.add(jMenuItemGerenciadorAmigo);
-
         jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
         jMenuItemEmprestimoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,22 +67,33 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuGerenciamentoGeral);
 
-        jMenuRelatorio.setText("Relatório de Empréstimos");
-        jMenuRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Gerenciar");
+
+        jMenuItemGerenciamentoDeFerramentas.setText("Gerenciamento de Ferramentas");
+        jMenuItemGerenciamentoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuRelatorioActionPerformed(evt);
+                jMenuItemGerenciamentoDeFerramentasActionPerformed(evt);
             }
         });
+        jMenu1.add(jMenuItemGerenciamentoDeFerramentas);
 
-        jMenuItemRelatorio.setText("Relatório das Ferramentas");
+        jMenuItemGerenciadorAmigo.setText("Gerenciador de Amigos");
+        jMenuItemGerenciadorAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGerenciadorAmigoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemGerenciadorAmigo);
+
+        jMenuItemRelatorio.setText("Gerenciar Emprestimos");
         jMenuItemRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemRelatorioActionPerformed(evt);
             }
         });
-        jMenuRelatorio.add(jMenuItemRelatorio);
+        jMenu1.add(jMenuItemRelatorio);
 
-        jMenuBar1.add(jMenuRelatorio);
+        jMenuBar1.add(jMenu1);
 
         jMenuSobre.setText("Sobre");
         jMenuBar1.add(jMenuSobre);
@@ -153,10 +148,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         amigo.setVisible(true);
     }//GEN-LAST:event_jMenuItemGerenciadorAmigoActionPerformed
 
-    private void jMenuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuRelatorioActionPerformed
-
     private void jMenuItemRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioActionPerformed
         // TODO add your handling code here:
         FrmRelatorioEmprestimo menu = new FrmRelatorioEmprestimo();
@@ -199,6 +190,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGerenciamentoGeral;
     private javax.swing.JMenuItem jMenuItemCadastroDeAmigos;
@@ -207,7 +199,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGerenciadorAmigo;
     private javax.swing.JMenuItem jMenuItemGerenciamentoDeFerramentas;
     private javax.swing.JMenuItem jMenuItemRelatorio;
-    private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JMenu jMenuSobre;
     // End of variables declaration//GEN-END:variables
 }

@@ -66,7 +66,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel3.setText("Gerenciador De Amigos");
+        jLabel3.setText("Gerenciador de Amigos");
 
         jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

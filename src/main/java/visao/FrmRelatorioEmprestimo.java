@@ -25,15 +25,15 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTEmpAtivos = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        JTEmpRealizados = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         JBCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Relatório de Empréstimos");
+        jLabel1.setText("Gerenciador de Emprestimos");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Empréstimos Ativos");
@@ -41,7 +41,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Empréstimos realizados");
 
-        JTEmpAtivos.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,9 +52,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Data", "ID"
             }
         ));
-        jScrollPane1.setViewportView(JTEmpAtivos);
+        jScrollPane1.setViewportView(jTable1);
 
-        JTEmpRealizados.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +65,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Tempo", "ID"
             }
         ));
-        jScrollPane2.setViewportView(JTEmpRealizados);
+        jScrollPane2.setViewportView(jTable2);
 
         JBCancelar.setText("Cancelar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable JTEmpAtivos;
-    private javax.swing.JTable JTEmpRealizados;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
