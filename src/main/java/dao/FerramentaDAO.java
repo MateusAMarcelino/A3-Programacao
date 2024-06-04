@@ -129,6 +129,14 @@ public class FerramentaDAO {
          }
          return true;
       }
+     
+     public static double CalcularSoma(ArrayList<Ferramenta> custo){
+         double soma = 0.0;
+         for (Ferramenta ferramenta : custo){
+             soma += ferramenta.getCustoFerramentas();
+         }
+         return soma;
+     }
 }
      
      

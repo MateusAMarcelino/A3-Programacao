@@ -1,10 +1,12 @@
 
 package visao;
 
+import dao.FerramentaDAO;
 import modelo.Ferramenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static dao.FerramentaDAO.CalcularSoma;
 /**
  *
  * @author guiho
@@ -42,6 +44,8 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         JLId = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         JLDisponibilidade = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        JLSoma = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,22 +124,31 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         JLDisponibilidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JLDisponibilidade.setText("Disponível ");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Custo Total:");
+
+        JLSoma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLSoma.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(336, 336, 336)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JLSoma))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JTFNomeAlterar)
                     .addComponent(JTFMarcaAlterar)
-                    .addComponent(JTFCustoAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(JTFCustoAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,15 +168,19 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                             .addComponent(JLDisponibilidade))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(272, 272, 272))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JLID)
                             .addComponent(JLId))
@@ -188,8 +205,14 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                             .addComponent(JBCancelar)
                             .addComponent(JBAlterar)
                             .addComponent(JBApagar)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(JLSoma))))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -354,6 +377,8 @@ public void CarregaListaFerramenta(){
         a.getCustoFerramentas(),
         a.getDisponibilidadeFerramenta()
     });
+        double soma = FerramentaDAO.CalcularSoma(ListaFerramenta);
+        JLSoma.setText(String.valueOf(soma));
 }
 }   
     
@@ -366,6 +391,7 @@ public void CarregaListaFerramenta(){
     private javax.swing.JLabel JLDisponibilidade;
     private javax.swing.JLabel JLID;
     private javax.swing.JLabel JLId;
+    private javax.swing.JLabel JLSoma;
     private javax.swing.JTextField JTFCustoAlterar;
     private javax.swing.JTextField JTFMarcaAlterar;
     private javax.swing.JTextField JTFNomeAlterar;
@@ -375,6 +401,7 @@ public void CarregaListaFerramenta(){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
