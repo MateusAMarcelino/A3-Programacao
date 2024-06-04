@@ -135,8 +135,8 @@ public class Amigo {
 * @return true se o amigo foi deletado com sucesso, false caso contrário.
 */
     public boolean deleteAmigoBD(int id) {
-        int indice = this.procuraIndice(id);
-        dao.deleteAmigoBD(indice);
+        //int indice = this.procuraIndice(id);
+        dao.deleteAmigoBD(id);
         return true;
     }
 

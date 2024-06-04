@@ -94,7 +94,7 @@ public class AmigoDAO {
     
     public boolean updateAmigoBD(Amigo objeto) {
 
-        String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? ,email = ? , WHERE id = ?";
+        String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? ,email = ?  WHERE id = ?";
 
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);

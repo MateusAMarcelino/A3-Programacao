@@ -6,6 +6,8 @@ package visao;
 
 import modelo.Amigo;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -58,6 +60,8 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         JBCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         JTFEmail = new javax.swing.JTextField();
+        JLID = new javax.swing.JLabel();
+        JLId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +128,10 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Email:");
 
+        JLID.setText("ID :");
+
+        JLId.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,13 +154,18 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
                                 .addComponent(JBCancelar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4)
-                                    .addComponent(JTFNome)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JTFTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(JTFEmail))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(JTFTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                        .addComponent(JTFEmail))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(JLID)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JLId)))))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -166,14 +179,19 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JLID)
+                            .addComponent(JLId))
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JTFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,62 +222,50 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
     private void jTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigosMouseClicked
         // TODO add your handling code here:
         if (this.jTableAmigos.getSelectedRow() != -1) {
-            String nome = this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 1).toString();
-            String telefone = this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 2).toString();
-            String email = this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 3).toString();
-
-            this.JTFNome.setText(nome);
-            this.JTFTelefone.setText(telefone);
-            this.JTFEmail.setText(email);
+            JLId.setText(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(),0).toString());
+            JLId.setVisible(true);
+            JTFNome.setText(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 1).toString());
+            JTFTelefone.setText(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 2).toString());
+            JTFEmail.setText(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 3).toString());
         }
     }//GEN-LAST:event_jTableAmigosMouseClicked
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
         // TODO add your handling code here:
-        try{
-            int id = 0;
+        try {
+            int id = Integer.parseInt(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 0).toString());
             String nome = "";
             int telefone = 0;
             String email = "";
             
-            if(this.JTFNome.getText().length()< 2 ){
-                throw new Mensagem("Nome deve conter ao menos dois caracteres.");
-            }else{
-              nome = this.JTFNome.getText();
+            if (this.JTFNome.getText().length() < 2) {
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome = JTFNome.getText();
             }
             
-            if(this.JTFTelefone.getText().length()<=0){
-                throw new Mensagem("Telefone deve ser número de até 9 números.");
-            }else{
-              telefone = Integer.parseInt(this.JTFTelefone.getText());
+            if (this.JTFTelefone.getText().length()==9) {
+                telefone = Integer.parseInt(this.JTFTelefone.getText());
+            } else {
+                throw new Mensagem("O número deve possuir extamente 9 digitos.");
             }
             
-            if(this.JTFEmail.getText().length()< 2){
-                throw new Mensagem("Email deve conter ao menos dois caracteres.");
-            }else{
-              email = this.JTFEmail.getText();
+            if (this.JTFEmail.getText().length() < 11) {
+                throw new Mensagem("Email deve conter ao menos 11 caracteres.");
+            } else {
+                email = JTFEmail.getText();
             }
             
-            if(this.jTableAmigos.getSelectedRow()== -1){
-                throw new Mensagem("Primeiro selecione um amigo para alterar.");
-            }else{
-              id = Integer.parseInt(this.jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(),0).toString());
-            }
-            
-            if(this.objetoamigo.updateAmigoBD(id, nome, telefone, email)){
-                this.JTFNome.setText("");
-                this.JTFTelefone.setText("");
-                this.JTFEmail.setText("");
+            if (this.objetoamigo.updateAmigoBD(id, nome, telefone, email)) {
+                JLId.setVisible(false);
+                JTFNome.setText("");
+                JTFTelefone.setText("");
+                JTFEmail.setText("");
                 JOptionPane.showMessageDialog(rootPane, "Amigo alterado com sucesso.");
+                this.carregaTabela();
             }
-            
-            System.out.println(this.objetoamigo.getListaAmigo().toString());
-          }catch (Mensagem erro){
-             JOptionPane.showMessageDialog(null, erro.getMessage());
-          }catch (NumberFormatException erro2){
-             JOptionPane.showMessageDialog(null, "Informe um número válido.");
-          }finally{
-            carregaTabela();
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
     }//GEN-LAST:event_JBEditarActionPerformed
 
@@ -331,6 +337,8 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
     private javax.swing.JButton JBApagar;
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBEditar;
+    private javax.swing.JLabel JLID;
+    private javax.swing.JLabel JLId;
     private javax.swing.JTextField JTFEmail;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JTextField JTFTelefone;
