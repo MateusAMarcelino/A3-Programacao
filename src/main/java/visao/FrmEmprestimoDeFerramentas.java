@@ -203,8 +203,8 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
         try{
-            String nome = "" + jCBNomeAmigo.getSelectedIndex();
-            int Id = jCBNomeFerramenta.getSelectedIndex();
+            String nome = jCBNomeAmigo.getItemAt(jCBNomeAmigo.getSelectedIndex());
+            int Id = jCBNomeFerramenta.getSelectedIndex() +1;
             int data = 0;
             
             if(this.JTFDataEmprestimo.getText().length() <6){
