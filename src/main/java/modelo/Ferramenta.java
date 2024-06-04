@@ -64,6 +64,11 @@ public Ferramenta() {
         return IdFerramentas;
     }
 
+    /**
+     * Define o Id da ferramenta
+     * 
+     * @param IdFerramentas : O Id a ser definido.
+     */
     public void setIdFerramentas(int IdFerramentas) {
         this.IdFerramentas = IdFerramentas;
     }
@@ -75,6 +80,11 @@ public Ferramenta() {
         return NomeFerramentas;
     }
 
+    /**
+     * Define o nome da ferramenta.
+     * 
+     * @param NomeFerramentas : O nome da ferramenta a ser definido.
+     */
     public void setNomeFerramentas(String NomeFerramentas) {
         this.NomeFerramentas = NomeFerramentas;
     }
@@ -85,7 +95,12 @@ public Ferramenta() {
     public String getMarcaFerramentas() {
         return MarcaFerramentas;
     }
-
+    
+    /**
+     * Define a marca da ferramenta.
+     * 
+     * @param MarcaFerramentas  : A marca da ferramenta a ser definida.
+     */
     public void setMarcaFerramentas(String MarcaFerramentas) {
         this.MarcaFerramentas = MarcaFerramentas;
     }
@@ -96,7 +111,12 @@ public Ferramenta() {
     public double getCustoFerramentas() {
         return CustoFerramentas;
     }
-
+    
+    /**
+     * Define o custo da ferramenta.
+     * 
+     * @param CustoFerramentas : O custo da ferramenta a ser definido.
+     */
     public void setCustoFerramenta(double CustoFerramentas) {
         this.CustoFerramentas = CustoFerramentas;
     }
@@ -109,7 +129,12 @@ public Ferramenta() {
     public boolean getDisponibilidadeFerramenta() {
         return DisponibilidadeFerramentas;
     }
-
+     
+    /**
+     * Define a disponibilidade de uma ferramenta.
+     * 
+     * @param DisponibilidadeFerramentas : A disponibilidade da ferramenta a ser definida.
+     */
     public void setDisponibilidadeFerramenta(boolean DisponibilidadeFerramentas) {
         this.DisponibilidadeFerramentas = DisponibilidadeFerramentas;
     }
@@ -145,6 +170,13 @@ public Ferramenta() {
         dao.DeleteFerramentaDB(IdFerramentas);
         return true;
     }
+    
+    /**
+     * Procura o INDICE de objeto da ListaFerramenta que contem o ID enviado.
+     * 
+     * @param IdFerramentas : O id da ferramenta.
+     * @return  O objeto da ferramenta com os dados carregados, ou nada se não encontrado.
+     */
     private int procuraIndice(int IdFerramentas){
         int indice = -1;
         for (int i = 0; i < FerramentaDAO.ListaFerramentas.size(); i++ ) {
