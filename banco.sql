@@ -32,6 +32,7 @@ CREATE TABLE tb_emprestimos (
     NomeAmigo VARCHAR(100) NULL,
     IdFerramentas INTEGER NULL ,
     DataEmprestimo DATE NULL,
+    DataDevolucao DATE NULL,
     PRIMARY KEY(idEmprestimo)
 );
 
