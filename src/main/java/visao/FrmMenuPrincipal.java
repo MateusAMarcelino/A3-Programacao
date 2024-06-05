@@ -30,7 +30,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuGerenciamentoGeral = new javax.swing.JMenu();
         jMenuItemCadastroDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemCadastroDeAmigos = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jMenuItemEmprestimoDeFerramentas = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemGerenciamentoDeFerramentas = new javax.swing.JMenuItem();
         jMenuItemGerenciadorAmigo = new javax.swing.JMenuItem();
@@ -57,15 +59,27 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuGerenciamentoGeral.add(jMenuItemCadastroDeAmigos);
 
+        jMenuBar1.add(jMenuGerenciamentoGeral);
+
+        jMenu2.setText("Emprestimos");
+
         jMenuItemEmprestimoDeFerramentas.setText("Emprestimo de Ferramentas");
         jMenuItemEmprestimoDeFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemEmprestimoDeFerramentasActionPerformed(evt);
             }
         });
-        jMenuGerenciamentoGeral.add(jMenuItemEmprestimoDeFerramentas);
+        jMenu2.add(jMenuItemEmprestimoDeFerramentas);
 
-        jMenuBar1.add(jMenuGerenciamentoGeral);
+        jMenuItem1.setText("Devolver Ferramentas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Gerenciar");
 
@@ -154,6 +168,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menu.setVisible (true);
     }//GEN-LAST:event_jMenuItemRelatorioActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        FrmDevolverFerramentas objeto = new FrmDevolverFerramentas();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,8 +211,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGerenciamentoGeral;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastroDeAmigos;
     private javax.swing.JMenuItem jMenuItemCadastroDeFerramentas;
     private javax.swing.JMenuItem jMenuItemEmprestimoDeFerramentas;
