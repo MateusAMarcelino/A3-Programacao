@@ -33,9 +33,10 @@ public class EmprestimoDAO {
                 int id = res.getInt("IdEmprestimo");
                 String nome = res.getString("NomeAmigo");
                 int idFerramentas = res.getInt("IdFerramentas");
-                int dataEmp = res.getInt("DataEmprestimo");
+                String dataEmp = res.getString("DataEmprestimo");
+                String dataDev = res.getString("DataDevolucao");
 
-                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, dataEmp);
+                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, dataEmp, dataDev);
 
                 ListaEmprestimo.add(objeto);
        }
@@ -55,7 +56,7 @@ public class EmprestimoDAO {
      * Procura o maior id entre todos os emprestimos do banco de dados.
      * @return O maior id encontrado.
      */
-     public int maiorID() {
+     public int maiorIDEmprestimo() {
         int maiorIdEmprestimo = 0;
         try {
             Statement stmt = ut.getConexao().createStatement();
@@ -76,14 +77,15 @@ public class EmprestimoDAO {
       * @return True se o emprestimo for inserido com sucesso, false caso o processo falhe.
       */
      public boolean insertEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo,DataDevolucao) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdEmprestimo());
-            stmt.setString(2, objeto.getNome());
+            stmt.setString(2, objeto.getNomeEmprestimo());
             stmt.setInt(3, objeto.getIdFerramentas());
-            stmt.setInt(4, objeto.getDataEmp());
+            stmt.setString(4, objeto.getDataEmp());
+            stmt.setString(5, objeto.getDataDev());
 
             stmt.execute();
             stmt.close();
@@ -124,9 +126,9 @@ public class EmprestimoDAO {
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
-            stmt.setString(1, objeto.getNome());
+            stmt.setString(1, objeto.getNomeEmprestimo());
             stmt.setInt(2, objeto.getIdFerramentas());
-            stmt.setInt(3, objeto.getDataEmp());
+            stmt.setString(3, objeto.getDataEmp());
             stmt.setInt(4, objeto.getIdEmprestimo());
 
             stmt.execute();
@@ -154,9 +156,9 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
             res.next();
 
-            objeto.setNome(res.getString("NomeAmigo"));
+            objeto.setNomeEmprestimo(res.getString("NomeAmigo"));
             objeto.setIdFerramentas(res.getInt("IdFerramentas"));
-            objeto.setDataEmp(res.getInt("DataEmprestimo"));
+            objeto.setDataEmp(res.getString("DataEmprestimo"));
 
             stmt.close();
         } catch (SQLException erro) {
@@ -164,4 +166,20 @@ public class EmprestimoDAO {
         }
         return objeto;
     }
+    public boolean isFerramentaDisponivel(int IdFerramentas) throws SQLException {
+    String sql = "SELECT DisponibilidadeFerramentas FROM ferramentas WHERE IdFerramentas = ?";
+    try (PreparedStatement pstmt = ut.getConexao().prepareStatement(sql)) {
+        pstmt.setInt(1, IdFerramentas);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getBoolean("DisponibilidadeFerramentas");
+            } else {
+                throw new SQLException("Ferramenta com ID " + IdFerramentas + " não encontrada.");
+            }
+        }
+    } catch (SQLException e) {
+        throw new SQLException("Erro ao verificar disponibilidade da ferramenta", e);
+    }
 }
+}
+

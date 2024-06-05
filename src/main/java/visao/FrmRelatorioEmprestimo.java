@@ -2,6 +2,10 @@ package visao;
 
 import modelo.Emprestimo;
 import dao.EmprestimoDAO;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
@@ -10,6 +14,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     public FrmRelatorioEmprestimo() {
         initComponents();
         this.objetoEmprestimo = new Emprestimo();
+        this.CarregaListaEmprestimo();
     }
 
     /**
@@ -25,9 +30,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTEmprestimosAtivos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        JTEmprestimosRealizados = new javax.swing.JTable();
         JBCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,20 +46,20 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Empréstimos realizados");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTEmprestimosAtivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Ferramenta", "Data", "ID"
+                "Amigo", "Ferramenta", "Data"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTEmprestimosAtivos);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        JTEmprestimosRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +70,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Tempo", "ID"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(JTEmprestimosRealizados);
 
         JBCancelar.setText("Cancelar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,14 +166,35 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         });
     }
 
+    public void CarregaListaEmprestimo(){
+        DefaultTableModel modelo = (DefaultTableModel) this.JTEmprestimosAtivos.getModel();
+          modelo.setNumRows(0);
+    ArrayList<Emprestimo> ListaEmprestimo = objetoEmprestimo.ListaEmprestimo();
+    for (int i=0; i<ListaEmprestimo.size(); i++) {
+            modelo.addRow(new Object[]{
+            ListaEmprestimo.get(i).getNomeEmprestimo(),
+            ListaEmprestimo.get(i).getIdEmprestimo(),
+            ListaEmprestimo.get(i).getDataEmp(),
+
+
+        });
+    }
+}
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JTable JTEmprestimosAtivos;
+    private javax.swing.JTable JTEmprestimosRealizados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

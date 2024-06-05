@@ -235,16 +235,16 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         try{
             String nome = jCBNomeAmigo.getItemAt(jCBNomeAmigo.getSelectedIndex());
             int Id = jCBNomeFerramenta.getSelectedIndex() +1;
-            int data = 0;
+            String Data = "";
             
             if(this.JTFDataEmprestimo.getText().length() <6){
                 throw new Mensagem("A data deve conter 6 caracteres");
             }else{
-                data = Integer.parseInt(this.JTFDataEmprestimo.getText());
+                Data = this.JTFDataEmprestimo.getText();
             }
             if(fe.getDisponibilidadeFerramenta() == false){
                 JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta."); 
-            }else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
+            }else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, Data)){
                 if(amigoExiste()==true) {
                 JOptionPane.showMessageDialog(null, "Você tem uma ferramenta pendente, faça a devolução o quanto antes!");
             }else{
@@ -254,7 +254,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 //limpa os campos da interface
                 this.JTFDataEmprestimo.setText("");
             }
-            System.out.println(this.objetoemprestimo.getListaEmprestimo().toString());
+            System.out.println(this.objetoemprestimo.ListaEmprestimo().toString());
             
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null,erro.getMessage());

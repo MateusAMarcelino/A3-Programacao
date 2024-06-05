@@ -1,7 +1,15 @@
 package modelo;
 
 import dao.EmprestimoDAO;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 /**
@@ -12,7 +20,8 @@ public class Emprestimo {
     private int idEmprestimo;
     private String nome;
     private int idFerramentas;
-    private int dataEmp;
+    private String dataEmp;
+    private String dataDev;
     private EmprestimoDAO dao;
 
     /**
@@ -21,7 +30,7 @@ public class Emprestimo {
      */
   public Emprestimo() {
     
-        this( 0, "", 0, 0);
+        this( 0, "", 0, "", "");
     }
 
   /**
@@ -31,11 +40,12 @@ public class Emprestimo {
    * @param idFerramentas; Id da ferramenta emprestada.
    * @param dataEmp; Data do empréstimo
    */
-    public Emprestimo(int idEmprestimo, String nome, int idFerramentas, int dataEmp) {
+    public Emprestimo(int idEmprestimo, String nome, int idFerramentas, String dataEmp, String dataDev) {
         this.idEmprestimo = idEmprestimo;
         this.nome = nome;
         this.idFerramentas = idFerramentas;
         this.dataEmp = dataEmp;
+        this.dataDev = dataDev;
         this.dao = new EmprestimoDAO();
     }
     
@@ -43,7 +53,7 @@ public class Emprestimo {
      * Obtém o nome do amigo fazendo o empréstimo.
      * @return O nome do amigo.
      */
-    public String getNome() {
+    public String getNomeEmprestimo() {
         return nome;
     }
 
@@ -51,7 +61,7 @@ public class Emprestimo {
      * Define do nome do amigo fazendo o empréstimo.
      * @param nome; Nome do amigo a ser definido.
      */
-    public void setNome(String nome) {
+    public void setNomeEmprestimo(String nome) {
         this.nome = nome;
     }
     
@@ -75,7 +85,7 @@ public class Emprestimo {
      * Obtém a data em que o empréstimo foi feito.
      * @return A data do empréstimo.
      */
-    public int getDataEmp() {
+    public String getDataEmp() {
         return dataEmp;
     }
 
@@ -83,8 +93,16 @@ public class Emprestimo {
      * Define a data em que o empréstimo foi feito.
      * @param dataEmp; A data do empréstimo a ser definido.
      */
-    public void setDataEmp(int dataEmp) {
+    public void setDataEmp(String dataEmp) {
         this.dataEmp = dataEmp;
+    }
+    
+    public String getDataDev() {
+     return dataDev;
+    }
+    
+    public void setDataDev(String dataDev) {
+        this.dataDev = dataDev;
     }
     
     /**
@@ -107,7 +125,7 @@ public class Emprestimo {
      * Obtém o ArrayList ListaEmprestimo, que contém os empréstimos realizados.
      * @return O ArrayList ListaEmprestimo.
      */
-public ArrayList<Emprestimo> getListaEmprestimo() {
+public ArrayList<Emprestimo> ListaEmprestimo() {
         return dao.getListaEmprestimo();
     }
     
@@ -118,9 +136,9 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
   * @param dataEmp; Data em que o empréstimo foi realizado.
   * @return True caso o empréstimo tiver sido cadastrado com sucesso, false caso tenha falhado.
   */
-    public boolean insertEmprestimoBD(String nome, int idFerramentas, int dataEmp) {
+    public boolean insertEmprestimoBD(String nome, int idFerramentas, String dataEmp) {
         int idEmprestimo = this.maiorID() + 1;
-        Emprestimo emprestimo = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp);
+        Emprestimo emprestimo = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp, null);
         dao.insertEmprestimoBD(emprestimo);
         return true;
     }
@@ -131,7 +149,7 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
   */
     
     public int maiorID() {
-        return dao.maiorID();
+        return dao.maiorIDEmprestimo();
 
     }
     
@@ -156,8 +174,8 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
      * @return True caso o empréstimo tiver sido atualizado com sucesso, false caso tenha falhado.
      */
      
-    public boolean updateEmprestimoBD(int idEmprestimo, String nome, int IdFerramentas, int dataEmp) {
-        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramentas, dataEmp);
+    public boolean updateEmprestimoBD(int idEmprestimo, String nome, int IdFerramentas, String dataEmp, String dataDev) {
+        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramentas, dataEmp, dataDev);
         int indice = this.procuraIndice(idEmprestimo);
         dao.ListaEmprestimo.set(indice, objeto);
         return true;
@@ -180,7 +198,7 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
      * @return O objeto do empréstimo com seus dados carregados, ou nada caso não tenha sido encontrado.
      */
      
-    private int procuraIndice(int idEmprestimo) {
+    public int procuraIndice(int idEmprestimo) {
         int indice = -1;
         for (int i = 0; i < dao.ListaEmprestimo.size(); i++) {
             if (dao.ListaEmprestimo.get(i).getIdEmprestimo() == idEmprestimo) {
@@ -189,5 +207,45 @@ public ArrayList<Emprestimo> getListaEmprestimo() {
         }
         return indice;
     }
+    
+    public ArrayList<Emprestimo> getListaEmprestimoAtivo(){
+        ArrayList<Emprestimo> listaEmprestimoAtivo = new ArrayList<>();
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            ArrayList<Emprestimo> ListaEmprestimo = this.ListaEmprestimo();
+            
+            for (int i = 0; i < ListaEmprestimo.size(); i++) {
+                
+            if (ListaEmprestimo.get(i).getDataDev() == null) {
+                listaEmprestimoAtivo.add(ListaEmprestimo.get(i));
+            }
+            
+            if (ListaEmprestimo.get(i).getDataDev() != null) {
+                Date dataDevo = (Date) sdf.parse(ListaEmprestimo.get(i).getDataDev());
+                java.util.Date dataAtual = sdf.parse(LocalDate.now() + "");
+                
+                if ( dataAtual.compareTo(dataDevo)  < 0) {
+                    listaEmprestimoAtivo.add(ListaEmprestimo.get(i));
+                }
+            }
+}
+            } catch (ParseException ex) {
+               
+        }
+        return listaEmprestimoAtivo;
+    }
+    
+    public String emprestimoAtivo(int idEmprestimo){
+        String ativo = "Não";
+        Emprestimo emp = new Emprestimo();
+        ArrayList<Emprestimo> listaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
+        for (int i = 0; i < listaEmprestimoAtivo.size(); i++) {
+            if (listaEmprestimoAtivo.get(i).getIdEmprestimo() == idEmprestimo){
+                ativo = "Sim";
+            }
+        }
+    return ativo;
+    }
+    
 }
 
