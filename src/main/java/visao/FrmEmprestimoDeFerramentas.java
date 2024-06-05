@@ -9,6 +9,7 @@ import dao.Utilitario;
 import javax.swing.*;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
+import dao.EmprestimoDAO;
 
 /**
  *
@@ -19,6 +20,8 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private Emprestimo objetoemprestimo;
     private Utilitario ut;
     private Ferramenta fe;
+    private EmprestimoDAO dao;
+    private boolean existe = false;
     /**
      * Creates new form FrmEmprestimoDeFerramentas
      */
@@ -163,6 +166,9 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
+    /**
+     * Conecta com a coluna nome da tb_amigos do banco de dados.
+     */
     private void inicializarJBCNomeAmigo(){
         try{
             //conexao com o banco de dados
@@ -182,6 +188,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Conecta com a coluna IdFerramentas da tb_ferramentas e coleta o nome da ferramenta
+     * para usar no jComboBox.
+     */
     private void inicializarJBCNomeFerramenta(){
         try{
             //conexao com o banco de dados
@@ -200,6 +210,26 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             System.out.println("Erro: " + ex);
         }     
     }
+    
+    /**
+     * Procura se o amigo tem empréstimos ativos no banco de dados.
+     * @return True se o amigo possuir empréstimos ativos, false se ele não possuir.
+     */
+    public boolean amigoExiste(){
+        try {
+            Statement stmt = ut.getConexao().createStatement();
+            
+            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + jCBNomeAmigo.getItemAt(jCBNomeAmigo.getSelectedIndex()) + "'");
+            if(res.next()){
+                existe = true;
+                stmt.close();
+            } 
+            } catch (SQLException erro){
+                System.out.println("Erro: " + erro);
+            }
+        return existe;
+    }
+    
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
         try{
@@ -213,11 +243,15 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
                 data = Integer.parseInt(this.JTFDataEmprestimo.getText());
             }
             if(fe.getDisponibilidadeFerramenta() == false){
-                JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta.");
-            } else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
-                JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
-                fe.emprestar();
-                //limpa os campos da interfac
+                JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta."); 
+            }else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, data)){
+                if(amigoExiste()==true) {
+                JOptionPane.showMessageDialog(null, "Você tem uma ferramenta pendente, faça a devolução o quanto antes!");
+            }else{
+                    JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
+                    fe.emprestar();
+                }
+                //limpa os campos da interface
                 this.JTFDataEmprestimo.setText("");
             }
             System.out.println(this.objetoemprestimo.getListaEmprestimo().toString());
