@@ -4,19 +4,74 @@
  */
 package visao;
 
+import dao.EmprestimoDAO;
+import dao.Utilitario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import modelo.Emprestimo;
+import modelo.Ferramenta;
+
 /**
  *
  * @author Mateus
  */
 public class FrmDevolverFerramentas extends javax.swing.JFrame {
+    
+    private Emprestimo objetodevolucao;
+    private Utilitario ut;
+    private Ferramenta fe;
+    private EmprestimoDAO dao;
+    private boolean existe = false;
 
     /**
      * Creates new form FrmDevolverFerramentas
      */
     public FrmDevolverFerramentas() {
         initComponents();
+        this.objetodevolucao = new Emprestimo();
+        this.ut = new Utilitario();
+        this.fe = new Ferramenta();
+        inicializarJCBNomeAmigoEmprestimo();
+       
+    
     }
 
+    private void inicializarJCBNomeAmigoEmprestimo(){
+         try{
+            //conexao com o banco de dados
+           Statement stmt = ut.getConexao().createStatement();
+           //seleciona a coluna nome da tabela amigos
+            ResultSet res = stmt.executeQuery("SELECT nome FROM tb_amigos");
+            //inserindo os nomes no jComboBox
+            while (res.next()) {
+                String nome = res.getString("nome");
+                JCBNomeAmigoEmprestimo.addItem(nome);
+            }
+            
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+        }
+    }
+   
+    public boolean amigoExiste(){
+        try {
+            Statement stmt = ut.getConexao().createStatement();
+            
+            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + JCBNomeAmigoEmprestimo.getItemAt(JCBNomeAmigoEmprestimo.getSelectedIndex()) + "'");
+            if(res.next()){
+                existe = true;
+                stmt.close();
+            } 
+            } catch (SQLException erro){
+                System.out.println("Erro: " + erro);
+            }
+        return existe;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +83,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        JBNomeAmigoEmprestimo = new javax.swing.JComboBox<>();
+        JCBNomeAmigoEmprestimo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         JBNomeFerramentaEmprestimo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -43,7 +98,11 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
 
         jLabel2.setText("Nome do Amigo");
 
-        JBNomeAmigoEmprestimo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        JCBNomeAmigoEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBNomeAmigoEmprestimoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Nome da Ferramenta");
 
@@ -75,7 +134,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JCBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(JBNomeFerramentaEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -106,7 +165,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBNomeFerramentaEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(jLabel4)
@@ -126,6 +185,11 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_JBCancelarDevolucaoActionPerformed
+
+    private void JCBNomeAmigoEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBNomeAmigoEmprestimoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_JCBNomeAmigoEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,8 +229,8 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelarDevolucao;
     private javax.swing.JToggleButton JBConfirmarDevolucao;
-    private javax.swing.JComboBox<String> JBNomeAmigoEmprestimo;
     private javax.swing.JComboBox<String> JBNomeFerramentaEmprestimo;
+    private javax.swing.JComboBox<String> JCBNomeAmigoEmprestimo;
     private javax.swing.JTextField JTFDataDevolução;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
