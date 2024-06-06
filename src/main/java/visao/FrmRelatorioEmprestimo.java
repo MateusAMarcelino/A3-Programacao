@@ -84,7 +84,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("PLACE HOLDER");
+        jLabel4.setText("Amigo que mais fez emprestimos :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

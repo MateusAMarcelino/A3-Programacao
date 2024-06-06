@@ -106,11 +106,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
 
         jLabel3.setText("Nome da Ferramenta");
 
-        JBNomeFerramentaEmprestimo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Data da Devolução");
-
-        JTFDataDevolução.setText("jTextField1");
 
         JBCancelarDevolucao.setText("Cancelar");
         JBCancelarDevolucao.addActionListener(new java.awt.event.ActionListener() {
@@ -142,9 +138,8 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                                 .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTFDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
+                                .addGap(88, 88, 88)
+                                .addComponent(JTFDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -153,6 +148,10 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(JBCancelarDevolucao)
                 .addGap(90, 90, 90))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

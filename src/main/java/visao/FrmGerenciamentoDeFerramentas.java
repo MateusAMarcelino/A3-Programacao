@@ -128,7 +128,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         jLabel6.setText("Custo Total:");
 
         JLSoma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JLSoma.setText("jLabel7");
+        JLSoma.setText("Custo Total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
