@@ -14,7 +14,6 @@ public class Ferramenta {
     private String NomeFerramentas;
     private String MarcaFerramentas;
     private double CustoFerramentas;
-    private boolean DisponibilidadeFerramentas;
     FerramentaDAO dao;
     
     
@@ -27,7 +26,7 @@ public class Ferramenta {
  */
     
 public Ferramenta() {
-    this(0,"","",0.0,true);
+    this(0,"","",0.0);
 }
 
 /**
@@ -46,12 +45,11 @@ public Ferramenta() {
  * DisponibilidadeFerramentas = True ( Disponivel )
  */
 
-    public Ferramenta(int IdFerramentas, String NomeFerramentas, String MarcaFerramentas, double CustoFerramentas, boolean DisponibilidadeFerramentas) {
+    public Ferramenta(int IdFerramentas, String NomeFerramentas, String MarcaFerramentas, double CustoFerramentas) {
         this.IdFerramentas = IdFerramentas;
         this.NomeFerramentas = NomeFerramentas;
         this.MarcaFerramentas = MarcaFerramentas;
         this.CustoFerramentas = CustoFerramentas;
-        this.DisponibilidadeFerramentas = DisponibilidadeFerramentas;
         this.dao = new FerramentaDAO();
     }
 
@@ -126,18 +124,20 @@ public Ferramenta() {
      * Obtém a Disponibilidade da ferramenta.
      * @return a Disponibilidade da ferramenta.
      */
-    public boolean getDisponibilidadeFerramenta() {
-        return DisponibilidadeFerramentas;
+    public String getDisponibilidadeFerramenta(int Id) {
+        String Disponivel = "Sim";
+        Emprestimo emp = new Emprestimo();
+        ArrayList<Emprestimo> ListaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
+        for (int i = 0; i < ListaEmprestimoAtivo.size(); i++) {
+            if (ListaEmprestimoAtivo.get(i).getIdFerramentas() == Id) {
+                Disponivel = "Não";
+            }
+        }
+        return Disponivel;
     }
      
-    /**
-     * Define a disponibilidade de uma ferramenta.
-     * 
-     * @param DisponibilidadeFerramentas : A disponibilidade da ferramenta a ser definida.
-     */
-    public void setDisponibilidadeFerramenta(boolean DisponibilidadeFerramentas) {
-        this.DisponibilidadeFerramentas = DisponibilidadeFerramentas;
-    }
+   
+  
     
     public ArrayList<Ferramenta> ListaFerramenta(){
         return dao.getListaFerramentas();
@@ -154,8 +154,8 @@ public Ferramenta() {
      */
     public boolean InsertFerramentaDB(String NomeFerramenta, String MarcaFerramenta,double CustoFerramenta){
         int maiorID = dao.MaiorIdFerramentas() +1;
-        boolean DisponibilidadeFerramenta = true;
-        Ferramenta ferramenta = new Ferramenta (maiorID, NomeFerramenta, MarcaFerramenta, CustoFerramenta,DisponibilidadeFerramenta);
+        
+        Ferramenta ferramenta = new Ferramenta (maiorID, NomeFerramenta, MarcaFerramenta, CustoFerramenta);
         dao.InsertFerramentaDB(ferramenta);
         return true;
     }
@@ -198,7 +198,7 @@ public Ferramenta() {
      * @return True, caso seja possivel atualizar a ferramenta desejada.
      */
     public boolean updateFerramentaDB(int IdFerramenta,String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta){
-        Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta,DisponibilidadeFerramentas);
+        Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta);
         dao.UpdateFerramentaDB(ferramenta);
         return true;
     }
@@ -212,18 +212,4 @@ public Ferramenta() {
     }
     
     
-    /**
-     * Empresta uma ferramenta caso ela esteja disponivel.
-     * Caso não esteja disponivel, emite um aviso avisando que a ferramenta já está emprestada.
-     * Caso esteja disponivel, emite um aviso avisando que a ferrametna foi emprestada com sucesso.
-     */
-    public void emprestar(){
-        if (DisponibilidadeFerramentas) {
-            DisponibilidadeFerramentas = false;
-            System.out.println("Ferramenta" + NomeFerramentas + " Emprestada ");
-                   
-          } else {
-            System.out.println("Essa Ferramenta está indisponivel para empréstimo");
-        }
-    }
 }

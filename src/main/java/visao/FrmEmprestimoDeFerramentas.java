@@ -10,6 +10,11 @@ import javax.swing.*;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
 import dao.EmprestimoDAO;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Amigo;
 
 /**
  *
@@ -18,6 +23,7 @@ import dao.EmprestimoDAO;
 public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
     private Emprestimo objetoemprestimo;
+    private Amigo amigo;
     private Utilitario ut;
     private Ferramenta fe;
     private EmprestimoDAO dao;
@@ -28,6 +34,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     public FrmEmprestimoDeFerramentas() {
         initComponents();
         this.objetoemprestimo = new Emprestimo();
+        this.amigo = new Amigo();
         this.ut = new Utilitario();
         this.fe = new Ferramenta();
         inicializarJBCNomeAmigo();
@@ -192,10 +199,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             //conexao com o banco de dados
            Statement stmt = ut.getConexao().createStatement();
            //seleciona a coluna nome da tabela amigos
-            ResultSet res = stmt.executeQuery("SELECT nome FROM tb_amigos");
+            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_amigos");
             //inserindo os nomes no jComboBox
             while (res.next()) {
-                String nome = res.getString("nome");
+                String nome = res.getString("NomeAmigo");
                 jCBNomeAmigo.addItem(nome);
             }
             
@@ -250,39 +257,33 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
-        try{
-            String nome = jCBNomeAmigo.getItemAt(jCBNomeAmigo.getSelectedIndex());
-            int Id = jCBNomeFerramenta.getSelectedIndex() +1;
-            String Data = "";
-            
-            if(this.JTFDataEmprestimo.getText().length() <6){
-                throw new Mensagem("A data deve conter 6 caracteres");
-            }else{
-                Data = this.JTFDataEmprestimo.getText();
+     try {
+            int conf = 0;
+
+            int posicaoFerramenta = jCBNomeFerramenta.getSelectedIndex();
+            int posicaoAmigo = jCBNomeAmigo.getSelectedIndex();
+            ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
+            ArrayList<Amigo> ListaAmigo = amigo.getListaAmigo();
+            Emprestimo emprestimo = new Emprestimo();
+            if ("Não".equals(listaFerramenta.get(posicaoFerramenta).getDisponibilidadeFerramenta(listaFerramenta.get(posicaoFerramenta).getIdFerramentas()))) {
+              throw new Mensagem("Ferramenta ja emprestada");
             }
-            if(fe.getDisponibilidadeFerramenta() == false){
-                JOptionPane.showMessageDialog(null, "A ferramenta está sendo utilizada, selecione outra ferramenta."); 
-            }else if (this.objetoemprestimo.insertEmprestimoBD(nome, Id, Data)){
-                if(amigoExiste()==true) {
-                JOptionPane.showMessageDialog(null, "Você tem uma ferramenta pendente, faça a devolução o quanto antes!");
-            }else{
-                    JOptionPane.showMessageDialog(null, "Empréstimo registrado com sucesso!");
-                    fe.emprestar();
-                }
-                //limpa os campos da interface
-                this.JTFDataEmprestimo.setText("");
+            int IdAmigo = ListaAmigo.get(posicaoAmigo).getIdAmigo();
+            if (amigo.possuiEmprestimoAtivo(IdAmigo)) {
+                conf = JOptionPane.showConfirmDialog(null, "Este amigo ja possui um emprestimo ativo, deseja continuar?");
             }
-            System.out.println(this.objetoemprestimo.ListaEmprestimo().toString());
-            
-        } catch (Mensagem erro){
-            JOptionPane.showMessageDialog(null,erro.getMessage());
-        } catch (NumberFormatException erro2){
-            JOptionPane.showMessageDialog(null, "Informe um número valido.");
+            int idFerramenta = listaFerramenta.get(posicaoFerramenta).getIdFerramentas();
+            String DataInicio = LocalDate.now() + "";
+            if (conf == 0) {
+                if (emprestimo.insertEmprestimoBD(IdAmigo, idFerramenta, DataInicio)) {
+                    JOptionPane.showMessageDialog(null, "Emprestimo cadastrado com sucesso");
+                    fe.updateFerramentaDB(idFerramenta, listaFerramenta.get(posicaoFerramenta).getNomeFerramentas(), listaFerramenta.get(posicaoFerramenta).getMarcaFerramentas(), listaFerramenta.get(posicaoFerramenta).getCustoFerramentas());
+                };
+
+            }
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
-           
-            
-        
-        
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
     private void jCBNomeAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeAmigoActionPerformed
@@ -292,7 +293,22 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private void jCBNomeFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeFerramentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBNomeFerramentaActionPerformed
+     public void carregaCBFerramenta() {
+        ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
+        for (Ferramenta objeto : listaFerramenta) {
+            jCBNomeFerramenta.addItem(objeto.getIdFerramentas() + "- " + objeto.getNomeFerramentas());
+        }
 
+    }
+
+    public void carregaCBAmigo() {
+        ArrayList<Amigo> listaAmigo = amigo.getListaAmigo();
+        for (Amigo objeto : listaAmigo) {
+            jCBNomeAmigo.addItem(objeto.getIdAmigo() + "- " + objeto.getNome());
+        }
+
+    }       
+    
     /**
      * @param args the command line arguments
      */
@@ -328,6 +344,11 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         });
     }
 
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;

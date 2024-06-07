@@ -32,7 +32,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         ArrayList<Amigo> listaamigo = objetoamigo.getListaAmigo();
         for (Amigo a : listaamigo){
             modelo.addRow(new Object[]{
-                a.getId(),
+                a.getIdAmigo(),
                 a.getNome(),
                 a.getTelefone(),
                 a.getEmail(),

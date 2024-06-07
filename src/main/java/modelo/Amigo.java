@@ -5,20 +5,20 @@ import java.util.ArrayList;
 
 
 /**
- * Classe do Amigo com ; nome, Id, email, telefone.
+ * Classe do Amigo com ; NomeAmigo, IdAmigo, EmailAmigo, TelefoneAmigo.
  * 
  */
 public class Amigo {
 
-    private String nome;
-    private int Id;
-    private String email;
-    private int telefone;
+    private String NomeAmigo;
+    private int IdAmigo;
+    private String EmailAmigo;
+    private int TelefoneAmigo;
     private AmigoDAO dao;
 
 
 /**
- * Construtor para a classe Amigo, incializa o amigo com nome e email sendo strings vazias, id e telefone são iniciados com o valor 0.
+ * Construtor para a classe Amigo, incializa o amigo com NomeAmigo e EmailAmigo sendo strings vazias, IdAmigo e TelefoneAmigo são iniciados com o valor 0.
  *  */
     public Amigo() {
         
@@ -28,95 +28,95 @@ public class Amigo {
     
    /**
     * 
-    * @param Id
-    * @param nome
-    * @param telefone
-    * @param email
+    * @param IdAmigo
+    * @param NomeAmigo
+    * @param TelefoneAmigo
+    * @param EmailAmigo
     * 
     * Inicializa todos com os valores iniciais acima, que são :
-    * Id = 0
-    * nome = "" ( vazio )
-    * telefone = 0
-    * email = "" ( vazio )
+    * IdAmigo = 0
+    * NomeAmigo = "" ( vazio )
+    * TelefoneAmigo = 0
+    * EmailAmigo = "" ( vazio )
     */ 
-    public Amigo(int Id, String nome, int telefone, String email) {
-        this.Id = Id;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+    public Amigo(int IdAmigo, String NomeAmigo, int TelefoneAmigo, String EmailAmigo) {
+        this.IdAmigo = IdAmigo;
+        this.NomeAmigo = NomeAmigo;
+        this.TelefoneAmigo = TelefoneAmigo;
+        this.EmailAmigo = EmailAmigo;
         this.dao = new AmigoDAO();
     }
 
 /**
-* Obtém o nome do amigo.
+* Obtém o NomeAmigo do amigo.
 * 
-* @return O nome do amigo.
+* @return O NomeAmigo do amigo.
 */
     public String getNome() {
-        return nome;
+        return NomeAmigo;
     }
 
 /**
-* Define o nome do amigo.
+* Define o NomeAmigo do amigo.
 * 
-* @param nome ; O nome a ser definido.
+* @param NomeAmigo ; O NomeAmigo a ser definido.
 */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String NomeAmigo) {
+        this.NomeAmigo = NomeAmigo;
     }
 
 /**
-* Obtém o Id do amigo.
+* Obtém o IdAmigo do amigo.
 * 
-* @return O Id do amigo.
+* @return O IdAmigo do amigo.
 */
-    public int getId() {
-        return Id;
+    public int getIdAmigo() {
+        return IdAmigo;
     }
 
 /**
-* Define o Id do amigo.
+* Define o IdAmigo do amigo.
 * 
-* @param Id ; O Id a ser definido.
+* @param IdAmigo ; O IdAmigo a ser definido.
 */
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int IdAmigo) {
+        this.IdAmigo = IdAmigo;
     }
 
 /**
-* Obtém o email do amigo.
+* Obtém o EmailAmigo do amigo.
 * 
-* @return O email do amigo.
+* @return O EmailAmigo do amigo.
 */
     public String getEmail() {
-        return email;
+        return EmailAmigo;
     }
 
 /**
-* Define o email do amigo.
+* Define o EmailAmigo do amigo.
 * 
-* @param email ; O email a ser definido.
+* @param EmailAmigo ; O EmailAmigo a ser definido.
 */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String EmailAmigo) {
+        this.EmailAmigo = EmailAmigo;
     }
 
 /**
-* Obtém o número de telefone do amigo.
+* Obtém o número de TelefoneAmigo do amigo.
 * 
-* @return O número de telefone do amigo.
+* @return O número de TelefoneAmigo do amigo.
 */
     public int getTelefone() {
-        return telefone;
+        return TelefoneAmigo;
     }
 
 /**
-* Define o número de telefone do amigo.
+* Define o número de TelefoneAmigo do amigo.
 * 
-* @param telefone ; O número de telefone a ser definido.
+* @param TelefoneAmigo ; O número de TelefoneAmigo a ser definido.
 */
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
+    public void setTelefone(int TelefoneAmigo) {
+        this.TelefoneAmigo = TelefoneAmigo;
     }
 
 /**
@@ -131,14 +131,14 @@ public class Amigo {
 /**
 * Cadastra um novo amigo.
 * 
-* @param Nome ; O nome do amigo.
-* @param telefone ; O número de telefone do amigo.
-* @param email ; O email do amigo.
+* @param Nome ; O NomeAmigo do amigo.
+* @param TelefoneAmigo ; O número de TelefoneAmigo do amigo.
+* @param EmailAmigo ; O EmailAmigo do amigo.
 * @return true se o amigo foi inserido com sucesso, false caso contrário.
 */
-    public boolean insertAmigoBD(String Nome, int telefone, String email) {
-        int Id = this.maiorID() + 1;
-        Amigo objeto = new Amigo(Id, Nome, telefone, email);
+    public boolean insertAmigoBD(String Nome, int TelefoneAmigo, String EmailAmigo) {
+        int IdAmigo = this.maiorID() + 1;
+        Amigo objeto = new Amigo(IdAmigo, Nome, TelefoneAmigo, EmailAmigo);
         dao.insertAmigoBD(objeto);
         return true;
     }
@@ -146,26 +146,26 @@ public class Amigo {
 /**
 * Deleta um amigo pelo ID.
 * 
-* @param id ; O ID do amigo a ser deletado.
+* @param IdAmigo ; O ID do amigo a ser deletado.
 * @return true se o amigo foi deletado com sucesso, false caso contrário.
 */
-    public boolean deleteAmigoBD(int id) {
-        //int indice = this.procuraIndice(id);
-        dao.deleteAmigoBD(id);
+    public boolean deleteAmigoBD(int IdAmigo) {
+        //int indice = this.procuraIndice(IdAmigo);
+        dao.deleteAmigoBD(IdAmigo);
         return true;
     }
 
 /**
 * Atualiza os dados de um amigo no banco de dados.
 * 
-* @param Id ; O ID do amigo.
-* @param Nome ; O nome do amigo.
-* @param telefone ; O número de telefone do amigo.
-* @param email ; O email do amigo.
+* @param IdAmigo ; O ID do amigo.
+* @param Nome ; O NomeAmigo do amigo.
+* @param TelefoneAmigo ; O número de TelefoneAmigo do amigo.
+* @param EmailAmigo ; O EmailAmigo do amigo.
 * @return true se os dados do amigo foram atualizados com sucesso, false caso contrário.
 */
-    public boolean updateAmigoBD(int Id, String Nome, int telefone, String email) {
-        Amigo objeto = new Amigo(Id, Nome, telefone, email);
+    public boolean updateAmigoBD(int IdAmigo, String Nome, int TelefoneAmigo, String EmailAmigo) {
+        Amigo objeto = new Amigo(IdAmigo, Nome, TelefoneAmigo, EmailAmigo);
         dao.updateAmigoBD(objeto);
         return true;
     }
@@ -173,13 +173,13 @@ public class Amigo {
 /**
 * Procura o INDICE de objeto da ListaAmigo que contem o ID enviado.
 * 
-* @param id ; O ID do amigo.
+* @param IdAmigo ; O ID do amigo.
 * @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
 */
-    private int procuraIndice(int id) {
+    private int procuraIndice(int IdAmigo) {
         int indice = -1;
         for (int i = 0; i < dao.ListaAmigo.size(); i++) {
-            if (dao.ListaAmigo.get(i).getId() == id) {
+            if (dao.ListaAmigo.get(i).getIdAmigo() == IdAmigo) {
                 indice = i;
             }
         }
@@ -189,11 +189,11 @@ public class Amigo {
 /**
 * Carrega os dados de um amigo específico pelo seu ID.
 * 
-* @param id ; O Id do amigo.
+* @param IdAmigo ; O IdAmigo do amigo.
 * @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
 */
-    public Amigo carregaAmigo(int id) {
-        return dao.carregaAmigo(id);
+    public Amigo carregaAmigo(int IdAmigo) {
+        return dao.carregaAmigo(IdAmigo);
     }
 
 /**
@@ -204,5 +204,33 @@ public class Amigo {
     public int maiorID() {
         return dao.maiorID();
 
+    }
+  
+    public boolean possuiEmprestimoAtivo(int IdAmigo) {
+        boolean emprestimoAtivo = false;
+        
+        Emprestimo emp = new Emprestimo();
+        
+        ArrayList<Emprestimo> ListaEmprestimo = emp.getListaEmprestimoAtivo();
+        
+        for (int i = 0; i < ListaEmprestimo.size(); i++) {
+            
+            if(ListaEmprestimo.get(i).getIdAmigo() == IdAmigo) {
+                emprestimoAtivo = true;
+            }
+        }
+        return emprestimoAtivo;
+    } 
+    
+    public int quantidadeEmprestimo(int IdAmigo) {
+        int som = 0;
+        Emprestimo emp = new Emprestimo();
+        ArrayList<Emprestimo> ListaEmprestimo = emp.ListaEmprestimo();
+        for (int i = 0; i < ListaEmprestimo.size(); i++) {
+            if (ListaEmprestimo.get(i).getIdAmigo() == IdAmigo) {
+                som++;
+            }
+        }
+        return som;
     }
 }

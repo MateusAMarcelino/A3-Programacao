@@ -33,7 +33,7 @@ public class FerramentaDAO {
                  String MarcaFerramentas = res.getString("MarcaFerramentas");
                  double CustoFerramentas = res.getDouble("CustoFerramentas");
                  boolean DisponibilidadeFerramentas = res.getBoolean("DisponibilidadeFerramentas");
-                 Ferramenta objeto = new Ferramenta(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas);
+                 Ferramenta objeto = new Ferramenta(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas);
                  
                  ListaFerramentas.add(objeto);
              }
@@ -72,14 +72,13 @@ public class FerramentaDAO {
       * @return True, caso seja possivel inserir, ou retorna um erro caso não seja possivel.
       */
      public boolean InsertFerramentaDB(Ferramenta ferramenta){
-         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) values (?,?,?,?,?)";
+         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas) values (?,?,?,?)";
          try {
              PreparedStatement smt = ut.getConexao().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
              smt.setString(2,ferramenta.getNomeFerramentas());
              smt.setString(3,ferramenta.getMarcaFerramentas());
              smt.setDouble(4,ferramenta.getCustoFerramentas());
-             smt.setBoolean(5, true);
              smt.execute();
              smt.close();
              return true;
@@ -95,15 +94,14 @@ public class FerramentaDAO {
       * @return True, caso seja possivel atualizar, ou retorna um erro caso não seja possivel.
       */
      public boolean UpdateFerramentaDB(Ferramenta ferramenta){
-         String res = "update tb_ferramentas set IdFerramentas=?,NomeFerramentas=?,MarcaFerramentas=?,CustoFerramentas=?,DisponibilidadeFerramentas=? where IdFerramentas=?";
+         String res = "update tb_ferramentas set IdFerramentas=?,NomeFerramentas=?,MarcaFerramentas=?,CustoFerramentas=? where IdFerramentas=?";
          try {
              PreparedStatement smt = ut.getConexao().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
              smt.setString(2,ferramenta.getNomeFerramentas());
              smt.setString(3,ferramenta.getMarcaFerramentas());
              smt.setDouble(4,ferramenta.getCustoFerramentas());
-             smt.setBoolean(5, ferramenta.getDisponibilidadeFerramenta());
-             smt.setInt(6,ferramenta.getIdFerramentas());
+             smt.setInt(5,ferramenta.getIdFerramentas());
              smt.execute();
              smt.close();
              return true;

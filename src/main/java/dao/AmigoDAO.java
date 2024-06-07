@@ -31,12 +31,12 @@ public class AmigoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos");
             while (res.next()) {
 
-                int id = res.getInt("id");
-                String nome = res.getString("nome");
-                int telefone = res.getInt("telefone");
-                String email = res.getString("email");
+                int IdAmigo = res.getInt("IdAmigo");
+                String NomeAmigo = res.getString("NomeAmigo");
+                int TelefoneAmigo = res.getInt("TelefoneAmigo");
+                String EmailAmigo = res.getString("EmailAmigo");
 
-                Amigo objeto = new Amigo(id, nome, telefone, email);
+                Amigo objeto = new Amigo(IdAmigo, NomeAmigo, TelefoneAmigo, EmailAmigo);
 
                 ListaAmigo.add(objeto);
             }
@@ -60,9 +60,9 @@ public class AmigoDAO {
         int maiorID = 0;
         try {
             Statement stmt = ut.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_amigos");
+            ResultSet res = stmt.executeQuery("SELECT MAX(IdAmigo) IdAmigo FROM tb_amigos");
             res.next();
-            maiorID = res.getInt("id");
+            maiorID = res.getInt("IdAmigo");
             stmt.close();
         } catch (SQLException ex) {
             System.out.println("Erro:" + ex);
@@ -76,11 +76,11 @@ public class AmigoDAO {
      * @return True, caso seja possivel inserir o amigo, ou retorna um erro caso não seja possivel.
      */
     public boolean insertAmigoBD(Amigo objeto) {
-        String sql = "INSERT INTO tb_amigos(id,nome,telefone,email) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_amigos(IdAmigo,NomeAmigo,TelefoneAmigo,EmailAmigo) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
-            stmt.setInt(1, objeto.getId());
+            stmt.setInt(1, objeto.getIdAmigo());
             stmt.setString(2, objeto.getNome());
             stmt.setInt(3, objeto.getTelefone());
             stmt.setString(4, objeto.getEmail());
@@ -100,10 +100,10 @@ public class AmigoDAO {
      * @param id é o id do amigo que será deletado.
      * @return True, caso seja possivel deletar, ou retorna um erro caso não seja possivel.
      */
-    public boolean deleteAmigoBD(int id) {
+    public boolean deleteAmigoBD(int IdAmigo) {
         try {
             Statement stmt = ut.getConexao().createStatement();
-            stmt.executeUpdate("DELETE FROM tb_amigos WHERE id = " + id);
+            stmt.executeUpdate("DELETE FROM tb_amigos WHERE IdAmigo = " + IdAmigo);
             stmt.close();
 
         } catch (SQLException erro) {
@@ -119,7 +119,7 @@ public class AmigoDAO {
      */
     public boolean updateAmigoBD(Amigo objeto) {
 
-        String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? ,email = ?  WHERE id = ?";
+        String sql = "UPDATE tb_amigos set NomeAmigo = ? ,TelefoneAmigo = ? ,EmailAmigo = ?  WHERE IdAmigo = ?";
 
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
@@ -127,7 +127,7 @@ public class AmigoDAO {
             stmt.setString(1, objeto.getNome());
             stmt.setInt(2, objeto.getTelefone());
             stmt.setString(3, objeto.getEmail());
-            stmt.setInt(4, objeto.getId());
+            stmt.setInt(4, objeto.getIdAmigo());
 
             stmt.execute();
             stmt.close();
@@ -145,18 +145,18 @@ public class AmigoDAO {
  * @param id é o Id que será carregado.
  * @return 
  */
-    public Amigo carregaAmigo(int id) {
+    public Amigo carregaAmigo(int IdAmigo) {
         Amigo objeto = new Amigo();
-        objeto.setId(id);
+        objeto.setId(IdAmigo);
         try {
             Statement stmt = ut.getConexao().createStatement();
 
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE id = " + id);
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE IdAmigo = " + IdAmigo);
             res.next();
 
-            objeto.setNome(res.getString("nome"));
-            objeto.setTelefone(res.getInt("telefone"));
-            objeto.setEmail(res.getString("email"));
+            objeto.setNome(res.getString("NomeAmigo"));
+            objeto.setTelefone(res.getInt("TelefoneAmigo"));
+            objeto.setEmail(res.getString("EmailAmigo"));
 
             stmt.close();
         } catch (SQLException erro) {

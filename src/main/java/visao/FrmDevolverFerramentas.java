@@ -9,6 +9,10 @@ import dao.Utilitario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.Amigo;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
 
@@ -21,6 +25,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
     private Emprestimo objetodevolucao;
     private Utilitario ut;
     private Ferramenta fe;
+    private Amigo amigo;
     private EmprestimoDAO dao;
     private boolean existe = false;
 
@@ -32,7 +37,9 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
         this.objetodevolucao = new Emprestimo();
         this.ut = new Utilitario();
         this.fe = new Ferramenta();
+        amigo = new Amigo();
         inicializarJCBNomeAmigoEmprestimo();
+        this.CarregaCBEmprestimo();
        
     
     }
@@ -42,11 +49,11 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
             //conexao com o banco de dados
            Statement stmt = ut.getConexao().createStatement();
            //seleciona a coluna nome da tabela amigos
-            ResultSet res = stmt.executeQuery("SELECT nome FROM tb_amigos");
+            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_amigos");
             //inserindo os nomes no jComboBox
             while (res.next()) {
-                String nome = res.getString("nome");
-                JCBNomeAmigoEmprestimo.addItem(nome);
+                String nome = res.getString("NomeAmigo");
+                JCBEmprestimo.addItem(nome);
             }
             
             stmt.close();
@@ -60,7 +67,7 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
         try {
             Statement stmt = ut.getConexao().createStatement();
             
-            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + JCBNomeAmigoEmprestimo.getItemAt(JCBNomeAmigoEmprestimo.getSelectedIndex()) + "'");
+            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + JCBEmprestimo.getItemAt(JCBEmprestimo.getSelectedIndex()) + "'");
             if(res.next()){
                 existe = true;
                 stmt.close();
@@ -83,28 +90,29 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        JCBNomeAmigoEmprestimo = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        JBNomeFerramentaEmprestimo = new javax.swing.JComboBox<>();
+        JCBEmprestimo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        JTFDataDevolução = new javax.swing.JTextField();
         JBCancelarDevolucao = new javax.swing.JButton();
         JBConfirmarDevolucao = new javax.swing.JToggleButton();
+        JCBDataDevolução = new javax.swing.JComboBox<>();
+        JTFDia = new javax.swing.JTextField();
+        JTFMes = new javax.swing.JTextField();
+        JTFAno = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Devolver Ferramentas");
 
-        jLabel2.setText("Nome do Amigo");
+        jLabel2.setText("Emprestimo:");
 
-        JCBNomeAmigoEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+        JCBEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCBNomeAmigoEmprestimoActionPerformed(evt);
+                JCBEmprestimoActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Nome da Ferramenta");
 
         jLabel4.setText("Data da Devolução");
 
@@ -116,32 +124,46 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
         });
 
         JBConfirmarDevolucao.setText("Confirmar");
+        JBConfirmarDevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBConfirmarDevolucaoActionPerformed(evt);
+            }
+        });
+
+        JCBDataDevolução.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBDataDevoluçãoActionPerformed(evt);
+            }
+        });
+
+        JTFDia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTFDiaKeyTyped(evt);
+            }
+        });
+
+        JTFMes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTFMesKeyTyped(evt);
+            }
+        });
+
+        JTFAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTFAnoKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("/");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("/");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JCBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JBNomeFerramentaEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(JTFDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(JBConfirmarDevolucao)
@@ -149,9 +171,35 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                 .addComponent(JBCancelarDevolucao)
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(JCBDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(JTFDia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel3)
+                        .addGap(3, 3, 3)
+                        .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel5)
+                        .addGap(3, 3, 3)
+                        .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,18 +207,21 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCBNomeAmigoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBNomeFerramentaEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addComponent(JCBDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTFDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelarDevolucao)
                     .addComponent(JBConfirmarDevolucao))
@@ -185,11 +236,84 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCancelarDevolucaoActionPerformed
 
-    private void JCBNomeAmigoEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBNomeAmigoEmprestimoActionPerformed
+    private void JCBEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBEmprestimoActionPerformed
         // TODO add your handling code here:
+        int posicaoEmprestimo = JCBEmprestimo.getSelectedIndex();
+        ArrayList<Emprestimo> ListaEmprestimo = objetodevolucao.getListaEmprestimoAtivo();
+        Emprestimo emp = new Emprestimo();
+        String Data = "";
+        switch (JCBDataDevolução.getSelectedIndex()) {
+            case 0:
+            Data = LocalDate.now() + "";
+            break;
+            case 1 :
+                Data = JTFAno.getText() + "-" + JTFMes.getText() + "-" + JTFDia.getText();
+}
+if (emp.updateEmprestimoBD(ListaEmprestimo.get(posicaoEmprestimo).getIdEmprestimo(), ListaEmprestimo.get(posicaoEmprestimo).getIdAmigo(),ListaEmprestimo.get(posicaoEmprestimo).getIdFerramentas(), ListaEmprestimo.get(posicaoEmprestimo).getDataEmp(), Data + "")) {
+    JOptionPane.showMessageDialog(null,"Devolução cadastrada com sucesso");
+    JCBEmprestimo.removeAllItems();
+    this.CarregaCBEmprestimo();
+    }else {
+    
+}
+        
 
-    }//GEN-LAST:event_JCBNomeAmigoEmprestimoActionPerformed
+    }//GEN-LAST:event_JCBEmprestimoActionPerformed
 
+    private void JBConfirmarDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarDevolucaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBConfirmarDevolucaoActionPerformed
+
+    private void JCBDataDevoluçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBDataDevoluçãoActionPerformed
+        // TODO add your handling code here:
+        int tipo = JCBDataDevolução.getSelectedIndex();
+        switch (tipo) {
+            case 1:
+                JTFDia.setVisible(true);
+                JTFMes.setVisible(true);
+                JTFAno.setVisible(true);
+                jLabel3.setVisible(true);
+                jLabel4.setVisible(true);
+                break;
+            case 0:
+                JTFDia.setVisible(false);
+                JTFMes.setVisible(false);
+                JTFAno.setVisible(false);
+                jLabel3.setVisible(false);
+                jLabel4.setVisible(false);
+        }
+    }//GEN-LAST:event_JCBDataDevoluçãoActionPerformed
+
+    private void JTFDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFDiaKeyTyped
+        // TODO add your handling code here:
+        if (JTFDia.getText().length() == 1) {
+            JTFMes.requestFocus();
+        }
+    }//GEN-LAST:event_JTFDiaKeyTyped
+
+    private void JTFMesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFMesKeyTyped
+        // TODO add your handling code here:
+        if (JTFMes.getText().length() == 1) {
+            JTFAno.requestFocus();
+        }
+    }//GEN-LAST:event_JTFMesKeyTyped
+
+    private void JTFAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFAnoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFAnoKeyTyped
+
+    public void CarregaCBEmprestimo() {
+        Emprestimo emprestimo = new Emprestimo();
+        ArrayList<Emprestimo> listaEmprestimo = emprestimo.getListaEmprestimoAtivo();
+        ArrayList<Amigo> ListaAmigo = amigo.getListaAmigo();
+        ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
+
+        for (Emprestimo objeto : listaEmprestimo) {
+            JCBEmprestimo.addItem(objeto.getIdEmprestimo() + "- " + ListaAmigo.get(objeto.getIdAmigo() - 1).getNome() + "- " + listaFerramenta.get(objeto.getIdFerramentas() - 1).getNomeFerramentas());
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -228,12 +352,15 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelarDevolucao;
     private javax.swing.JToggleButton JBConfirmarDevolucao;
-    private javax.swing.JComboBox<String> JBNomeFerramentaEmprestimo;
-    private javax.swing.JComboBox<String> JCBNomeAmigoEmprestimo;
-    private javax.swing.JTextField JTFDataDevolução;
+    private javax.swing.JComboBox<String> JCBDataDevolução;
+    private javax.swing.JComboBox<String> JCBEmprestimo;
+    private javax.swing.JTextField JTFAno;
+    private javax.swing.JTextField JTFDia;
+    private javax.swing.JTextField JTFMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

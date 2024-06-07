@@ -2,67 +2,64 @@ package modelo;
 
 import dao.EmprestimoDAO;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 
 /**
- * Classe do empréstimo, com idEmprestimo, nome, idFerramentas, dataEmp.
+ * Classe do empréstimo, com IdEmprestimo, IdAmigo, IdFerramentas, dataEmp.
  */
 public class Emprestimo {
 
-    private int idEmprestimo;
-    private String nome;
-    private int idFerramentas;
+    private int IdEmprestimo;
+    private int IdAmigo;
+    private int IdFerramentas;
     private String dataEmp;
     private String dataDev;
     private EmprestimoDAO dao;
 
     /**
-     * Construtor para a classe Emprestimo, inicializa o empréstimo com nome do
+     * Construtor para a classe Emprestimo, inicializa o empréstimo com IdAmigo do
      * amigo, id da ferramenta e data do emprestimo.
      */
   public Emprestimo() {
     
-        this( 0, "", 0, "", "");
+        this( 0, 0, 0, "", "");
     }
 
   /**
    * 
-   * @param idEmprestimo; Id do empréstimo feito.
-   * @param nome; Nome do amigo fazendo o empréstimo.
-   * @param idFerramentas; Id da ferramenta emprestada.
+   * @param IdEmprestimo; Id do empréstimo feito.
+   * @param IdAmigo; Nome do amigo fazendo o empréstimo.
+   * @param IdFerramentas; Id da ferramenta emprestada.
    * @param dataEmp; Data do empréstimo
    */
-    public Emprestimo(int idEmprestimo, String nome, int idFerramentas, String dataEmp, String dataDev) {
-        this.idEmprestimo = idEmprestimo;
-        this.nome = nome;
-        this.idFerramentas = idFerramentas;
+    public Emprestimo(int IdEmprestimo, int IdAmigo, int IdFerramentas, String dataEmp, String dataDev) {
+        this.IdEmprestimo = IdEmprestimo;
+        this.IdAmigo = IdAmigo;
+        this.IdFerramentas = IdFerramentas;
         this.dataEmp = dataEmp;
         this.dataDev = dataDev;
         this.dao = new EmprestimoDAO();
     }
     
     /**
-     * Obtém o nome do amigo fazendo o empréstimo.
-     * @return O nome do amigo.
+     * Obtém o IdAmigo do amigo fazendo o empréstimo.
+     * @return O IdAmigo do amigo.
      */
-    public String getNomeEmprestimo() {
-        return nome;
+    public int getIdAmigo() {
+        return IdAmigo;
     }
 
     /**
-     * Define do nome do amigo fazendo o empréstimo.
-     * @param nome; Nome do amigo a ser definido.
+     * Define do IdAmigo do amigo fazendo o empréstimo.
+     * @param IdAmigo; Nome do amigo a ser definido.
      */
-    public void setNomeEmprestimo(String nome) {
-        this.nome = nome;
+    public void setIdAmigo(int IdAmigo) {
+        this.IdAmigo = IdAmigo;
     }
     
     /**
@@ -70,15 +67,15 @@ public class Emprestimo {
      * @return O id do empréstimo.
      */
     public int getIdEmprestimo() {
-        return idEmprestimo;
+        return IdEmprestimo;
     }
 
     /**
      * Define o id do empréstimo realizado.
-     * @param idEmprestimo; O id do empréstimo a ser definido.
+     * @param IdEmprestimo; O id do empréstimo a ser definido.
      */
-    public void setIdEmprestimo(int idEmprestimo) {
-        this.idEmprestimo = idEmprestimo;
+    public void setIdEmprestimo(int IdEmprestimo) {
+        this.IdEmprestimo = IdEmprestimo;
     }
     
     /**
@@ -107,10 +104,10 @@ public class Emprestimo {
     
     /**
      * Define o id da ferramenta a ser emprestada.
-     * @param idFerramentas; O id da ferramenta a ser definido.
+     * @param IdFerramentas; O id da ferramenta a ser definido.
      */
-    public void setIdFerramentas(int idFerramentas){
-        this.idFerramentas = idFerramentas;
+    public void setIdFerramentas(int IdFerramentas){
+        this.IdFerramentas = IdFerramentas;
     }
     
     /**
@@ -118,7 +115,7 @@ public class Emprestimo {
      * @return O id da ferramenta.
      */
     public int getIdFerramentas(){
-        return idFerramentas;
+        return IdFerramentas;
     }
     
     /**
@@ -131,14 +128,14 @@ public ArrayList<Emprestimo> ListaEmprestimo() {
     
  /**
   * Cadastra um novo empréstimo no banco de dados.
-  * @param nome; Nome do amigo que está fazendo o empréstimo.
-  * @param idFerramentas; Id da ferramenta emprestada.
+  * @param IdAmigo; Nome do amigo que está fazendo o empréstimo.
+  * @param IdFerramentas; Id da ferramenta emprestada.
   * @param dataEmp; Data em que o empréstimo foi realizado.
   * @return True caso o empréstimo tiver sido cadastrado com sucesso, false caso tenha falhado.
   */
-    public boolean insertEmprestimoBD(String nome, int idFerramentas, String dataEmp) {
-        int idEmprestimo = this.maiorID() + 1;
-        Emprestimo emprestimo = new Emprestimo(idEmprestimo, nome, idFerramentas, dataEmp, null);
+    public boolean insertEmprestimoBD(int IdAmigo, int IdFerramentas, String dataEmp) {
+        int IdEmprestimo = this.maiorID() + 1;
+        Emprestimo emprestimo = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, null);
         dao.insertEmprestimoBD(emprestimo);
         return true;
     }
@@ -155,53 +152,53 @@ public ArrayList<Emprestimo> ListaEmprestimo() {
     
     /**
      * Deleta um empréstimo do banco de dados pelo seu id.
-     * @param idEmprestimo; Id do empréstimo a ser deletado.
+     * @param IdEmprestimo; Id do empréstimo a ser deletado.
      * @return True caso o empréstimo tiver sido deletado com sucesso, false caso tenha falhado.
      */
     
-    public boolean deleteEmprestimoBD(int idEmprestimo) {
-        int indice = this.procuraIndice(idEmprestimo);
+    public boolean deleteEmprestimoBD(int IdEmprestimo) {
+        int indice = this.procuraIndice(IdEmprestimo);
         dao.ListaEmprestimo.remove(indice);
         return true;
     }
     
     /**
      * Atualiza as informações de um empréstimo dentro do banco de dados.
-     * @param idEmprestimo; Id do empréstimo sendo atualizado;
-     * @param nome; Nome do amigo que fez o empréstimo.
+     * @param IdEmprestimo; Id do empréstimo sendo atualizado;
+     * @param IdAmigo; Nome do amigo que fez o empréstimo.
      * @param IdFerramentas; Id da ferramenta emprestada;
      * @param dataEmp; Data em que o empréstimo foi realizado.
      * @return True caso o empréstimo tiver sido atualizado com sucesso, false caso tenha falhado.
      */
      
-    public boolean updateEmprestimoBD(int idEmprestimo, String nome, int IdFerramentas, String dataEmp, String dataDev) {
-        Emprestimo objeto = new Emprestimo(idEmprestimo, nome, IdFerramentas, dataEmp, dataDev);
-        int indice = this.procuraIndice(idEmprestimo);
-        dao.ListaEmprestimo.set(indice, objeto);
+    public boolean updateEmprestimoBD(int IdEmprestimo, int IdAmigo, int IdFerramentas, String dataEmp, String dataDev) {
+        Emprestimo objeto = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, dataDev);
+        int indice = this.procuraIndice(IdEmprestimo);
+        dao.updateEmprestimoBD(objeto);
         return true;
     }
     
     /**
      * Carrega as informações de um empréstimo específico pelo seu id.
-     * @param idEmprestimo; Id do empréstimo a ser carregado.
+     * @param IdEmprestimo; Id do empréstimo a ser carregado.
      * @return As informações do empréstimo procurado.
      */
      
-    public Emprestimo carregaEmprestimo(int idEmprestimo) {
-        int indice = this.procuraIndice(idEmprestimo);
+    public Emprestimo carregaEmprestimo(int IdEmprestimo) {
+        int indice = this.procuraIndice(IdEmprestimo);
         return dao.ListaEmprestimo.get(indice);
     }
     
     /**
      * Procura o INDICE de objeto da ListaEmprestimo que contém o id enviado.
-     * @param idEmprestimo; Id do empréstimo procurado.
+     * @param IdEmprestimo; Id do empréstimo procurado.
      * @return O objeto do empréstimo com seus dados carregados, ou nada caso não tenha sido encontrado.
      */
      
-    public int procuraIndice(int idEmprestimo) {
+    public int procuraIndice(int IdEmprestimo) {
         int indice = -1;
         for (int i = 0; i < dao.ListaEmprestimo.size(); i++) {
-            if (dao.ListaEmprestimo.get(i).getIdEmprestimo() == idEmprestimo) {
+            if (dao.ListaEmprestimo.get(i).getIdEmprestimo() == IdEmprestimo) {
                 indice = i;
             }
         }
@@ -235,12 +232,12 @@ public ArrayList<Emprestimo> ListaEmprestimo() {
         return listaEmprestimoAtivo;
     }
     
-    public String emprestimoAtivo(int idEmprestimo){
+    public String emprestimoAtivo(int IdEmprestimo){
         String ativo = "Não";
         Emprestimo emp = new Emprestimo();
         ArrayList<Emprestimo> listaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
         for (int i = 0; i < listaEmprestimoAtivo.size(); i++) {
-            if (listaEmprestimoAtivo.get(i).getIdEmprestimo() == idEmprestimo){
+            if (listaEmprestimoAtivo.get(i).getIdEmprestimo() == IdEmprestimo){
                 ativo = "Sim";
             }
         }

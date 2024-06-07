@@ -30,13 +30,13 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
             while (res.next()) {
 
-                int id = res.getInt("IdEmprestimo");
-                String nome = res.getString("NomeAmigo");
-                int idFerramentas = res.getInt("IdFerramentas");
+                int IdEmprestimo = res.getInt("IdEmprestimo");
+                int IdAmigo = res.getInt("IdAmigo");
+                int IdFerramentas = res.getInt("IdFerramentas");
                 String dataEmp = res.getString("DataEmprestimo");
                 String dataDev = res.getString("DataDevolucao");
 
-                Emprestimo objeto = new Emprestimo(id, nome, idFerramentas, dataEmp, dataDev);
+                Emprestimo objeto = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, dataDev);
 
                 ListaEmprestimo.add(objeto);
        }
@@ -77,12 +77,12 @@ public class EmprestimoDAO {
       * @return True se o emprestimo for inserido com sucesso, false caso o processo falhe.
       */
      public boolean insertEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo,DataDevolucao) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tb_emprestimos(IdEmprestimo,IdAmigo,IdFerramentas,DataEmprestimo,DataDevolucao) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdEmprestimo());
-            stmt.setString(2, objeto.getNomeEmprestimo());
+            stmt.setInt(2, objeto.getIdAmigo());
             stmt.setInt(3, objeto.getIdFerramentas());
             stmt.setString(4, objeto.getDataEmp());
             stmt.setString(5, objeto.getDataDev());
@@ -121,12 +121,12 @@ public class EmprestimoDAO {
       */
      public boolean updateEmprestimoBD(Emprestimo objeto) {
 
-        String sql = "UPDATE tb_emprestimos set NomeAmigo = ? ,IdFerramentas = ? ,DataEmprestimo = ? , WHERE IdEmprestimo = ?";
+        String sql = "UPDATE tb_emprestimos set IdAmigo = ? ,IdFerramentas = ? ,DataEmprestimo = ? , WHERE IdEmprestimo = ?";
 
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
-            stmt.setString(1, objeto.getNomeEmprestimo());
+            stmt.setInt(1, objeto.getIdAmigo());
             stmt.setInt(2, objeto.getIdFerramentas());
             stmt.setString(3, objeto.getDataEmp());
             stmt.setInt(4, objeto.getIdEmprestimo());
@@ -156,7 +156,7 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
             res.next();
 
-            objeto.setNomeEmprestimo(res.getString("NomeAmigo"));
+            objeto.setIdAmigo(res.getInt("IdAmigo"));
             objeto.setIdFerramentas(res.getInt("IdFerramentas"));
             objeto.setDataEmp(res.getString("DataEmprestimo"));
 
@@ -166,6 +166,7 @@ public class EmprestimoDAO {
         }
         return objeto;
     }
+     
     public boolean isFerramentaDisponivel(int IdFerramentas) throws SQLException {
     String sql = "SELECT DisponibilidadeFerramentas FROM ferramentas WHERE IdFerramentas = ?";
     try (PreparedStatement pstmt = ut.getConexao().prepareStatement(sql)) {
