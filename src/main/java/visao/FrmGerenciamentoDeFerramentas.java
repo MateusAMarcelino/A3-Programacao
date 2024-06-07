@@ -355,7 +355,7 @@ public void CarregaListaFerramenta(){
         a.getDisponibilidadeFerramenta(a.getIdFerramentas())
 });
         double soma = FerramentaDAO.CalcularSoma(ListaFerramenta);
-        JLSoma.setText(String.valueOf(soma));
+        JLSoma.setText(String.valueOf("R$" + soma));
 }
 }   
     

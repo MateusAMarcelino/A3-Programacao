@@ -11,16 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
+import modelo.Ferramenta;
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
     private Emprestimo objetoEmprestimo;
     private  Amigo objetoAmigo;
+    private Ferramenta objetoFerramenta;
     
     public FrmRelatorioEmprestimo() {
         initComponents();
         this.objetoEmprestimo = new Emprestimo();
         this.objetoAmigo = new Amigo();
+        this.objetoFerramenta = new Ferramenta();
         this.CarregaListaEmprestimo();
     }
 
@@ -71,7 +74,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Id Emprestimo", "Nome Amigo", "Id Ferramenta", "Data Inicio", "Data Devolução", "Ativo"
+                "Id Emprestimo", "Nome Amigo", "Id/Nome Ferramenta", "Data Inicio", "Data Devolução", "Ativo"
             }
         ));
         jScrollPane1.setViewportView(JTEmprestimosAtivos);
@@ -137,16 +140,19 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
 
 public void CarregaListaEmprestimo() {
-      DefaultTableModel model = (DefaultTableModel) JTEmprestimosAtivos.getModel();
-      model.setRowCount(0);
+   DefaultTableModel model = (DefaultTableModel) JTEmprestimosAtivos.getModel();
+    model.setRowCount(0);
     ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.ListaEmprestimo();
     
     // Supondo que você tenha acesso à lista de amigos
     ArrayList<Amigo> listaAmigos = objetoAmigo.getListaAmigo();
     
-    for (int i = 0; i < listaEmprestimo.size(); i++) {
+    // Supondo que você tenha acesso à lista de ferramentas
+    ArrayList<Ferramenta> listaFerramentas = objetoFerramenta.ListaFerramenta();
+    
+    for (Emprestimo emprestimo : listaEmprestimo) {
         // Obtém o ID do amigo deste empréstimo
-        int idAmigo = listaEmprestimo.get(i).getIdAmigo();
+        int idAmigo = emprestimo.getIdAmigo();
         
         // Encontra o objeto Amigo correspondente ao ID
         String nomeAmigo = "";
@@ -158,14 +164,27 @@ public void CarregaListaEmprestimo() {
             }
         }
         
-        // Adiciona uma nova linha à tabela com o nome do amigo
+        // Obtém o ID da ferramenta deste empréstimo
+        int idFerramenta = emprestimo.getIdFerramentas();
+        
+        // Encontra o objeto Ferramenta correspondente ao ID
+        String nomeFerramenta = "";
+        for (Ferramenta ferramenta : listaFerramentas) {
+            if (ferramenta.getIdFerramentas() == idFerramenta) {
+                // Se o ID corresponder, obtém o nome da ferramenta
+                nomeFerramenta = ferramenta.getNomeFerramentas();
+                break; // Sai do loop assim que encontrar a ferramenta correspondente
+            }
+        }
+        
+        // Adiciona uma nova linha à tabela com o nome do amigo e da ferramenta
         model.addRow(new Object[]{
-            listaEmprestimo.get(i).getIdEmprestimo(),
+            emprestimo.getIdEmprestimo(),
             nomeAmigo, // Aqui está o nome do amigo em vez do ID
-            listaEmprestimo.get(i).getIdFerramentas(),
-            listaEmprestimo.get(i).getDataEmp(),
-            listaEmprestimo.get(i).getDataDev(),
-            listaEmprestimo.get(i).emprestimoAtivo(listaEmprestimo.get(i).getIdEmprestimo())
+            idFerramenta + "- " + nomeFerramenta,
+            emprestimo.getDataEmp(),
+            emprestimo.getDataDev(),
+            emprestimo.emprestimoAtivo(emprestimo.getIdEmprestimo())
         });
     }
 }
