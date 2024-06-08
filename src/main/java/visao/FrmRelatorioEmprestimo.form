@@ -292,7 +292,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Data Emprestimo :"/>
+        <Property name="text" type="java.lang.String" value="Data Devolu&#xe7;&#xe3;o :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="JTFDataEmp1">

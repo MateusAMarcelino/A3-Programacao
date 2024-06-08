@@ -135,7 +135,18 @@ public Ferramenta() {
         }
         return Disponivel;
     }
-     
+    
+   public boolean updateFerramentaDB(int IdFerramenta, String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta) {
+    Ferramenta ferramenta = new Ferramenta(IdFerramenta, NomeFerramenta, MarcaFerramenta, CustoFerramenta);
+    boolean atualizado = dao.UpdateFerramentaDB(ferramenta);
+    if (atualizado) {
+        System.out.println("Ferramenta atualizada com sucesso");
+    } else {
+        System.out.println("Erro ao atualizar a ferramenta");
+    }
+    return atualizado;
+}
+
    
   
     
@@ -186,6 +197,7 @@ public Ferramenta() {
         }
         return indice;
     }
+
     
     /**
      * Atualiza as informações de uma ferramenta já existente.
@@ -197,11 +209,7 @@ public Ferramenta() {
      * @param DisponibilidadeFerramenta é a Disponibilidade da ferramenta a ser atualizada.
      * @return True, caso seja possivel atualizar a ferramenta desejada.
      */
-    public boolean updateFerramentaDB(int IdFerramenta,String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta){
-        Ferramenta ferramenta = new Ferramenta (IdFerramenta, NomeFerramenta,MarcaFerramenta,CustoFerramenta);
-        dao.UpdateFerramentaDB(ferramenta);
-        return true;
-    }
+    
     
     public Ferramenta RecuperaFerramentaDB(int id) {
         return dao.RecuperaFerramentaDB(id);

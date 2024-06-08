@@ -71,7 +71,7 @@ public class FerramentaDAO {
       * @return True, caso seja possivel inserir, ou retorna um erro caso não seja possivel.
       */
      public boolean InsertFerramentaDB(Ferramenta ferramenta){
-         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas) values (?,?,?,?)";
+         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) values (?,?,?,?,1)";
          try {
              PreparedStatement smt = ut.getConexao().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
@@ -114,24 +114,25 @@ public class FerramentaDAO {
      
      
      
-     public boolean UpdateFerramentaDB(Ferramenta ferramenta){
-         String res = "update tb_ferramentas set IdFerramentas=?,NomeFerramentas=?,MarcaFerramentas=?,CustoFerramentas=? where IdFerramentas=?";
-         try {
-             PreparedStatement smt = ut.getConexao().prepareCall(res);
-             smt.setInt(1,ferramenta.getIdFerramentas());
-             smt.setString(2,ferramenta.getNomeFerramentas());
-             smt.setString(3,ferramenta.getMarcaFerramentas());
-             smt.setDouble(4,ferramenta.getCustoFerramentas());
-             smt.setInt(5,ferramenta.getIdFerramentas());
-             smt.execute();
-             smt.close();
-             return true;
-         } catch (SQLException erro) {
-             System.out.println("Erro : " + erro);
-             throw new RuntimeException(erro);
-         }
-             
-         }
+     public boolean UpdateFerramentaDB(Ferramenta ferramenta) {
+    String res = "UPDATE tb_ferramentas SET NomeFerramentas=?, MarcaFerramentas=?, CustoFerramentas=?, DisponibilidadeFerramentas=? WHERE IdFerramentas=?";
+    try {
+        PreparedStatement smt = ut.getConexao().prepareStatement(res);
+        smt.setString(1, ferramenta.getNomeFerramentas());
+        smt.setString(2, ferramenta.getMarcaFerramentas());
+        smt.setDouble(3, ferramenta.getCustoFerramentas());
+        // Aqui você pode definir a disponibilidade com base na lógica necessária
+        String disponibilidade = ferramenta.getDisponibilidadeFerramenta(ferramenta.getIdFerramentas());
+        smt.setString(4, disponibilidade);
+        smt.setInt(5, ferramenta.getIdFerramentas());
+        smt.executeUpdate();
+        smt.close();
+        return true;
+    } catch (SQLException erro) {
+        System.out.println("Erro: " + erro);
+        throw new RuntimeException(erro);
+    }
+     }
      /**
       * Deleta uma ferramenta do banco de dados.
       * @param IdFerramentas É o ID da ferramenta que deve ser deletada.
@@ -156,6 +157,7 @@ public class FerramentaDAO {
          }
          return soma;
      }
+     
 }
      
      

@@ -136,7 +136,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Data Emprestimo :");
+        jLabel5.setText("Data Devolução :");
 
         JTFDataEmp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
