@@ -1,7 +1,10 @@
 package visao;
 
+import static dao.AmigoDAO.ListaAmigo;
 import modelo.Emprestimo;
 import dao.EmprestimoDAO;
+import static dao.EmprestimoDAO.ListaEmprestimo;
+import static dao.FerramentaDAO.ListaFerramentas;
 import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -16,11 +19,15 @@ import modelo.Ferramenta;
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
     private Emprestimo emprestimo;
+    private Amigo amigo;
+    private Ferramenta ferramenta;
 
     
     public FrmRelatorioEmprestimo() {
         initComponents();
         this.emprestimo = new Emprestimo();
+        this.ferramenta = new Ferramenta();
+        this.amigo = new Amigo();
         this.CarregaListaEmprestimo();
     }
 
@@ -41,11 +48,15 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         JBCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        JLId = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JTFNomeAmigo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JTFNomeFerramenta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        JTFDataEmp = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        JTFDataEmp1 = new javax.swing.JTextField();
 
         JTEmprestimosRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,6 +87,11 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 "Id Emprestimo", "Nome Amigo", "Id/Nome Ferramenta", "Data Inicio", "Data Devolução", "Ativo"
             }
         ));
+        JTEmprestimosAtivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTEmprestimosAtivosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTEmprestimosAtivos);
 
         JBCancelar.setText("Cancelar");
@@ -91,21 +107,34 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Id do Empréstimo :");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("0");
+        JLId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLId.setText("0");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Nome do Amigo :");
 
-        jTextField1.setText("jTextField1");
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Nome do Ferramenta :");
 
-        jTextField2.setText("jTextField1");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        JTFNomeFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                JTFNomeFerramentaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Data Inicio :");
+
+        JTFDataEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFDataEmpActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Data Emprestimo :");
+
+        JTFDataEmp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFDataEmp1ActionPerformed(evt);
             }
         });
 
@@ -121,27 +150,35 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(44, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JTFDataEmp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JTFNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel4))
+                                .addComponent(JLId)
+                                .addGap(237, 237, 237)
+                                .addComponent(jLabel4)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -150,23 +187,34 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JLId)
+                        .addComponent(jLabel4))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(15, 15, 15)
-                .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(JTFDataEmp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42))
         );
 
@@ -178,28 +226,91 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void JTFNomeFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeFerramentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_JTFNomeFerramentaActionPerformed
 
+    private void JTEmprestimosAtivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTEmprestimosAtivosMouseClicked
+        // TODO add your handling code here:
+       if (this.JTEmprestimosAtivos.getSelectedRow() != -1) {
+            JLId.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),0).toString());
+            JLId.setVisible(true);
+            JTFNomeAmigo.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),1).toString());
+            JTFNomeFerramenta.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),2).toString());
+            JTFDataEmp1.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),3).toString());
+            JTFDataEmp.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),4).toString());
+            
+            
+            
+        }
+    }//GEN-LAST:event_JTEmprestimosAtivosMouseClicked
 
-public void CarregaListaEmprestimo() {
-    DefaultTableModel model = (DefaultTableModel) JTEmprestimosAtivos.getModel();
-        model.setRowCount(0);
-        ArrayList<Emprestimo> listaEmprestimo = emprestimo.ListaEmprestimo();
-        for (int i = 0; i < listaEmprestimo.size(); i++) {
-            model.addRow(new Object[]{
-                listaEmprestimo.get(i).getIdEmprestimo(),
-                listaEmprestimo.get(i).getIdAmigo(),
-                listaEmprestimo.get(i).getIdFerramentas(),
-                listaEmprestimo.get(i).getDataEmp(),
-                listaEmprestimo.get(i).getDataDev(),
-                listaEmprestimo.get(i).emprestimoAtivo(listaEmprestimo.get(i).getIdEmprestimo()),}
-            );
+    private void JTFDataEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFDataEmpActionPerformed
+
+    private void JTFDataEmp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmp1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFDataEmp1ActionPerformed
+    private int getIdFerramentaPorNome(String nomeFerramenta) {
+    for (Ferramenta ferramenta : ListaFerramentas) {
+        if (ferramenta.getNomeFerramentas().equals(nomeFerramenta)) {
+            return ferramenta.getIdFerramentas();
         }
     }
+    return -1; // Retorna -1 se não encontrar
+    }
+    
+    private int getIdAmigoPorNome(String nomeAmigo) {
+    for (Amigo amigo : ListaAmigo) {
+        if (amigo.getNomeAmigo().equals(nomeAmigo)) {
+            return amigo.getIdAmigo();
+        }
+    }
+    return -1; // Retorna -1 se não encontrar
+}
+    
+    
+    
 
+public void CarregaListaEmprestimo() {
+DefaultTableModel model = (DefaultTableModel) JTEmprestimosAtivos.getModel();
+model.setRowCount(0);
+ArrayList<Emprestimo> listaEmprestimo = emprestimo.ListaEmprestimo();
+ArrayList<Ferramenta> listaFerramentas = ferramenta.ListaFerramenta(); // Supondo que você tenha uma lista de ferramentas
+ArrayList<Amigo> listaAmigos = amigo.ListaAmigo(); // Supondo que você tenha uma lista de amigos
 
+for (int i = 0; i < listaEmprestimo.size(); i++) {
+    String nomeFerramenta = ""; // Variável para armazenar o nome da ferramenta
+    String nomeAmigo = ""; // Variável para armazenar o nome do amigo
+    
+    // Procura a ferramenta correspondente ao ID do empréstimo
+    for (Ferramenta ferramenta : listaFerramentas) {
+        if (ferramenta.getIdFerramentas() == listaEmprestimo.get(i).getIdFerramentas()) {
+            nomeFerramenta = ferramenta.getNomeFerramentas(); // Obtém o nome da ferramenta
+            break; // Sai do loop assim que encontrar a ferramenta
+        }
+    }
+    
+    // Procura o amigo correspondente ao ID do empréstimo
+    for (Amigo amigo : listaAmigos) {
+        if (amigo.getIdAmigo() == listaEmprestimo.get(i).getIdAmigo()) {
+            nomeAmigo = amigo.getNomeAmigo(); // Obtém o nome do amigo
+            break; // Sai do loop assim que encontrar o amigo
+        }
+    }
+    
+    // Adiciona uma nova linha à tabela com os dados do empréstimo, nome do amigo e nome da ferramenta
+    model.addRow(new Object[]{
+        listaEmprestimo.get(i).getIdEmprestimo(),
+        nomeAmigo, // Nome do amigo ao invés do ID
+        nomeFerramenta, // Nome da ferramenta ao invés do ID
+        listaEmprestimo.get(i).getDataEmp(),
+        listaEmprestimo.get(i).getDataDev(),
+        listaEmprestimo.get(i).emprestimoAtivo(listaEmprestimo.get(i).getIdEmprestimo())
+    });
+}
+}
 
 
 
@@ -254,9 +365,15 @@ public void CarregaListaEmprestimo() {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JLabel JLId;
     private javax.swing.JTable JTEmprestimosAtivos;
     private javax.swing.JTable JTEmprestimosRealizados;
+    private javax.swing.JTextField JTFDataEmp;
+    private javax.swing.JTextField JTFDataEmp1;
+    private javax.swing.JTextField JTFNomeAmigo;
+    private javax.swing.JTextField JTFNomeFerramenta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -264,7 +381,5 @@ public void CarregaListaEmprestimo() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
