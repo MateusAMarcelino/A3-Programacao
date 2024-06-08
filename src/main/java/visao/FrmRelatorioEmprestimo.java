@@ -34,6 +34,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         this.ferramenta = new Ferramenta();
         this.amigo = new Amigo();
         this.CarregaListaEmprestimo();
+        this.AtualizarAmigoMaisRepetido();
     }
 
     /**
@@ -128,6 +129,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Data Inicio :");
 
         JTFDataEmp.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +138,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data Devolução :");
 
         JTFDataEmp1.addActionListener(new java.awt.event.ActionListener() {
@@ -168,12 +171,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                         .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(95, 95, 95)
                         .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(44, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -183,18 +183,23 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JTFNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 614, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JLId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(172, 172, 172))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JLId)
-                                .addGap(237, 237, 237)
-                                .addComponent(jLabel4)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(JTFNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,14 +229,14 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42))
         );
 
@@ -360,6 +365,7 @@ for (int i = 0; i < listaEmprestimo.size(); i++) {
     // Adiciona uma nova linha à tabela com os dados do empréstimo, nome do amigo e nome da ferramenta
     model.addRow(new Object[]{
         listaEmprestimo.get(i).getIdEmprestimo(),
+        
         nomeAmigo, // Nome do amigo ao invés do ID
         nomeFerramenta, // Nome da ferramenta ao invés do ID
         listaEmprestimo.get(i).getDataEmp(),
@@ -368,7 +374,28 @@ for (int i = 0; i < listaEmprestimo.size(); i++) {
     });
 }
 }
+private String amigoMaisRepetido() {
+        HashMap<String, Integer> countMap = new HashMap<>();
+        String amigoMaisRepetido = "";
+        int maxCount = 0;
 
+        for (int i = 0; i < JTEmprestimosAtivos.getRowCount(); i++) {
+            String nomeAmigo = JTEmprestimosAtivos.getValueAt(i, 1).toString();
+            countMap.put(nomeAmigo, countMap.getOrDefault(nomeAmigo, 0) + 1);
+            int count = countMap.get(nomeAmigo);
+            if (count > maxCount) {
+                maxCount = count;
+                amigoMaisRepetido = nomeAmigo;
+            }
+        }
+
+        return amigoMaisRepetido;
+    }
+        
+        private void AtualizarAmigoMaisRepetido() {
+        String amigoMaisRepetido = amigoMaisRepetido();
+        jLabel4.setText("Amigo que mais fez empréstimos: " + amigoMaisRepetido);
+    }
 
 
 
@@ -409,9 +436,7 @@ for (int i = 0; i < listaEmprestimo.size(); i++) {
             }
         });
     }
-
-   
-
+  
 
 
     

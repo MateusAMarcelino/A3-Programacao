@@ -142,7 +142,7 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
             
           Ferramenta ferramenta = new Ferramenta();  
           String NomeFerramentas = "";
-          int CustoFerrametas = 0;
+          double CustoFerrametas = 0.0;
           String MarcaFerramentas = "";
           
           if(this.JTFNomeF.getText().length() < 2){ /*Caso o texto no field tenha menos que 2 caracteres, manda um aviso dizendo que deve ter mais de 2 caracteres. */
@@ -154,7 +154,7 @@ public class FrmCadastrarFerramenta extends javax.swing.JFrame {
           if(this.JTFCustoF.getText().length() <= 0){ /*Caso o texto inserido no textfield seja menor que 0, numericamente , manda um aviso dizendo que deve ser maior que 0. */
               throw new Mensagem("Custo deve ser maior que zero.");
           }else{ /*Caso o texto no field seja maior que 0, pega o texto covnerte para um valor tipo INT e coloca na variavel CustoFerramenta */
-           CustoFerrametas = Integer.parseInt(this.JTFCustoF.getText());
+           CustoFerrametas = Double.parseDouble(this.JTFCustoF.getText());
           }
           if(this.JTFMarcaF.getText().length() < 2){ /*Caso o texto no field tenha menos que 2 caracteres, manda um aviso dizendo que deve ter mais de 2 caracteres. */
               throw new Mensagem("Marca deve conter dois caracteres.");
