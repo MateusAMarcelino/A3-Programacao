@@ -68,14 +68,7 @@ public class Emprestimo {
     }
 
     // Métodos adicionais
-    public String getDataEmpInverso() {
-        String DataEmp = this.dataEmp;
-        if (DataEmp != null) {
-            String[] DataEmpSeparado = this.dataEmp.split("-");
-            DataEmp = DataEmpSeparado[2] + "-" + DataEmpSeparado[1] + "-" + DataEmpSeparado[0];
-        }
-        return DataEmp;
-    }
+    
 
     public String getDataDev() {
         return dataDev;
@@ -85,14 +78,7 @@ public class Emprestimo {
         this.dataDev = dataDev;
     }
 
-    public String getDataDevInverso() {
-        String DataDev = this.dataDev;
-        if (DataDev != null) {
-            String[] DataDevSeparado = this.dataDev.split("-");
-            DataDev = DataDevSeparado[2] + "-" + DataDevSeparado[1] + "-" + DataDevSeparado[0];
-        }
-        return DataDev;
-    }
+    
 
     public void setIdFerramentas(int IdFerramentas) {
         this.IdFerramentas = IdFerramentas;

@@ -133,22 +133,24 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(JCBTipoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JCBTipoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(263, 263, 263)
-                        .addComponent(JBCadastrar)
+                        .addGap(298, 298, 298)
+                        .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JBCancelar)))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(263, 263, 263)
+                .addComponent(JBCadastrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JBCancelar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -209,24 +211,45 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
 
-        int posicaoEmprestimo = JCBEmprestimo.getSelectedIndex();
+      int posicaoEmprestimo = JCBEmprestimo.getSelectedIndex();
         ArrayList<Emprestimo> listaEmprestimo = emprestimo.getListaEmprestimoAtivo();
         Emprestimo emp = new Emprestimo();
         String data = "";
-        switch (JCBTipoRegistro.getSelectedIndex()) {
-            case 0:
-            data = LocalDate.now() + "";
-            break;
-            case 1:
-            data = JTFAno.getText() + "-" + JTFMes.getText() + "-" + JTFData.getText();
-        }
-        if (emp.updateEmprestimoBD(listaEmprestimo.get(posicaoEmprestimo).getIdEmprestimo(), listaEmprestimo.get(posicaoEmprestimo).getIdAmigo(), listaEmprestimo.get(posicaoEmprestimo).getIdFerramentas(), listaEmprestimo.get(posicaoEmprestimo).getDataEmp(), data + "")) {
-            JOptionPane.showMessageDialog(null, "Devolucao cadastrada com sucesso");
-            JCBEmprestimo.removeAllItems();
-            this.carregaCBEmprestimo();
-        } else {
 
-        }
+
+      switch (JCBTipoRegistro.getSelectedIndex()) {
+        case 0:
+            data = LocalDate.now().toString();
+           break;
+        case 1:
+            String ano = JTFAno.getText();
+            String mes = JTFMes.getText();
+            String dia = JTFData.getText();
+
+        
+            if (mes.length() == 1) mes = "0" + mes;
+            if (dia.length() == 1) dia = "0" + dia;
+ 
+            data = ano + "-" + mes + "-" + dia;
+           break;
+}
+
+
+           boolean atualizado = emp.updateEmprestimoBD(
+              listaEmprestimo.get(posicaoEmprestimo).getIdEmprestimo(),
+              listaEmprestimo.get(posicaoEmprestimo).getIdAmigo(),
+              listaEmprestimo.get(posicaoEmprestimo).getIdFerramentas(),
+              listaEmprestimo.get(posicaoEmprestimo).getDataEmp(),
+              data
+             );
+
+             if (atualizado) {
+               JOptionPane.showMessageDialog(null, "Devolucao cadastrada com sucesso");
+                JCBEmprestimo.removeAllItems();
+             this.carregaCBEmprestimo();
+             } else {
+               JOptionPane.showMessageDialog(null, "Erro ao cadastrar a devolução");
+            }
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JCBTipoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBTipoRegistroActionPerformed
