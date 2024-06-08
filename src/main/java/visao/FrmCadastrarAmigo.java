@@ -158,10 +158,10 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
                 nome = this.JTFNome.getText();
             }
             
-            if(this.JTFTelefone.getText().length() < 8){
+            if(this.JTFTelefone.getText().length() == 9){
                 telefone = (JTFTelefone.getText());
             } else {
-                throw new Mensagem ("O número de telefone deve possuir mais de 8 digitos");
+                throw new Mensagem ("O número de telefone deve possuir exatamente 9 digitos");
             }
             
             if(this.JTFEmail.getText().length()<11){
