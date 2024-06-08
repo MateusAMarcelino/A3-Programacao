@@ -22,21 +22,16 @@ import modelo.Amigo;
  */
 public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
-    private Emprestimo objetoemprestimo;
+    private Ferramenta ferramenta;
     private Amigo amigo;
-    private Utilitario ut;
-    private Ferramenta fe;
-    private EmprestimoDAO dao;
-    private boolean existe = false;
     /**
      * Creates new form FrmEmprestimoDeFerramentas
      */
     public FrmEmprestimoDeFerramentas() {
         initComponents();
-        this.objetoemprestimo = new Emprestimo();
+        
         this.amigo = new Amigo();
-        this.ut = new Utilitario();
-        this.fe = new Ferramenta();
+        this.ferramenta = new Ferramenta();
         inicializarJBCNomeAmigo();
         inicializarJBCNomeFerramenta();
     }
@@ -52,14 +47,11 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        JTFDataEmprestimo = new javax.swing.JTextField();
         JBConfirmar = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jCBNomeAmigo = new javax.swing.JComboBox<>();
         jCBNomeFerramenta = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,15 +60,6 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome do Amigo:");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Data do Empréstimo:");
-
-        JTFDataEmprestimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFDataEmprestimoActionPerformed(evt);
-            }
-        });
 
         JBConfirmar.setText("Confirmar");
         JBConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,72 +90,54 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel5.setText("(ano / mês / dia )");
-        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jCBNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel5)))
-                .addGap(0, 45, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69)
+                                .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(234, 234, 234)
+                                .addComponent(jLabel4)))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBNomeAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBNomeFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JTFDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,10 +146,6 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JTFDataEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmprestimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFDataEmprestimoActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
         // TODO add your handling code here:
@@ -195,22 +156,12 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
      * Conecta com a coluna nome da tb_amigos do banco de dados.
      */
     private void inicializarJBCNomeAmigo(){
-        try{
-            //conexao com o banco de dados
-           Statement stmt = ut.getConexao().createStatement();
-           //seleciona a coluna nome da tabela amigos
-            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_amigos");
-            //inserindo os nomes no jComboBox
-            while (res.next()) {
-                String nome = res.getString("NomeAmigo");
-                jCBNomeAmigo.addItem(nome);
-            }
-            
-            stmt.close();
-            
-        }catch(Exception ex){
-            System.out.println("Erro: " + ex);
+        
+        ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
+        for (Amigo objeto : listaAmigo) {
+            jCBNomeAmigo.addItem(objeto.getIdAmigo() + "- " + objeto.getNomeAmigo());
         }
+
     }
     
     /**
@@ -218,41 +169,12 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
      * para usar no jComboBox.
      */
     private void inicializarJBCNomeFerramenta(){
-        try{
-            //conexao com o banco de dados
-           Statement stmt = ut.getConexao().createStatement();
-           //seleciona a coluna nome da tabela ferramentas
-            ResultSet res = stmt.executeQuery("SELECT NomeFerramentas FROM tb_ferramentas");
-            //inserindo os ids no jComboBox
-            while (res.next()) {
-                String NomeFerramentas = res.getString("NomeFerramentas");
-                jCBNomeFerramenta.addItem(NomeFerramentas);
-            }
-            
-            stmt.close();
-            
-        }catch(Exception ex){
-            System.out.println("Erro: " + ex);
-        }     
-    }
-    
-    /**
-     * Procura se o amigo tem empréstimos ativos no banco de dados.
-     * @return True se o amigo possuir empréstimos ativos, false se ele não possuir.
-     */
-    public boolean amigoExiste(){
-        try {
-            Statement stmt = ut.getConexao().createStatement();
-            
-            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + jCBNomeAmigo.getItemAt(jCBNomeAmigo.getSelectedIndex()) + "'");
-            if(res.next()){
-                existe = true;
-                stmt.close();
-            } 
-            } catch (SQLException erro){
-                System.out.println("Erro: " + erro);
-            }
-        return existe;
+        
+            ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
+        for (Ferramenta objeto : listaFerramenta) {
+            jCBNomeFerramenta.addItem(objeto.getIdFerramentas() + "- " + objeto.getNomeFerramentas());
+        }
+
     }
     
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
@@ -262,22 +184,22 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
             int posicaoFerramenta = jCBNomeFerramenta.getSelectedIndex();
             int posicaoAmigo = jCBNomeAmigo.getSelectedIndex();
-            ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
-            ArrayList<Amigo> ListaAmigo = amigo.getListaAmigo();
+            ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
+            ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
             Emprestimo emprestimo = new Emprestimo();
-            if ("Não".equals(listaFerramenta.get(posicaoFerramenta).getDisponibilidadeFerramenta(listaFerramenta.get(posicaoFerramenta).getIdFerramentas()))) {
-              throw new Mensagem("Ferramenta ja emprestada");
+            if (listaFerramenta.get(posicaoFerramenta).getDisponibilidadeFerramenta(listaFerramenta.get(posicaoFerramenta).getIdFerramentas()) == "Não") {
+                throw new Mensagem("Ferramenta ja emprestada");
             }
-            int IdAmigo = ListaAmigo.get(posicaoAmigo).getIdAmigo();
-            if (amigo.possuiEmprestimoAtivo(IdAmigo)) {
+            int idAmigo = listaAmigo.get(posicaoAmigo).getIdAmigo();
+            if (amigo.possuiEmprestimoAtivo(idAmigo)) {
                 conf = JOptionPane.showConfirmDialog(null, "Este amigo ja possui um emprestimo ativo, deseja continuar?");
             }
             int idFerramenta = listaFerramenta.get(posicaoFerramenta).getIdFerramentas();
             String DataInicio = LocalDate.now() + "";
             if (conf == 0) {
-                if (emprestimo.insertEmprestimoBD(IdAmigo, idFerramenta, DataInicio)) {
+                if (emprestimo.insertEmprestimoBD(idAmigo, idFerramenta, DataInicio)) {
                     JOptionPane.showMessageDialog(null, "Emprestimo cadastrado com sucesso");
-                    fe.updateFerramentaDB(idFerramenta, listaFerramenta.get(posicaoFerramenta).getNomeFerramentas(), listaFerramenta.get(posicaoFerramenta).getMarcaFerramentas(), listaFerramenta.get(posicaoFerramenta).getCustoFerramentas());
+                    ferramenta.updateFerramentaDB(idFerramenta, listaFerramenta.get(posicaoFerramenta).getNomeFerramentas(), listaFerramenta.get(posicaoFerramenta).getMarcaFerramentas(), listaFerramenta.get(posicaoFerramenta).getCustoFerramentas());
                 };
 
             }
@@ -294,7 +216,7 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBNomeFerramentaActionPerformed
      public void carregaCBFerramenta() {
-        ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
+        ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
         for (Ferramenta objeto : listaFerramenta) {
             jCBNomeFerramenta.addItem(objeto.getIdFerramentas() + "- " + objeto.getNomeFerramentas());
         }
@@ -302,9 +224,9 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     }
 
     public void carregaCBAmigo() {
-        ArrayList<Amigo> listaAmigo = amigo.getListaAmigo();
+        ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
         for (Amigo objeto : listaAmigo) {
-            jCBNomeAmigo.addItem(objeto.getIdAmigo() + "- " + objeto.getNome());
+            jCBNomeAmigo.addItem(objeto.getIdAmigo() + "- " + objeto.getNomeAmigo());
         }
 
     }       
@@ -352,13 +274,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
-    private javax.swing.JTextField JTFDataEmprestimo;
     private javax.swing.JComboBox<String> jCBNomeAmigo;
     private javax.swing.JComboBox<String> jCBNomeFerramenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

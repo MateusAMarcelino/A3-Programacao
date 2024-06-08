@@ -14,7 +14,7 @@ public class AmigoDAO {
     /**
      * Cria a ArrayList para os amigos.
      */
-    public ArrayList<Amigo> ListaAmigo = new ArrayList<>();
+    public static ArrayList<Amigo> ListaAmigo = new ArrayList<>();
     
     
     /**
@@ -33,7 +33,7 @@ public class AmigoDAO {
 
                 int IdAmigo = res.getInt("IdAmigo");
                 String NomeAmigo = res.getString("NomeAmigo");
-                int TelefoneAmigo = res.getInt("TelefoneAmigo");
+                String TelefoneAmigo = res.getString("TelefoneAmigo");
                 String EmailAmigo = res.getString("EmailAmigo");
 
                 Amigo objeto = new Amigo(IdAmigo, NomeAmigo, TelefoneAmigo, EmailAmigo);
@@ -49,14 +49,14 @@ public class AmigoDAO {
     }
 
     public void setListaAmigo(ArrayList<Amigo> ListaAmigo) {
-        this.ListaAmigo = ListaAmigo;
+        AmigoDAO.ListaAmigo = ListaAmigo;
     }
 
    /**
     * Procura o maior ID entre os amigos, buscando por todos os amigos no banco de dados.
     * @return O maior ID encontrado.
     */
-    public int maiorID() {
+    public int maiorIDAmigo() {
         int maiorID = 0;
         try {
             Statement stmt = ut.getConexao().createStatement();
@@ -81,9 +81,9 @@ public class AmigoDAO {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getIdAmigo());
-            stmt.setString(2, objeto.getNome());
-            stmt.setInt(3, objeto.getTelefone());
-            stmt.setString(4, objeto.getEmail());
+            stmt.setString(2, objeto.getNomeAmigo());
+            stmt.setString(3, objeto.getTelefoneAmigo());
+            stmt.setString(4, objeto.getEmailAmigo());
 
             stmt.execute();
             stmt.close();
@@ -112,6 +112,24 @@ public class AmigoDAO {
         return true;
     }
     
+    public Amigo RecuperaAmigoDB(int id) {
+        Amigo amigo = new Amigo();
+        amigo.setIdAmigo(id);
+        try {
+            Statement smt = ut.getConexao().createStatement();
+            ResultSet res = smt.executeQuery("select * from tb_amigo where IdAmigo = " + id);
+            res.next();
+            amigo.setNomeAmigo(res.getString("NomeAmigo"));
+            amigo.setTelefoneAmigo(res.getString("TelefoneAmigo"));
+            smt.close();
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+        }
+        return amigo;
+        
+    }
+    
+    
     /**
      * Atualiza as informações de um amigo, já existente no banco de dados.
      * @param objeto é o objeto do amigo, o qual será atualizado.
@@ -124,9 +142,9 @@ public class AmigoDAO {
         try {
             PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
 
-            stmt.setString(1, objeto.getNome());
-            stmt.setInt(2, objeto.getTelefone());
-            stmt.setString(3, objeto.getEmail());
+            stmt.setString(1, objeto.getNomeAmigo());
+            stmt.setString(2, objeto.getTelefoneAmigo());
+            stmt.setString(3, objeto.getEmailAmigo());
             stmt.setInt(4, objeto.getIdAmigo());
 
             stmt.execute();
@@ -138,30 +156,5 @@ public class AmigoDAO {
             System.out.println("Erro:" + erro);
             throw new RuntimeException(erro);
         }
-    }
-/**
- * Carrega o objeto amigo, com as informações, coletando as informações do banco de dados
- * e preenchendo os valores, definindo no objeto.
- * @param id é o Id que será carregado.
- * @return 
- */
-    public Amigo carregaAmigo(int IdAmigo) {
-        Amigo objeto = new Amigo();
-        objeto.setId(IdAmigo);
-        try {
-            Statement stmt = ut.getConexao().createStatement();
-
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE IdAmigo = " + IdAmigo);
-            res.next();
-
-            objeto.setNome(res.getString("NomeAmigo"));
-            objeto.setTelefone(res.getInt("TelefoneAmigo"));
-            objeto.setEmail(res.getString("EmailAmigo"));
-
-            stmt.close();
-        } catch (SQLException erro) {
-            System.out.println("Erro:" + erro);
-        }
-        return objeto;
     }
 }

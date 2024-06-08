@@ -146,9 +146,10 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
         try{
-            //recebendo e validando os dados da interface
+            
+            Amigo amigo = new Amigo();
             String nome = "";
-            int telefone = 0;
+            String telefone = "";
             String email = "";
             
             if(this.JTFNome.getText().length()<2){
@@ -157,10 +158,10 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
                 nome = this.JTFNome.getText();
             }
             
-            if(this.JTFTelefone.getText().length()==9){
-                telefone = Integer.parseInt(this.JTFTelefone.getText());
+            if(this.JTFTelefone.getText().length() < 8){
+                telefone = (JTFTelefone.getText());
             } else {
-                throw new Mensagem ("O número de telefone deve possuir exatamente 9 digitos");
+                throw new Mensagem ("O número de telefone deve possuir mais de 8 digitos");
             }
             
             if(this.JTFEmail.getText().length()<11){
@@ -176,7 +177,7 @@ public class FrmCadastrarAmigo extends javax.swing.JFrame {
                 this.JTFTelefone.setText("");
                 this.JTFEmail.setText("");
             }
-            System.out.println(this.objetoamigo.getListaAmigo().toString());
+            System.out.println(this.objetoamigo.ListaAmigo().toString());
             
         } catch (Mensagem erro){
             JOptionPane.showMessageDialog(null, erro.getMessage());

@@ -4,11 +4,6 @@
  */
 package visao;
 
-import dao.EmprestimoDAO;
-import dao.Utilitario;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -22,63 +17,21 @@ import modelo.Ferramenta;
  */
 public class FrmDevolverFerramentas extends javax.swing.JFrame {
     
-    private Emprestimo objetodevolucao;
-    private Utilitario ut;
-    private Ferramenta fe;
+    private Emprestimo emprestimo;
     private Amigo amigo;
-    private EmprestimoDAO dao;
-    private boolean existe = false;
+    private Ferramenta ferramenta;
 
     /**
      * Creates new form FrmDevolverFerramentas
      */
     public FrmDevolverFerramentas() {
-        initComponents();
-        this.objetodevolucao = new Emprestimo();
-        this.ut = new Utilitario();
-        this.fe = new Ferramenta();
+        emprestimo = new Emprestimo();
         amigo = new Amigo();
-        inicializarJCBNomeAmigoEmprestimo();
-        this.CarregaCBEmprestimo();
-       
-    
+        ferramenta = new Ferramenta();
+        initComponents();
+        this.carregaCBEmprestimo();
     }
 
-    private void inicializarJCBNomeAmigoEmprestimo(){
-         try{
-            //conexao com o banco de dados
-           Statement stmt = ut.getConexao().createStatement();
-           //seleciona a coluna nome da tabela amigos
-            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_amigos");
-            //inserindo os nomes no jComboBox
-            while (res.next()) {
-                String nome = res.getString("NomeAmigo");
-                JCBEmprestimo.addItem(nome);
-            }
-            
-            stmt.close();
-            
-        }catch(Exception ex){
-            System.out.println("Erro: " + ex);
-        }
-    }
-   
-    public boolean amigoExiste(){
-        try {
-            Statement stmt = ut.getConexao().createStatement();
-            
-            ResultSet res = stmt.executeQuery("SELECT NomeAmigo FROM tb_emprestimos WHERE NomeAmigo = '" + JCBEmprestimo.getItemAt(JCBEmprestimo.getSelectedIndex()) + "'");
-            if(res.next()){
-                existe = true;
-                stmt.close();
-            } 
-            } catch (SQLException erro){
-                System.out.println("Erro: " + erro);
-            }
-        return existe;
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,232 +41,213 @@ public class FrmDevolverFerramentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        JCBEmprestimo = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        JBCancelarDevolucao = new javax.swing.JButton();
-        JBConfirmarDevolucao = new javax.swing.JToggleButton();
-        JCBDataDevolução = new javax.swing.JComboBox<>();
-        JTFDia = new javax.swing.JTextField();
-        JTFMes = new javax.swing.JTextField();
-        JTFAno = new javax.swing.JTextField();
+        JTFData = new javax.swing.JTextField();
+        JTFData.setVisible(false);
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel3.setVisible(false);
+        JTFMes = new javax.swing.JTextField();
+        JTFMes.setVisible(false);
+        jLabel4 = new javax.swing.JLabel();
+        jLabel4.setVisible(false);
+        JTFAno = new javax.swing.JTextField();
+        JTFAno.setVisible(false);
+        JBCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        JBCadastrar = new javax.swing.JButton();
+        JCBEmprestimo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        JCBTipoRegistro = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Devolver Ferramentas");
-
-        jLabel2.setText("Emprestimo:");
-
-        JCBEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+        JTFData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCBEmprestimoActionPerformed(evt);
+                JTFDataActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Data da Devolução");
-
-        JBCancelarDevolucao.setText("Cancelar");
-        JBCancelarDevolucao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBCancelarDevolucaoActionPerformed(evt);
-            }
-        });
-
-        JBConfirmarDevolucao.setText("Confirmar");
-        JBConfirmarDevolucao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBConfirmarDevolucaoActionPerformed(evt);
-            }
-        });
-
-        JCBDataDevolução.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCBDataDevoluçãoActionPerformed(evt);
-            }
-        });
-
-        JTFDia.addKeyListener(new java.awt.event.KeyAdapter() {
+        JTFData.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTFDiaKeyTyped(evt);
+                JTFDataKeyTyped(evt);
             }
         });
 
+        jLabel3.setText("/");
+
+        JTFMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFMesActionPerformed(evt);
+            }
+        });
         JTFMes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JTFMesKeyTyped(evt);
             }
         });
 
-        JTFAno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTFAnoKeyTyped(evt);
+        jLabel4.setText("/");
+
+        JTFAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFAnoActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("/");
+        JBCancelar.setText("Cancelar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelarActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("/");
+        jLabel1.setText("Emprestimo:");
+
+        JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
+
+        JCBEmprestimo.setMaximumRowCount(999);
+
+        jLabel2.setText("Data da Devolução");
+
+        JCBTipoRegistro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data Atual", "Data Especifica" }));
+        JCBTipoRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBTipoRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JBConfirmarDevolucao)
-                .addGap(55, 55, 55)
-                .addComponent(JBCancelarDevolucao)
-                .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(JCBTipoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(JCBDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)))
+                                .addComponent(JTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JTFDia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel3)
-                        .addGap(3, 3, 3)
-                        .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel5)
-                        .addGap(3, 3, 3)
-                        .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 88, Short.MAX_VALUE))
+                        .addGap(263, 263, 263)
+                        .addComponent(JBCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JBCancelar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JCBDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(110, 110, 110)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTFDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCBTipoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCBEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JTFMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addGap(48, 48, 48)
+                    .addComponent(jLabel4)
+                    .addComponent(JTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBCancelarDevolucao)
-                    .addComponent(JBConfirmarDevolucao))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(JBCancelar)
+                    .addComponent(JBCadastrar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JBCancelarDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarDevolucaoActionPerformed
+    private void JTFDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_JBCancelarDevolucaoActionPerformed
+    }//GEN-LAST:event_JTFDataActionPerformed
 
-    private void JCBEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBEmprestimoActionPerformed
-        // TODO add your handling code here:
-        int posicaoEmprestimo = JCBEmprestimo.getSelectedIndex();
-        ArrayList<Emprestimo> ListaEmprestimo = objetodevolucao.getListaEmprestimoAtivo();
-        Emprestimo emp = new Emprestimo();
-        String Data = "";
-        switch (JCBDataDevolução.getSelectedIndex()) {
-            case 0:
-            Data = LocalDate.now() + "";
-            break;
-            case 1 :
-                Data = JTFAno.getText() + "-" + JTFMes.getText() + "-" + JTFDia.getText();
-}
-if (emp.updateEmprestimoBD(ListaEmprestimo.get(posicaoEmprestimo).getIdEmprestimo(), ListaEmprestimo.get(posicaoEmprestimo).getIdAmigo(),ListaEmprestimo.get(posicaoEmprestimo).getIdFerramentas(), ListaEmprestimo.get(posicaoEmprestimo).getDataEmp(), Data + "")) {
-    JOptionPane.showMessageDialog(null,"Devolução cadastrada com sucesso");
-    JCBEmprestimo.removeAllItems();
-    this.CarregaCBEmprestimo();
-    }else {
-    
-}
-        
-
-    }//GEN-LAST:event_JCBEmprestimoActionPerformed
-
-    private void JBConfirmarDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarDevolucaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBConfirmarDevolucaoActionPerformed
-
-    private void JCBDataDevoluçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBDataDevoluçãoActionPerformed
-        // TODO add your handling code here:
-        int tipo = JCBDataDevolução.getSelectedIndex();
-        switch (tipo) {
-            case 1:
-                JTFDia.setVisible(true);
-                JTFMes.setVisible(true);
-                JTFAno.setVisible(true);
-                jLabel3.setVisible(true);
-                jLabel4.setVisible(true);
-                break;
-            case 0:
-                JTFDia.setVisible(false);
-                JTFMes.setVisible(false);
-                JTFAno.setVisible(false);
-                jLabel3.setVisible(false);
-                jLabel4.setVisible(false);
-        }
-    }//GEN-LAST:event_JCBDataDevoluçãoActionPerformed
-
-    private void JTFDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFDiaKeyTyped
-        // TODO add your handling code here:
-        if (JTFDia.getText().length() == 1) {
+    private void JTFDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFDataKeyTyped
+        if (JTFData.getText().length() == 1) {
             JTFMes.requestFocus();
         }
-    }//GEN-LAST:event_JTFDiaKeyTyped
+    }//GEN-LAST:event_JTFDataKeyTyped
+
+    private void JTFMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFMesActionPerformed
 
     private void JTFMesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFMesKeyTyped
-        // TODO add your handling code here:
         if (JTFMes.getText().length() == 1) {
             JTFAno.requestFocus();
         }
     }//GEN-LAST:event_JTFMesKeyTyped
 
-    private void JTFAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFAnoKeyTyped
+    private void JTFAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFAnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFAnoKeyTyped
+    }//GEN-LAST:event_JTFAnoActionPerformed
 
-    public void CarregaCBEmprestimo() {
-        Emprestimo emprestimo = new Emprestimo();
+    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+
+        int posicaoEmprestimo = JCBEmprestimo.getSelectedIndex();
         ArrayList<Emprestimo> listaEmprestimo = emprestimo.getListaEmprestimoAtivo();
-        ArrayList<Amigo> ListaAmigo = amigo.getListaAmigo();
-        ArrayList<Ferramenta> listaFerramenta = fe.ListaFerramenta();
-
-        for (Emprestimo objeto : listaEmprestimo) {
-            JCBEmprestimo.addItem(objeto.getIdEmprestimo() + "- " + ListaAmigo.get(objeto.getIdAmigo() - 1).getNome() + "- " + listaFerramenta.get(objeto.getIdFerramentas() - 1).getNomeFerramentas());
+        Emprestimo emp = new Emprestimo();
+        String data = "";
+        switch (JCBTipoRegistro.getSelectedIndex()) {
+            case 0:
+            data = LocalDate.now() + "";
+            break;
+            case 1:
+            data = JTFAno.getText() + "-" + JTFMes.getText() + "-" + JTFData.getText();
         }
-    }
-    
-    
+        if (emp.updateEmprestimoBD(listaEmprestimo.get(posicaoEmprestimo).getIdEmprestimo(), listaEmprestimo.get(posicaoEmprestimo).getIdAmigo(), listaEmprestimo.get(posicaoEmprestimo).getIdFerramentas(), listaEmprestimo.get(posicaoEmprestimo).getDataEmp(), data + "")) {
+            JOptionPane.showMessageDialog(null, "Devolucao cadastrada com sucesso");
+            JCBEmprestimo.removeAllItems();
+            this.carregaCBEmprestimo();
+        } else {
+
+        }
+    }//GEN-LAST:event_JBCadastrarActionPerformed
+
+    private void JCBTipoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBTipoRegistroActionPerformed
+        int tipo = JCBTipoRegistro.getSelectedIndex();
+        switch (tipo) {
+            case 1:
+            JTFData.setVisible(true);
+            JTFMes.setVisible(true);
+            JTFAno.setVisible(true);
+            jLabel3.setVisible(true);
+            jLabel4.setVisible(true);
+            break;
+            case 0:
+            JTFData.setVisible(false);
+            JTFMes.setVisible(false);
+            JTFAno.setVisible(false);
+            jLabel3.setVisible(false);
+            jLabel4.setVisible(false);
+        }
+    }//GEN-LAST:event_JCBTipoRegistroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,18 +283,31 @@ if (emp.updateEmprestimoBD(ListaEmprestimo.get(posicaoEmprestimo).getIdEmprestim
         });
     }
 
+    public void carregaCBEmprestimo() {
+        Emprestimo emprestimo = new Emprestimo();
+        ArrayList<Emprestimo> listaEmprestimo = emprestimo.getListaEmprestimoAtivo();
+        ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
+        ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
+
+        for (Emprestimo objeto : listaEmprestimo) {
+            JCBEmprestimo.addItem(objeto.getIdEmprestimo() + " - " + listaAmigo.get(objeto.getIdAmigo() - 1).getNomeAmigo() + " - " + listaFerramenta.get(objeto.getIdFerramentas() - 1).getNomeFerramentas());
+        }
+    }
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JBCancelarDevolucao;
-    private javax.swing.JToggleButton JBConfirmarDevolucao;
-    private javax.swing.JComboBox<String> JCBDataDevolução;
+    private javax.swing.JButton JBCadastrar;
+    private javax.swing.JButton JBCancelar;
     private javax.swing.JComboBox<String> JCBEmprestimo;
+    private javax.swing.JComboBox<String> JCBTipoRegistro;
     private javax.swing.JTextField JTFAno;
-    private javax.swing.JTextField JTFDia;
+    private javax.swing.JTextField JTFData;
     private javax.swing.JTextField JTFMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

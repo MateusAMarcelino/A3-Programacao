@@ -203,6 +203,10 @@ public Ferramenta() {
         return true;
     }
     
+    public Ferramenta RecuperaFerramentaDB(int id) {
+        return dao.RecuperaFerramentaDB(id);
+    }
+    
     /**
      * É um metodo para procurar o Maior id, entre todas as ferramentas existentes.
      * @return o Maior id, entre todas as ferramentas existentes.

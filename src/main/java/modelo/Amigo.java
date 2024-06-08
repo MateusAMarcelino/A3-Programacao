@@ -13,8 +13,8 @@ public class Amigo {
     private String NomeAmigo;
     private int IdAmigo;
     private String EmailAmigo;
-    private int TelefoneAmigo;
-    private AmigoDAO dao;
+    private String TelefoneAmigo;
+    AmigoDAO dao;
 
 
 /**
@@ -22,7 +22,7 @@ public class Amigo {
  *  */
     public Amigo() {
         
-        this(0, "", 0, "");
+        this(0, "", "", "");
     }
 
     
@@ -39,7 +39,7 @@ public class Amigo {
     * TelefoneAmigo = 0
     * EmailAmigo = "" ( vazio )
     */ 
-    public Amigo(int IdAmigo, String NomeAmigo, int TelefoneAmigo, String EmailAmigo) {
+    public Amigo(int IdAmigo, String NomeAmigo, String TelefoneAmigo, String EmailAmigo) {
         this.IdAmigo = IdAmigo;
         this.NomeAmigo = NomeAmigo;
         this.TelefoneAmigo = TelefoneAmigo;
@@ -52,7 +52,7 @@ public class Amigo {
 * 
 * @return O NomeAmigo do amigo.
 */
-    public String getNome() {
+    public String getNomeAmigo() {
         return NomeAmigo;
     }
 
@@ -61,7 +61,7 @@ public class Amigo {
 * 
 * @param NomeAmigo ; O NomeAmigo a ser definido.
 */
-    public void setNome(String NomeAmigo) {
+    public void setNomeAmigo(String NomeAmigo) {
         this.NomeAmigo = NomeAmigo;
     }
 
@@ -79,7 +79,7 @@ public class Amigo {
 * 
 * @param IdAmigo ; O IdAmigo a ser definido.
 */
-    public void setId(int IdAmigo) {
+    public void setIdAmigo(int IdAmigo) {
         this.IdAmigo = IdAmigo;
     }
 
@@ -88,7 +88,7 @@ public class Amigo {
 * 
 * @return O EmailAmigo do amigo.
 */
-    public String getEmail() {
+    public String getEmailAmigo() {
         return EmailAmigo;
     }
 
@@ -97,7 +97,7 @@ public class Amigo {
 * 
 * @param EmailAmigo ; O EmailAmigo a ser definido.
 */
-    public void setEmail(String EmailAmigo) {
+    public void setEmailAmigo(String EmailAmigo) {
         this.EmailAmigo = EmailAmigo;
     }
 
@@ -106,7 +106,7 @@ public class Amigo {
 * 
 * @return O número de TelefoneAmigo do amigo.
 */
-    public int getTelefone() {
+    public String getTelefoneAmigo() {
         return TelefoneAmigo;
     }
 
@@ -115,7 +115,7 @@ public class Amigo {
 * 
 * @param TelefoneAmigo ; O número de TelefoneAmigo a ser definido.
 */
-    public void setTelefone(int TelefoneAmigo) {
+    public void setTelefoneAmigo(String TelefoneAmigo) {
         this.TelefoneAmigo = TelefoneAmigo;
     }
 
@@ -124,7 +124,7 @@ public class Amigo {
 * 
 * @return Uma lista de objetos Amigo.
 */
-    public ArrayList<Amigo> getListaAmigo() {
+    public ArrayList<Amigo> ListaAmigo() {
         return dao.getListaAmigo();
     }
 
@@ -136,9 +136,9 @@ public class Amigo {
 * @param EmailAmigo ; O EmailAmigo do amigo.
 * @return true se o amigo foi inserido com sucesso, false caso contrário.
 */
-    public boolean insertAmigoBD(String Nome, int TelefoneAmigo, String EmailAmigo) {
-        int IdAmigo = this.maiorID() + 1;
-        Amigo objeto = new Amigo(IdAmigo, Nome, TelefoneAmigo, EmailAmigo);
+    public boolean insertAmigoBD(String Nome, String TelefoneAmigo, String EmailAmigo) {
+        int MaiorID = dao.maiorIDAmigo() + 1;
+        Amigo objeto = new Amigo(MaiorID, Nome, TelefoneAmigo, EmailAmigo);
         dao.insertAmigoBD(objeto);
         return true;
     }
@@ -164,22 +164,28 @@ public class Amigo {
 * @param EmailAmigo ; O EmailAmigo do amigo.
 * @return true se os dados do amigo foram atualizados com sucesso, false caso contrário.
 */
-    public boolean updateAmigoBD(int IdAmigo, String Nome, int TelefoneAmigo, String EmailAmigo) {
-        Amigo objeto = new Amigo(IdAmigo, Nome, TelefoneAmigo, EmailAmigo);
-        dao.updateAmigoBD(objeto);
+    public boolean updateAmigoBD(int IdAmigo, String Nome, String TelefoneAmigo, String EmailAmigo) {
+        Amigo amigo = new Amigo(IdAmigo, Nome, TelefoneAmigo, EmailAmigo);
+        int indice = this.procuraIndice(IdAmigo);
+        dao.updateAmigoBD(amigo);
         return true;
     }
 
+    
+    public Amigo RecuperaAmigoDB(int IdAmigo) {
+        return dao.RecuperaAmigoDB(IdAmigo);
+    }
+ 
 /**
 * Procura o INDICE de objeto da ListaAmigo que contem o ID enviado.
 * 
 * @param IdAmigo ; O ID do amigo.
 * @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
 */
-    private int procuraIndice(int IdAmigo) {
+    private int procuraIndice(int id) {
         int indice = -1;
-        for (int i = 0; i < dao.ListaAmigo.size(); i++) {
-            if (dao.ListaAmigo.get(i).getIdAmigo() == IdAmigo) {
+        for (int i = 0; i < AmigoDAO.ListaAmigo.size(); i++) {
+            if (AmigoDAO.ListaAmigo.get(i).getIdAmigo() == id) {
                 indice = i;
             }
         }
@@ -187,22 +193,12 @@ public class Amigo {
     }
 
 /**
-* Carrega os dados de um amigo específico pelo seu ID.
-* 
-* @param IdAmigo ; O IdAmigo do amigo.
-* @return O objeto Amigo com os dados carregados, ou nada se não encontrado.
-*/
-    public Amigo carregaAmigo(int IdAmigo) {
-        return dao.carregaAmigo(IdAmigo);
-    }
-
-/**
 * Retorna o maior ID existente na base de dados.
 * 
 * @return O maior ID.
 */
-    public int maiorID() {
-        return dao.maiorID();
+    public int MaiorID() {
+        return dao.maiorIDAmigo();
 
     }
   

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import modelo.Emprestimo;
 
@@ -15,7 +16,7 @@ public class EmprestimoDAO {
     /**
      * Cria um ArrayList para os emprestimos.
      */
-    public ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
+    public static ArrayList<Emprestimo> ListaEmprestimo = new ArrayList<>();
 
     /**
      * Obtem as informações dos emprestimos do banco de dados e cria um objeto com essas informações no ArrayList ListaEmprestimo.
@@ -48,7 +49,7 @@ public class EmprestimoDAO {
     }
     
     public void setListaEmprestimo(ArrayList<Emprestimo> ListaEmprestimo) {
-        this.ListaEmprestimo = ListaEmprestimo;
+        EmprestimoDAO.ListaEmprestimo = ListaEmprestimo;
         
     }
     
@@ -119,68 +120,52 @@ public class EmprestimoDAO {
       * @param objeto; É o objeto emprestimo a ser atualizado.
       * @return True caso o emprestimo tiver sido atualizado com sucesso, false caso tenha dado algum erro.
       */
-     public boolean updateEmprestimoBD(Emprestimo objeto) {
-
-        String sql = "UPDATE tb_emprestimos set IdAmigo = ? ,IdFerramentas = ? ,DataEmprestimo = ? , WHERE IdEmprestimo = ?";
-
-        try {
-            PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
-
-            stmt.setInt(1, objeto.getIdAmigo());
-            stmt.setInt(2, objeto.getIdFerramentas());
-            stmt.setString(3, objeto.getDataEmp());
-            stmt.setInt(4, objeto.getIdEmprestimo());
-
-            stmt.execute();
-            stmt.close();
-
-            return true;
-
-        } catch (SQLException erro) {
-            System.out.println("Erro:" + erro);
-            throw new RuntimeException(erro);
-        }
-    }
      
-     /**
-      * Carrega as informações de um emprestimo por seu id.
-      * @param idEmprestimo; Id do emprestimo a ser carregado.
-      * @return O emprestimo com todas as suas informações, ou nada caso o id do emprestimo nao exista.
-      */
-     public Emprestimo carregaEmprestimo(int idEmprestimo) {
-        Emprestimo objeto = new Emprestimo();
-        objeto.setIdEmprestimo(idEmprestimo);
-        try {
-            Statement stmt = ut.getConexao().createStatement();
-
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE IdEmprestimo = " + idEmprestimo);
+     public Emprestimo RecuperaEmprestimoDB(int IdEmprestimo){
+         Emprestimo emprestimo = new Emprestimo();
+         emprestimo.setIdEmprestimo(IdEmprestimo);
+         try {
+             Statement smt = ut.getConexao().createStatement();
+            ResultSet res = smt.executeQuery("select * from tb_emprestimo where IdEmprestimo = " + IdEmprestimo);
             res.next();
-
-            objeto.setIdAmigo(res.getInt("IdAmigo"));
-            objeto.setIdFerramentas(res.getInt("IdFerramentas"));
-            objeto.setDataEmp(res.getString("DataEmprestimo"));
-
-            stmt.close();
+            emprestimo.setIdEmprestimo(res.getInt("IdEmprestimo"));
+            emprestimo.setDataEmp(res.getString("DataEmprestimo"));
+            emprestimo.setDataDev(res.getString("DataDevolucao"));
+            emprestimo.setIdAmigo(res.getInt("IdAmigo"));
+            emprestimo.setIdFerramentas(res.getInt("IdFerramentas"));
+            smt.close();
         } catch (SQLException erro) {
-            System.out.println("Erro:" + erro);
+            System.out.println("Erro: " + erro);
         }
-        return objeto;
-    }
-     
-    public boolean isFerramentaDisponivel(int IdFerramentas) throws SQLException {
-    String sql = "SELECT DisponibilidadeFerramentas FROM ferramentas WHERE IdFerramentas = ?";
-    try (PreparedStatement pstmt = ut.getConexao().prepareStatement(sql)) {
-        pstmt.setInt(1, IdFerramentas);
-        try (ResultSet rs = pstmt.executeQuery()) {
-            if (rs.next()) {
-                return rs.getBoolean("DisponibilidadeFerramentas");
-            } else {
-                throw new SQLException("Ferramenta com ID " + IdFerramentas + " não encontrada.");
-            }
-        }
-    } catch (SQLException e) {
-        throw new SQLException("Erro ao verificar disponibilidade da ferramenta", e);
-    }
-}
-}
+        return emprestimo;
+     }
+     public boolean updateEmprestimoBD(Emprestimo objeto) {
+    String sql = "UPDATE tb_emprestimos SET IdAmigo=?, IdFerramentas=?, DataEmprestimo=?, DataDevolucao=? WHERE IdEmprestimo=?";
 
+    try {
+        PreparedStatement stmt = ut.getConexao().prepareStatement(sql);
+        stmt.setInt(1, objeto.getIdAmigo());
+        stmt.setInt(2, objeto.getIdFerramentas());
+        stmt.setString(3, objeto.getDataEmp());
+        
+        // Verifica se a data de devolução é nula ou vazia
+        if (objeto.getDataDev() == null || objeto.getDataDev().isEmpty()) {
+            stmt.setNull(4, Types.DATE); // Define null no banco de dados
+        } else {
+            stmt.setString(4, objeto.getDataDev()); // Define a data normalmente
+        }
+
+        stmt.setInt(5, objeto.getIdEmprestimo());
+
+        stmt.executeUpdate();
+        stmt.close();
+
+        return true;
+    } catch (SQLException erro) {
+        System.out.println("Erro:" + erro);
+        throw new RuntimeException(erro);
+    }
+}
+     
+
+}

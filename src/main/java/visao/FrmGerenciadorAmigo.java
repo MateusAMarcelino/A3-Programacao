@@ -29,13 +29,13 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
     public void carregaTabela(){
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigos.getModel();
         modelo.setNumRows(0);
-        ArrayList<Amigo> listaamigo = objetoamigo.getListaAmigo();
+        ArrayList<Amigo> listaamigo = objetoamigo.ListaAmigo();
         for (Amigo a : listaamigo){
             modelo.addRow(new Object[]{
                 a.getIdAmigo(),
-                a.getNome(),
-                a.getTelefone(),
-                a.getEmail(),
+                a.getNomeAmigo(),
+                a.getTelefoneAmigo(),
+                a.getEmailAmigo(),
             });
         }
     }
@@ -235,7 +235,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(jTableAmigos.getValueAt(this.jTableAmigos.getSelectedRow(), 0).toString());
             String nome = "";
-            int telefone = 0;
+            String telefone = "";
             String email = "";
             
             if (this.JTFNome.getText().length() < 2) {
@@ -245,7 +245,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
             }
             
             if (this.JTFTelefone.getText().length()==9) {
-                telefone = Integer.parseInt(this.JTFTelefone.getText());
+                telefone = (this.JTFTelefone.getText());
             } else {
                 throw new Mensagem("O número deve possuir extamente 9 digitos.");
             }
@@ -290,7 +290,7 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
                 }
             }
             
-            System.out.println(this.objetoamigo.getListaAmigo().toString());
+            System.out.println(this.objetoamigo.ListaAmigo().toString());
            }catch (Mensagem erro){
                JOptionPane.showMessageDialog(null, erro.getMessage());
            }finally{

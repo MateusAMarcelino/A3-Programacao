@@ -13,14 +13,14 @@ import static dao.FerramentaDAO.CalcularSoma;
  */
 public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
 
-    private Ferramenta objetoferramenta;
+    private Ferramenta ferramenta;
 
     /**
      * Incia os componentes, carrega a lista de ferramentas.
      */
     public FrmGerenciamentoDeFerramentas() {
         initComponents();
-        this.objetoferramenta = new Ferramenta();
+        this.ferramenta = new Ferramenta();
         this.CarregaListaFerramenta();
     }
 
@@ -261,7 +261,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                 CustoFerramentas = Double.parseDouble(JTFCustoAlterar.getText());
             }
 
-            if (this.objetoferramenta.updateFerramentaDB(IdFerramentas, NomeFerramentas, MarcaFerramentas,CustoFerramentas)){
+            if (this.ferramenta.updateFerramentaDB(IdFerramentas, NomeFerramentas, MarcaFerramentas,CustoFerramentas)){
                 JLId.setVisible(false);
                 JTFNomeAlterar.setText("");
                 JTFMarcaAlterar.setText("");
@@ -289,7 +289,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
             }
             int respostaUsuario = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja apagar essa ferramenta?");
             if(respostaUsuario == 0) {
-                if(this.objetoferramenta.DeleteFerramentaDB(IdFerramentas)){
+                if(this.ferramenta.DeleteFerramentaDB(IdFerramentas)){
                     this.JLId.setText("0");
                     this.JTFNomeAlterar.setText("");
                     this.JTFMarcaAlterar.setText("");
@@ -297,7 +297,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Ferramenta Apagada com sucesso!!");
                 }
             }
-            System.out.println(this.objetoferramenta.ListaFerramenta().toString());
+            System.out.println(this.ferramenta.ListaFerramenta().toString());
         }  catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } finally {
@@ -345,7 +345,7 @@ public void CarregaListaFerramenta(){
     DefaultTableModel modelo = (DefaultTableModel) this.JTableFerramentas.getModel();
     JLId.setVisible(false); /* Deixa o label que informa o Id vazio até que alguma ferramenta seja clicada */
     modelo.setNumRows(0);
-    ArrayList<Ferramenta> ListaFerramenta = objetoferramenta.ListaFerramenta();
+    ArrayList<Ferramenta> ListaFerramenta = ferramenta.ListaFerramenta();
     for (Ferramenta a : ListaFerramenta){
         modelo.addRow(new Object[]{
         a.getIdFerramentas(),

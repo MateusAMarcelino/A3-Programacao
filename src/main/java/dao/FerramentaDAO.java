@@ -32,7 +32,6 @@ public class FerramentaDAO {
                  String NomeFerramentas = res.getString("NomeFerramentas");
                  String MarcaFerramentas = res.getString("MarcaFerramentas");
                  double CustoFerramentas = res.getDouble("CustoFerramentas");
-                 boolean DisponibilidadeFerramentas = res.getBoolean("DisponibilidadeFerramentas");
                  Ferramenta objeto = new Ferramenta(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas);
                  
                  ListaFerramentas.add(objeto);
@@ -93,6 +92,28 @@ public class FerramentaDAO {
       * @param ferramenta é o objeto da ferramenta, o qual será atualizado.
       * @return True, caso seja possivel atualizar, ou retorna um erro caso não seja possivel.
       */
+     public Ferramenta RecuperaFerramentaDB(int IdFerramentas) {
+         Ferramenta ferramenta = new Ferramenta();
+         ferramenta.setIdFerramentas(IdFerramentas);
+         try{
+             Statement smt = ut.getConexao().createStatement();
+             ResultSet res = smt.executeQuery("Select * from tb_ferramentas where IdFerramentas = " + IdFerramentas);
+             while (res.next()){
+                 String NomeFerramentas = res.getString("NomeFerramentas");
+                 String MarcaFerramentas = res.getString("MarcaFerramentas");
+                 double CustoFerramentas = res.getDouble("CustoFerramentas");
+             }
+             smt.close();                 
+         } catch (SQLException erro) {
+             System.out.println("Erro : " +erro);
+         }
+         return ferramenta;
+     }
+     
+     
+     
+     
+     
      public boolean UpdateFerramentaDB(Ferramenta ferramenta){
          String res = "update tb_ferramentas set IdFerramentas=?,NomeFerramentas=?,MarcaFerramentas=?,CustoFerramentas=? where IdFerramentas=?";
          try {
