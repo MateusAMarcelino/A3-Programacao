@@ -121,9 +121,14 @@ public class FerramentaDAO {
         smt.setString(1, ferramenta.getNomeFerramentas());
         smt.setString(2, ferramenta.getMarcaFerramentas());
         smt.setDouble(3, ferramenta.getCustoFerramentas());
-        // Aqui você pode definir a disponibilidade com base na lógica necessária
-        String disponibilidade = ferramenta.getDisponibilidadeFerramenta(ferramenta.getIdFerramentas());
-        smt.setString(4, disponibilidade);
+        
+        // Obter a disponibilidade da ferramenta como um booleano
+        boolean disponibilidade = ferramenta.getDisponibilidadeFerramenta(ferramenta.getIdFerramentas());
+
+        // Converter o booleano para uma string "1" ou "0"
+        String disponibilidadeStr = disponibilidade ? "1" : "0";
+        smt.setString(4, disponibilidadeStr);
+        
         smt.setInt(5, ferramenta.getIdFerramentas());
         smt.executeUpdate();
         smt.close();
@@ -132,7 +137,7 @@ public class FerramentaDAO {
         System.out.println("Erro: " + erro);
         throw new RuntimeException(erro);
     }
-     }
+}
      /**
       * Deleta uma ferramenta do banco de dados.
       * @param IdFerramentas É o ID da ferramenta que deve ser deletada.

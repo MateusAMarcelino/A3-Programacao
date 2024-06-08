@@ -35,7 +35,7 @@ public Ferramenta() {
  * @param NomeFerramentas : O Nome da ferramenta.
  * @param MarcaFerramentas : A Marca da ferramenta.
  * @param CustoFerramentas : O Custo da ferramenta.
- * @param DisponibilidadeFerramentas : A Disponibilidade da ferramenta. 
+ * 
  * 
  * Inicializa todos com os valores inicias acima, que são :
  * Id = 0
@@ -124,17 +124,21 @@ public Ferramenta() {
      * Obtém a Disponibilidade da ferramenta.
      * @return a Disponibilidade da ferramenta.
      */
-    public String getDisponibilidadeFerramenta(int Id) {
-        String Disponivel = "Sim";
-        Emprestimo emp = new Emprestimo();
-        ArrayList<Emprestimo> ListaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
-        for (int i = 0; i < ListaEmprestimoAtivo.size(); i++) {
-            if (ListaEmprestimoAtivo.get(i).getIdFerramentas() == Id) {
-                Disponivel = "Não";
-            }
+    public boolean getDisponibilidadeFerramenta(int Id) {
+    boolean disponivel = true; // Assume que a ferramenta está disponível por padrão
+    
+    Emprestimo emp = new Emprestimo();
+    ArrayList<Emprestimo> listaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
+    
+    for (int i = 0; i < listaEmprestimoAtivo.size(); i++) {
+        if (listaEmprestimoAtivo.get(i).getIdFerramentas() == Id) {
+            disponivel = false; // Se a ferramenta estiver emprestada, define disponível como falso
+            break; // Sai do loop, já que encontrou um empréstimo ativo para a ferramenta
         }
-        return Disponivel;
     }
+    
+    return disponivel;
+}
     
    public boolean updateFerramentaDB(int IdFerramenta, String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta) {
     Ferramenta ferramenta = new Ferramenta(IdFerramenta, NomeFerramenta, MarcaFerramenta, CustoFerramenta);

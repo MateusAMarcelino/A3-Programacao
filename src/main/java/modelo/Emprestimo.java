@@ -17,6 +17,7 @@ public class Emprestimo {
     private String dataEmp;
     private String dataDev;
     private EmprestimoDAO dao;
+    private Ferramenta ferramenta;
 
     /**
      * Construtor para a classe Emprestimo, inicializa o empréstimo com IdAmigo do amigo, id da ferramenta e data do emprestimo.
@@ -38,6 +39,7 @@ public class Emprestimo {
         this.dataEmp = dataEmp;
         this.dataDev = dataDev;
         this.dao = new EmprestimoDAO();
+        this.ferramenta = new Ferramenta();
     }
 
     // Getter e Setter para IdAmigo
@@ -108,11 +110,18 @@ public class Emprestimo {
         return true;
     }
 
-    public boolean updateEmprestimoBD(int IdEmprestimo, int IdAmigo, int IdFerramentas, String dataEmp, String dataDev) {
-        Emprestimo emprestimo = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, dataDev);
-        dao.updateEmprestimoBD(emprestimo);
+   public boolean updateEmprestimoBD(int IdEmprestimo, int IdAmigo, int IdFerramentas, String dataEmp, String dataDev) {
+    Emprestimo emprestimo = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, dataDev);
+    
+    // Atualiza o empréstimo no banco de dados
+    if (dao.updateEmprestimoBD(emprestimo)) {
+        // Se o empréstimo foi atualizado com sucesso, atualiza a disponibilidade da ferramenta para 1
+        ferramenta.updateFerramentaDB(IdFerramentas, "NomeFerramenta", "MarcaFerramenta", 0.0); // Substitua os argumentos conforme necessário
         return true;
+    } else {
+        return false;
     }
+}
 
     public Emprestimo RecuperaEmprestimoDB(int IdEmprestimo) {
         return dao.RecuperaEmprestimoDB(IdEmprestimo);

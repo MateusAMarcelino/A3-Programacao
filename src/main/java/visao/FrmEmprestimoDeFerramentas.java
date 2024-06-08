@@ -180,32 +180,35 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
      try {
-            int conf = 0;
+    int conf = 0;
 
-            int posicaoFerramenta = jCBNomeFerramenta.getSelectedIndex();
-            int posicaoAmigo = jCBNomeAmigo.getSelectedIndex();
-            ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
-            ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
-            Emprestimo emprestimo = new Emprestimo();
-            if (listaFerramenta.get(posicaoFerramenta).getDisponibilidadeFerramenta(listaFerramenta.get(posicaoFerramenta).getIdFerramentas()) == "Não") {
-                throw new Mensagem("Ferramenta ja emprestada");
-            }
-            int idAmigo = listaAmigo.get(posicaoAmigo).getIdAmigo();
-            if (amigo.possuiEmprestimoAtivo(idAmigo)) {
-                conf = JOptionPane.showConfirmDialog(null, "Este amigo ja possui um emprestimo ativo, deseja continuar?");
-            }
-            int idFerramenta = listaFerramenta.get(posicaoFerramenta).getIdFerramentas();
-            String DataInicio = LocalDate.now() + "";
-            if (conf == 0) {
-                if (emprestimo.insertEmprestimoBD(idAmigo, idFerramenta, DataInicio)) {
-                    JOptionPane.showMessageDialog(null, "Emprestimo cadastrado com sucesso");
-                    ferramenta.updateFerramentaDB(idFerramenta, listaFerramenta.get(posicaoFerramenta).getNomeFerramentas(), listaFerramenta.get(posicaoFerramenta).getMarcaFerramentas(), listaFerramenta.get(posicaoFerramenta).getCustoFerramentas());
-                };
+    int posicaoFerramenta = jCBNomeFerramenta.getSelectedIndex();
+    int posicaoAmigo = jCBNomeAmigo.getSelectedIndex();
+    ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
+    ArrayList<Amigo> listaAmigo = amigo.ListaAmigo();
+    Emprestimo emprestimo = new Emprestimo();
 
-            }
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
+    if (!listaFerramenta.get(posicaoFerramenta).getDisponibilidadeFerramenta(listaFerramenta.get(posicaoFerramenta).getIdFerramentas())) {
+        throw new Mensagem("Ferramenta já emprestada");
+    }
+
+    int idAmigo = listaAmigo.get(posicaoAmigo).getIdAmigo();
+    if (amigo.possuiEmprestimoAtivo(idAmigo)) {
+        conf = JOptionPane.showConfirmDialog(null, "Este amigo já possui um empréstimo ativo, deseja continuar?");
+    }
+
+    int idFerramenta = listaFerramenta.get(posicaoFerramenta).getIdFerramentas();
+    String DataInicio = LocalDate.now().toString();
+    
+    if (conf == 0) {
+        if (emprestimo.insertEmprestimoBD(idAmigo, idFerramenta, DataInicio)) {
+            JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso");
+            ferramenta.updateFerramentaDB(idFerramenta, listaFerramenta.get(posicaoFerramenta).getNomeFerramentas(), listaFerramenta.get(posicaoFerramenta).getMarcaFerramentas(), listaFerramenta.get(posicaoFerramenta).getCustoFerramentas());
         }
+    }
+} catch (Mensagem erro) {
+    JOptionPane.showMessageDialog(null, erro.getMessage());
+}
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
     private void jCBNomeAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeAmigoActionPerformed
