@@ -71,7 +71,7 @@ public class FerramentaDAO {
       * @return True, caso seja possivel inserir, ou retorna um erro caso não seja possivel.
       */
      public boolean InsertFerramentaDB(Ferramenta ferramenta){
-         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) values (?,?,?,?,1)";
+         String res = "insert into tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas) values (?,?,?,?)";
          try {
              PreparedStatement smt = ut.getConexao().prepareCall(res);
              smt.setInt(1,ferramenta.getIdFerramentas());
@@ -115,21 +115,13 @@ public class FerramentaDAO {
      
      
      public boolean UpdateFerramentaDB(Ferramenta ferramenta) {
-    String res = "UPDATE tb_ferramentas SET NomeFerramentas=?, MarcaFerramentas=?, CustoFerramentas=?, DisponibilidadeFerramentas=? WHERE IdFerramentas=?";
+    String res = "UPDATE tb_ferramentas SET NomeFerramentas=?, MarcaFerramentas=?, CustoFerramentas=? WHERE IdFerramentas=?";
     try {
         PreparedStatement smt = ut.getConexao().prepareStatement(res);
         smt.setString(1, ferramenta.getNomeFerramentas());
         smt.setString(2, ferramenta.getMarcaFerramentas());
-        smt.setDouble(3, ferramenta.getCustoFerramentas());
-        
-        // Obter a disponibilidade da ferramenta como um booleano
-        boolean disponibilidade = ferramenta.getDisponibilidadeFerramenta(ferramenta.getIdFerramentas());
-
-        // Converter o booleano para uma string "1" ou "0"
-        String disponibilidadeStr = disponibilidade ? "1" : "0";
-        smt.setString(4, disponibilidadeStr);
-        
-        smt.setInt(5, ferramenta.getIdFerramentas());
+        smt.setDouble(3, ferramenta.getCustoFerramentas());        
+        smt.setInt(4, ferramenta.getIdFerramentas());
         smt.executeUpdate();
         smt.close();
         return true;
