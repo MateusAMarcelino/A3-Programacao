@@ -6,12 +6,17 @@ import dao.EmprestimoDAO;
 import static dao.EmprestimoDAO.ListaEmprestimo;
 import static dao.FerramentaDAO.ListaFerramentas;
 import static java.lang.Integer.parseInt;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 import modelo.Ferramenta;
@@ -57,6 +62,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         JTFDataEmp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         JTFDataEmp1 = new javax.swing.JTextField();
+        JBModificar = new javax.swing.JButton();
 
         JTEmprestimosRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,6 +144,13 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        JBModificar.setText("Modificar");
+        JBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,6 +167,8 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
                         .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
@@ -212,9 +227,11 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                         .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(JTFDataEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(42, 42, 42))
         );
 
@@ -232,17 +249,27 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
     private void JTEmprestimosAtivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTEmprestimosAtivosMouseClicked
         // TODO add your handling code here:
-       if (this.JTEmprestimosAtivos.getSelectedRow() != -1) {
-            JLId.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),0).toString());
-            JLId.setVisible(true);
-            JTFNomeAmigo.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),1).toString());
-            JTFNomeFerramenta.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),2).toString());
-            JTFDataEmp1.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),3).toString());
-            JTFDataEmp.setText(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(),4).toString());
-            
-            
-            
-        }
+       try {
+            if (this.JTEmprestimosAtivos.getSelectedRow() != -1) {
+                int selectedRow = this.JTEmprestimosAtivos.getSelectedRow();
+
+                Object idObj = this.JTEmprestimosAtivos.getValueAt(selectedRow, 0);
+                Object nomeAmigoObj = this.JTEmprestimosAtivos.getValueAt(selectedRow, 1);
+                Object nomeFerramentaObj = this.JTEmprestimosAtivos.getValueAt(selectedRow, 2);
+                Object dataEmpObj = this.JTEmprestimosAtivos.getValueAt(selectedRow, 3);
+                Object dataDevObj = this.JTEmprestimosAtivos.getValueAt(selectedRow, 4);
+
+                JLId.setText(idObj != null ? idObj.toString() : "");
+                JLId.setVisible(true);
+                JTFNomeAmigo.setText(nomeAmigoObj != null ? nomeAmigoObj.toString() : "");
+                JTFNomeFerramenta.setText(nomeFerramentaObj != null ? nomeFerramentaObj.toString() : "");
+                JTFDataEmp1.setText(dataEmpObj != null ? dataEmpObj.toString() : "");
+                JTFDataEmp.setText(dataDevObj != null ? dataDevObj.toString() : "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao selecionar empréstimo: " + e.getMessage());
+        }    
     }//GEN-LAST:event_JTEmprestimosAtivosMouseClicked
 
     private void JTFDataEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmpActionPerformed
@@ -252,16 +279,47 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     private void JTFDataEmp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEmp1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFDataEmp1ActionPerformed
-    private int getIdFerramentaPorNome(String nomeFerramenta) {
+
+    private void JBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBModificarActionPerformed
+            try {
+        int id = Integer.parseInt(JTEmprestimosAtivos.getValueAt(this.JTEmprestimosAtivos.getSelectedRow(), 0).toString());
+        int idAmigo = getIdAmigoPorNome(JTFNomeAmigo.getText());
+        int idFerramenta = getIdFerramentaPorNome(JTFNomeFerramenta.getText());
+        String dataEmprestimo = JTFDataEmp1.getText(); // Obtém a data do campo JTFDataEmp1
+        String dataDevolucao = JTFDataEmp.getText(); // Obtém a data do campo JTFDataEmp
+
+        // Ajuste do formato da data para o MySQL
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date emprestimoDate = dateFormat.parse(dataEmprestimo);
+        Date devolucaoDate = dateFormat.parse(dataDevolucao);
+
+        if (emprestimo.updateEmprestimoBD(id, idAmigo, idFerramenta, dateFormat.format(emprestimoDate), dateFormat.format(devolucaoDate))) {
+            JOptionPane.showMessageDialog(null, "Empréstimo atualizado com sucesso");
+            JLId.setVisible(false);
+            JTFNomeAmigo.setText("");
+            JTFNomeFerramenta.setText("");
+            JTFDataEmp1.setText("");
+            JTFDataEmp.setText("");
+            this.CarregaListaEmprestimo();
+        }
+    } catch (NumberFormatException | ArrayIndexOutOfBoundsException | ParseException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao atualizar empréstimo: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace(); // Imprime o rastreamento da pilha para facilitar a depuração
+    }
+
+    }//GEN-LAST:event_JBModificarActionPerformed
+
+            
+  private int getIdFerramentaPorNome(String nomeFerramenta) {
     for (Ferramenta ferramenta : ListaFerramentas) {
         if (ferramenta.getNomeFerramentas().equals(nomeFerramenta)) {
             return ferramenta.getIdFerramentas();
         }
     }
     return -1; // Retorna -1 se não encontrar
-    }
-    
-    private int getIdAmigoPorNome(String nomeAmigo) {
+}
+
+private int getIdAmigoPorNome(String nomeAmigo) {
     for (Amigo amigo : ListaAmigo) {
         if (amigo.getNomeAmigo().equals(nomeAmigo)) {
             return amigo.getIdAmigo();
@@ -269,7 +327,6 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     }
     return -1; // Retorna -1 se não encontrar
 }
-    
     
     
 
@@ -365,6 +422,7 @@ for (int i = 0; i < listaEmprestimo.size(); i++) {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JButton JBModificar;
     private javax.swing.JLabel JLId;
     private javax.swing.JTable JTEmprestimosAtivos;
     private javax.swing.JTable JTEmprestimosRealizados;
