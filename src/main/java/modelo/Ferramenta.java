@@ -139,7 +139,16 @@ public Ferramenta() {
     
     return disponivel;
 }
-    
+
+   
+/**
+ * Atualiza uma ferramenta no banco de dados.
+ * @param IdFerramenta : O id da ferrametna a ser atualizado.
+ * @param NomeFerramenta : O nome da ferramenta que vai ser atualizada.
+ * @param MarcaFerramenta : A marca da ferramenta que vai ser atualizada.
+ * @param CustoFerramenta : O custo da ferramenta que vai ser atualizado.
+ * @return A ferramenta já atualizada.
+ */    
    public boolean updateFerramentaDB(int IdFerramenta, String NomeFerramenta, String MarcaFerramenta, double CustoFerramenta) {
     Ferramenta ferramenta = new Ferramenta(IdFerramenta, NomeFerramenta, MarcaFerramenta, CustoFerramenta);
     boolean atualizado = dao.UpdateFerramentaDB(ferramenta);
@@ -153,7 +162,10 @@ public Ferramenta() {
 
    
   
-    
+/**
+ * Define o ArrayList da Lista das ferramentas.
+ * @return a lista de ferramentas, definida no FerramentaDAO
+ */
     public ArrayList<Ferramenta> ListaFerramenta(){
         return dao.getListaFerramentas();
     }
@@ -214,7 +226,11 @@ public Ferramenta() {
      * @return True, caso seja possivel atualizar a ferramenta desejada.
      */
     
-    
+/**
+ * Recupera uma ferramenta no Banco de dados, baseado no Id dela.
+ * @param id o id da ferramenta a ser recuperado
+ * @return a ferramenta carregada com as informações do banco de dados.
+ */    
     public Ferramenta RecuperaFerramentaDB(int id) {
         return dao.RecuperaFerramentaDB(id);
     }
