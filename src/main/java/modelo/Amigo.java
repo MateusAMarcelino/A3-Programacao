@@ -170,6 +170,12 @@ public class Amigo {
         dao.updateAmigoBD(amigo);
         return true;
     }
+    
+    /**
+     * Recupera o amigo baseado no Id dele.  
+     * @param IdAmigo o Id do amigo a ser recuperado do banco de dados.
+     * @return o amigo recuperado de acordo com o Id.
+     */
 
     
     public Amigo RecuperaAmigoDB(int IdAmigo) {
@@ -218,6 +224,12 @@ public class Amigo {
         return emprestimoAtivo;
     } 
     
+    
+    /**
+     * Verifica a quantidade de emprestimos, para verificar qual amigo fez mais emprestimos.
+     * @param IdAmigo, é o Id que é buscado para fazer essa comparação.
+     * @return a som, que é a soma dos emprestimos de um amigo por Id.
+     */
     public int quantidadeEmprestimo(int IdAmigo) {
         int som = 0;
         Emprestimo emp = new Emprestimo();
