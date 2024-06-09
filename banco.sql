@@ -37,13 +37,13 @@ CREATE TABLE tb_emprestimos (
 
 
 # inserindo amigos na BD
-INSERT INTO tb_amigos(id,nome,telefone,email) VALUES (1,"Mateus","123456789","emaildomateus@gmail.com");
-INSERT INTO tb_amigos(id,nome,telefone,email) VALUES (2,"Maria","987654321","emaildamaria@gmail.com");
+INSERT INTO tb_amigos(IdAmigo,NomeAmigo,TelefoneAmigo,EmailAmigo) VALUES (1,"Mateus","123456789","emaildomateus@gmail.com");
+INSERT INTO tb_amigos(IdAmigo,NomeAmigo,TelefoneAmigo,EmailAmigo) VALUES (2,"Maria","987654321","emaildamaria@gmail.com");
 
 # inserindo ferramentas na BD
-INSERT INTO tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) VALUES (1,"Cortador de Grama","Tramontina","199.99");
-INSERT INTO tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas,DisponibilidadeFerramentas) VALUES (2,"Martelo","Vonder","59.99");
+INSERT INTO tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas) VALUES (1,"Cortador de Grama","Tramontina","199.99");
+INSERT INTO tb_ferramentas(IdFerramentas,NomeFerramentas,MarcaFerramentas,CustoFerramentas) VALUES (2,"Martelo","Vonder","59.99");
 
 # inserindo emprestimos na BD
-INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo) VALUES (1,NULL,NULL,NULL);
-INSERT INTO tb_emprestimos(IdEmprestimo,NomeAmigo,IdFerramentas,DataEmprestimo) VALUES (2,NULL,NULL,NULL);
+INSERT INTO tb_emprestimos(IdEmprestimo,IdAmigo,IdFerramentas,DataEmprestimo) VALUES (1,1,2,"2024-06-08");
+INSERT INTO tb_emprestimos(IdEmprestimo,IdAmigo,IdFerramentas,DataEmprestimo) VALUES (2,2,1,"2024-06-08");
