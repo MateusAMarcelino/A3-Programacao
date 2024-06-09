@@ -10,6 +10,9 @@ import modelo.Ferramenta;
 public class FerramentaDAO {
      
     
+    /**
+     * Inicializa o Utilitario para podermos realizar a conecxão com o banco de dados.
+     */
     private Utilitario ut = new Utilitario();
     
     /**
@@ -87,11 +90,11 @@ public class FerramentaDAO {
          }
      }
      
-     /**
-      * Atualiza as informações de uma ferramenta já existente no banco de dados.
-      * @param ferramenta é o objeto da ferramenta, o qual será atualizado.
-      * @return True, caso seja possivel atualizar, ou retorna um erro caso não seja possivel.
-      */
+     /*
+    Recupera uma ferramenta do nosso DB, procurando ele pelo Id da ferramenta.
+    @param IdFerramentas é o id da ferramenta a ser recuperada.
+    @return retorna a ferramenta recuperada com base no IdFerramentas.
+    */
      public Ferramenta RecuperaFerramentaDB(int IdFerramentas) {
          Ferramenta ferramenta = new Ferramenta();
          ferramenta.setIdFerramentas(IdFerramentas);
@@ -113,6 +116,11 @@ public class FerramentaDAO {
      
      
      
+     /**
+      * Atualiza as informações de uma ferramenta já existente no banco de dados.
+      * @param ferramenta é o objeto da ferramenta, o qual será atualizado.
+      * @return True, caso seja possivel atualizar, ou retorna um erro caso não seja possivel.
+      */
      
      public boolean UpdateFerramentaDB(Ferramenta ferramenta) {
     String res = "UPDATE tb_ferramentas SET NomeFerramentas=?, MarcaFerramentas=?, CustoFerramentas=? WHERE IdFerramentas=?";

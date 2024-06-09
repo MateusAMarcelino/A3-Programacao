@@ -117,11 +117,11 @@ public class EmprestimoDAO {
         return true;
     }
      
-     /**
-      * Atualiza as informações de um emprestimo ativo do banco de dados.
-      * @param objeto; É o objeto emprestimo a ser atualizado.
-      * @return True caso o emprestimo tiver sido atualizado com sucesso, false caso tenha dado algum erro.
-      */
+     /*
+    Recupera um emprestimo do nosso DB, procurando ele pelo Id do emprestimo.
+    @param IdEmprestimo é o id do emprestimo a ser  recuperado
+    @return retorna o emprestimo recuperado com base no IdEmprestimo.
+    */
      
      public Emprestimo RecuperaEmprestimoDB(int IdEmprestimo){
          Emprestimo emprestimo = new Emprestimo();
@@ -142,9 +142,11 @@ public class EmprestimoDAO {
         return emprestimo;
      }
      
-     /*
-     Atualiza um emprestimo no banco de dados.
-     */
+      /**
+      * Atualiza as informações de um emprestimo ativo do banco de dados.
+      * @param objeto; É o objeto emprestimo a ser atualizado.
+      * @return True caso o emprestimo tiver sido atualizado com sucesso, false caso tenha dado algum erro.
+      */
      public boolean updateEmprestimoBD(Emprestimo objeto) {
     String sql = "UPDATE tb_emprestimos SET IdAmigo=?, IdFerramentas=?, DataEmprestimo=?, DataDevolucao=? WHERE IdEmprestimo=?";
 
