@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import modelo.Amigo;
 
 public class AmigoDAO {
+    
+    /*
+    Inicia o Utilitario,para poder fazer a conecxão com o DB.
+    */
 
     private Utilitario ut = new Utilitario();
     
@@ -97,7 +101,7 @@ public class AmigoDAO {
     
     /**
      * Deleta um amigo do banco de dados.
-     * @param id é o id do amigo que será deletado.
+     * @param IdAmgio é o id do amigo que será deletado.
      * @return True, caso seja possivel deletar, ou retorna um erro caso não seja possivel.
      */
     public boolean deleteAmigoBD(int IdAmigo) {
@@ -111,6 +115,12 @@ public class AmigoDAO {
         }
         return true;
     }
+    
+    /*
+    Recupera um amigo do nosso DB, procurando ele pelo Id.
+    @param id é o id do amigo a ser  recuperado
+    @return retorna o amigo recuperado com base no Id.
+    */
     
     public Amigo RecuperaAmigoDB(int id) {
         Amigo amigo = new Amigo();
