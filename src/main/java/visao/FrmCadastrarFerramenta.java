@@ -7,14 +7,13 @@ import javax.swing.JOptionPane;
 
 public class FrmCadastrarFerramenta extends javax.swing.JFrame {
 
-   private Ferramenta objetoferramenta;
    
-   /**
-    * Inicia o um novo objeto ferramenta.
+    /*
+    Inicia os componentes, carregando a tela cadastrar ferramentas.
     */
     public FrmCadastrarFerramenta() {
         initComponents();
-        this.objetoferramenta = new Ferramenta();
+        new Ferramenta();
     }
     
     @SuppressWarnings("unchecked")
