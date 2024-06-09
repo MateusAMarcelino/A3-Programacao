@@ -10,7 +10,9 @@ import modelo.Emprestimo;
 
 public class EmprestimoDAO {
     
-    //chamando o metodo getConexao
+    /**
+     * Inicializa o Utilitario para podermos realizar a conecxão com o banco de dados.
+     */
     private Utilitario ut = new Utilitario();
     
     /**
@@ -139,6 +141,10 @@ public class EmprestimoDAO {
         }
         return emprestimo;
      }
+     
+     /*
+     Atualiza um emprestimo no banco de dados.
+     */
      public boolean updateEmprestimoBD(Emprestimo objeto) {
     String sql = "UPDATE tb_emprestimos SET IdAmigo=?, IdFerramentas=?, DataEmprestimo=?, DataDevolucao=? WHERE IdEmprestimo=?";
 
@@ -148,11 +154,11 @@ public class EmprestimoDAO {
         stmt.setInt(2, objeto.getIdFerramentas());
         stmt.setString(3, objeto.getDataEmp());
         
-        // Verifica se a data de devolução é nula ou vazia
+        // Verifica se a data de devolução de um emprestimo é nula ou não.
         if (objeto.getDataDev() == null || objeto.getDataDev().isEmpty()) {
-            stmt.setNull(4, Types.DATE); // Define null no banco de dados
+            stmt.setNull(4, Types.DATE); // Caso seja vazia, define a mesma como nula.
         } else {
-            stmt.setString(4, objeto.getDataDev()); // Define a data normalmente
+            stmt.setString(4, objeto.getDataDev()); // Caso não, define a data de devolução.
         }
 
         stmt.setInt(5, objeto.getIdEmprestimo());
