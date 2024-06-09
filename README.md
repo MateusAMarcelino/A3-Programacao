@@ -5,6 +5,15 @@ O presente trabalho tem como intuito propor a análise e modelagem de um sistema
 visando atender de forma eficaz às demandas específicas do cliente e de seus potenciais usuários. O objetivo principal é o desenvolvimento de um software que não apenas otimize o
 cadastro de ferramentas e amigos, mas também monitore de maneira eficiente o processo de empréstimo desses itens, fornecendo relatórios sobre despesas, empréstimos ativos e um histórico completo de transações.
 
+## 🧠 Integrantes do Grupo:
+
+➡️ Ana Carolina Vieira Marcondes Bories - 1072416427
+➡️ Davi Dias Perius  - 10724114628
+➡️ Guilherme Mitsuo Honda - 1072416697 - Conta GitHub - lmitsuol
+➡️ Lorenzo Eid Colaferro - 1072419633
+➡️ Mateus Aloisio Marcelino - 1072321293
+
+
 ## 🛠️ Linguagens e Tecnologias Utilizadas:
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
@@ -54,5 +63,7 @@ REQUISITOS NÃO FUNCIONAIS:
  Senha ; root
 
  Os scripts que terão de ser utilizados para criar o Banco de Dados, estão no arquivo [ banco.sql ]
+
+
 
 
