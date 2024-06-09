@@ -12,11 +12,17 @@ import modelo.Ferramenta;
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
+/*
+    Cria o vinculo com o Emprestimo ; Amigo e Ferramentas
+    */
+
     private Emprestimo emprestimo;
     private Amigo amigo;
     private Ferramenta ferramenta;
 
-    
+    /*
+    Inicia o FRMRelatorioEmprestimo, com todos seus componentes carregando e atualizando a tabela.
+    */
     public FrmRelatorioEmprestimo() {
         initComponents();
         this.emprestimo = new Emprestimo();
@@ -42,17 +48,17 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         JTEmprestimosAtivos = new javax.swing.JTable();
         JBCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        JLIDEmprestimo = new javax.swing.JLabel();
         JLId = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        JLNomeAmigo = new javax.swing.JLabel();
+        JLNomeFerramenta = new javax.swing.JLabel();
+        JLDataInicial = new javax.swing.JLabel();
+        JLDataDevolução = new javax.swing.JLabel();
         JBApagar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        JLnomeamigo = new javax.swing.JLabel();
+        JLnomeferramenta = new javax.swing.JLabel();
+        JLdataEmp = new javax.swing.JLabel();
+        JldataDev = new javax.swing.JLabel();
 
         JTEmprestimosRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,22 +106,22 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Amigo que mais fez emprestimos :");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Id do Empréstimo :");
+        JLIDEmprestimo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLIDEmprestimo.setText("Id do Empréstimo :");
 
         JLId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Nome do Amigo :");
+        JLNomeAmigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLNomeAmigo.setText("Nome do Amigo :");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Nome do Ferramenta :");
+        JLNomeFerramenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLNomeFerramenta.setText("Nome do Ferramenta :");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Data Inicio :");
+        JLDataInicial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLDataInicial.setText("Data Inicio :");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Data Devolução :");
+        JLDataDevolução.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLDataDevolução.setText("Data Devolução :");
 
         JBApagar.setText("Apagar");
         JBApagar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,13 +130,13 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLnomeamigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLnomeferramenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JLdataEmp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JldataDev.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,14 +152,14 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                             .addGap(79, 79, 79)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JLNomeAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel8)
+                                    .addComponent(JLnomeamigo)
                                     .addGap(527, 527, 527))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
+                                    .addComponent(JLDataDevolução)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel11)
+                                    .addComponent(JldataDev)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(JBApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -161,15 +167,15 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
+                                            .addComponent(JLDataInicial)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel10))
+                                            .addComponent(JLdataEmp))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
+                                            .addComponent(JLNomeFerramenta)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel9))
+                                            .addComponent(JLnomeferramenta))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
+                                            .addComponent(JLIDEmprestimo)
                                             .addGap(6, 6, 6)
                                             .addComponent(JLId)
                                             .addGap(213, 213, 213)
@@ -189,26 +195,26 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLIDEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JLId)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
+                    .addComponent(JLNomeAmigo)
+                    .addComponent(JLnomeamigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(JLNomeFerramenta)
+                    .addComponent(JLnomeferramenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel10))
+                    .addComponent(JLDataInicial)
+                    .addComponent(JLdataEmp))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11))
+                        .addComponent(JLDataDevolução, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JldataDev))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -224,7 +230,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         // Cancela a ação
         this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
-
+/*
+    Torna possivel exibir as informações de um emprestimo nos labels ao clicar neles.
+    */
     private void JTEmprestimosAtivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTEmprestimosAtivosMouseClicked
         // TODO add your handling code here:
        try {
@@ -239,49 +247,37 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
                 JLId.setText(idObj != null ? idObj.toString() : "");
                 JLId.setVisible(true);
-                jLabel8.setText(nomeAmigoObj != null ? nomeAmigoObj.toString() : "");
-                jLabel9.setText(nomeFerramentaObj != null ? nomeFerramentaObj.toString() : "");
-                jLabel10.setText(dataEmpObj != null ? dataEmpObj.toString() : "");
-                jLabel11.setText(dataDevObj != null ? dataDevObj.toString() : "FERRAMENTA NUNCA DEVOLVIDA");
+                JLnomeamigo.setText(nomeAmigoObj != null ? nomeAmigoObj.toString() : "");
+                JLnomeferramenta.setText(nomeFerramentaObj != null ? nomeFerramentaObj.toString() : "");
+                JLdataEmp.setText(dataEmpObj != null ? dataEmpObj.toString() : "");
+                JldataDev.setText(dataDevObj != null ? dataDevObj.toString() : "FERRAMENTA NUNCA DEVOLVIDA");
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao selecionar empréstimo: " + e.getMessage());
         }    
     }//GEN-LAST:event_JTEmprestimosAtivosMouseClicked
-
+/*
+    Torna possivel deletar um emprestimo ao apertar no botão de apagar.
+    */
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
 
         emprestimo.deleteEmprestimoBD(Integer.parseInt(JLId.getText()));
         JLId.setVisible(false);
-        jLabel8.setText("");
-        jLabel9.setText("");
-        jLabel10.setText("");
-        jLabel11.setText("");
+        JLnomeamigo.setText("");
+        JLnomeferramenta.setText("");
+        JLdataEmp.setText("");
+        JldataDev.setText("");
         this.CarregaListaEmprestimo();
     }//GEN-LAST:event_JBApagarActionPerformed
 
             
-  private int getIdFerramentaPorNome(String nomeFerramenta) {
-    for (Ferramenta ferramenta : ListaFerramentas) {
-        if (ferramenta.getNomeFerramentas().equals(nomeFerramenta)) {
-            return ferramenta.getIdFerramentas();
-        }
-    }
-    return -1; // Retorna -1 se não encontrar
-}
 
-private int getIdAmigoPorNome(String nomeAmigo) {
-    for (Amigo amigo : ListaAmigo) {
-        if (amigo.getNomeAmigo().equals(nomeAmigo)) {
-            return amigo.getIdAmigo();
-        }
-    }
-    return -1; // Retorna -1 se não encontrar
-}
     
     
-
+/*
+    Carrega a lista de emprestimos, puxando informações das tabelas de : Ferramentas e Amigos.
+    */
 public void CarregaListaEmprestimo() {
 DefaultTableModel model = (DefaultTableModel) JTEmprestimosAtivos.getModel();
 model.setRowCount(0);
@@ -321,7 +317,9 @@ for (int i = 0; i < listaEmprestimo.size(); i++) {
     });
 }
 }
-
+/*
+O metodo analisa qual nome mais repete e insere ele num label, exibindo qual o amigo mais repetido.
+*/
 private String amigoMaisRepetido() {
         HashMap<String, Integer> countMap = new HashMap<>();
         String amigoMaisRepetido = "";
@@ -339,7 +337,9 @@ private String amigoMaisRepetido() {
 
         return amigoMaisRepetido;
     }
-        
+       /*
+Metodo que coloca o metodo acima em um label.
+*/ 
         private void AtualizarAmigoMaisRepetido() {
         String amigoMaisRepetido = amigoMaisRepetido();
         jLabel4.setText("Amigo que mais fez empréstimos: " + amigoMaisRepetido);
@@ -396,20 +396,20 @@ private String amigoMaisRepetido() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBApagar;
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JLabel JLDataDevolução;
+    private javax.swing.JLabel JLDataInicial;
+    private javax.swing.JLabel JLIDEmprestimo;
     private javax.swing.JLabel JLId;
+    private javax.swing.JLabel JLNomeAmigo;
+    private javax.swing.JLabel JLNomeFerramenta;
+    private javax.swing.JLabel JLdataEmp;
+    private javax.swing.JLabel JLnomeamigo;
+    private javax.swing.JLabel JLnomeferramenta;
     private javax.swing.JTable JTEmprestimosAtivos;
     private javax.swing.JTable JTEmprestimosRealizados;
+    private javax.swing.JLabel JldataDev;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

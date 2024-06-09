@@ -177,6 +177,14 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
 
     }
     
+    
+    /*
+    Confirma a ação de emprestar, cadastrando a ferrementa e o amigo na lista de emprestimo.
+    
+    Caso o amigo já tenha um emprestimo aparecerá um aviso perguntando se realmente quer emprestar.
+    
+    Caso a ferramenta já esteja emprestada não será possivel emprestar.
+    */
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
         // TODO add your handling code here:
      try {
@@ -218,7 +226,10 @@ public class FrmEmprestimoDeFerramentas extends javax.swing.JFrame {
     private void jCBNomeFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNomeFerramentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBNomeFerramentaActionPerformed
-     public void carregaCBFerramenta() {
+    /*
+    Carrega a tabela de emprestimos, por isso puxa uma tabela de amigos e uma de ferramentas.
+    */
+    public void carregaCBFerramenta() {
         ArrayList<Ferramenta> listaFerramenta = ferramenta.ListaFerramenta();
         for (Ferramenta objeto : listaFerramenta) {
             jCBNomeFerramenta.addItem(objeto.getIdFerramentas() + "- " + objeto.getNomeFerramentas());

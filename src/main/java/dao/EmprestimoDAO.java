@@ -50,6 +50,9 @@ public class EmprestimoDAO {
        return ListaEmprestimo;
     }
     
+    /*
+    Define a lista de emprestimo.
+    */
     public void setListaEmprestimo(ArrayList<Emprestimo> ListaEmprestimo) {
         EmprestimoDAO.ListaEmprestimo = ListaEmprestimo;
         

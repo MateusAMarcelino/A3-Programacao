@@ -25,7 +25,9 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         this.objetoamigo = new Amigo();
         this.carregaTabela();
     }
-
+/*
+    Carrega a tabela de amigos, pegando as informações do banco de dados.
+    */
     public void carregaTabela(){
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigos.getModel();
         modelo.setNumRows(0);
@@ -219,7 +221,9 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
     private void JTFTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFTelefoneActionPerformed
-
+/*
+    Faz com que seja possivel selecioanr um amigo na tabela, clicando nela.
+    */
     private void jTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigosMouseClicked
         // TODO add your handling code here:
         if (this.jTableAmigos.getSelectedRow() != -1) {
@@ -231,6 +235,12 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableAmigosMouseClicked
 
+    
+    /*
+    Edita a informção de um amigo selecionado na tabela.
+    
+    Após editar limpa todos os TextFields
+    */
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
         // TODO add your handling code here:
         try {
@@ -269,7 +279,9 @@ public class FrmGerenciadorAmigo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         }
     }//GEN-LAST:event_JBEditarActionPerformed
-
+/*
+    Apaga um amigo, deletando o mesmo tambem do banco de dados.
+    */
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
         // TODO add your handling code here:
         try{
