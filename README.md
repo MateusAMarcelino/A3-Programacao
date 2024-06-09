@@ -7,15 +7,15 @@ cadastro de ferramentas e amigos, mas também monitore de maneira eficiente o pr
 
 ## 🧠 Integrantes do Grupo:
 
-➡️ Ana Carolina Vieira Marcondes Bories - 1072416427
+➡️ Ana Carolina Vieira Marcondes Bories - 1072416427 - Conta GitHub - anacvieiracc
 
-➡️ Davi Dias Perius  - 10724114628
+➡️ Davi Dias Perius  - 10724114628 - Conta GitHub - 
 
 ➡️ Guilherme Mitsuo Honda - 1072416697 - Conta GitHub - lmitsuol
 
-➡️ Lorenzo Eid Colaferro - 1072419633
+➡️ Lorenzo Eid Colaferro - 1072419633 - Conta GitHub - lorenzoeid 
 
-➡️ Mateus Aloisio Marcelino - 1072321293
+➡️ Mateus Aloisio Marcelino - 1072321293 - Conta GitHub - MateusAMarcelino
 
 
 ## 🛠️ Linguagens e Tecnologias Utilizadas:
