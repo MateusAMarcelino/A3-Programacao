@@ -338,9 +338,7 @@ public class FrmGerenciamentoDeFerramentas extends javax.swing.JFrame {
         });
     }
     
-/**
- * Carrega a lista do gerenciador, colocando todas as informações nas suas posições.
- */    
+   
 public void CarregaListaFerramenta(){
     DefaultTableModel modelo = (DefaultTableModel) this.JTableFerramentas.getModel();
     JLId.setVisible(false); /* Deixa o label que informa o Id vazio até que alguma ferramenta seja clicada */

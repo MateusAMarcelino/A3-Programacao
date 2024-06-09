@@ -110,18 +110,12 @@ public class Emprestimo {
         return true;
     }
 
-   public boolean updateEmprestimoBD(int IdEmprestimo, int IdAmigo, int IdFerramentas, String dataEmp, String dataDev) {
-    Emprestimo emprestimo = new Emprestimo(IdEmprestimo, IdAmigo, IdFerramentas, dataEmp, dataDev);
-    
-    // Atualiza o empréstimo no banco de dados
-    if (dao.updateEmprestimoBD(emprestimo)) {
-        // Se o empréstimo foi atualizado com sucesso, atualiza a disponibilidade da ferramenta para 1
-        ferramenta.updateFerramentaDB(IdFerramentas, "NomeFerramenta", "MarcaFerramenta", 0.0); // Substitua os argumentos conforme necessário
+  public boolean updateEmprestimoDB(int idEmprestimo, int idAmigo, int idFerramenta, String dataEmprestimo, String dataDevolucao) {
+        Emprestimo emprestimo = new Emprestimo(idEmprestimo, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao);
+        int indice = this.procuraIndice(idEmprestimo);
+        dao.updateEmprestimoBD(emprestimo);
         return true;
-    } else {
-        return false;
     }
-}
 
     public Emprestimo RecuperaEmprestimoDB(int IdEmprestimo) {
         return dao.RecuperaEmprestimoDB(IdEmprestimo);
