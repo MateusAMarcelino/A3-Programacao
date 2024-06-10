@@ -9,11 +9,11 @@ cadastro de ferramentas e amigos, mas também monitore de maneira eficiente o pr
 
 ➡️ Ana Carolina Vieira Marcondes Bories - RA:1072416427 - Conta GitHub - [anacvieiracc](https://github.com/anacvieiracc)
 
-➡️ Davi Dias Perius, (10724114628, Unisul ADM)  - RA:10724114628 - Conta GitHub - [Periusdv](https://github.com/Periusdv) 
+➡️ Davi Dias Perius - RA:10724114628 - Conta GitHub - [Periusdv](https://github.com/Periusdv) 10724114628, Unisul ADM
 
 ➡️ Guilherme Mitsuo Honda - RA:1072416697 - Conta GitHub - [lmitsuol](https://github.com/lmitsuol)
 
-➡️ Lorenzo Eid Colaferro, 1072419633 - RA:1072419633 - Conta GitHub - [lorenzoeid](https://github.com/lorenzoeid)
+➡️ Lorenzo Eid Colaferro - RA:1072419633 - Conta GitHub - [lorenzoeid](https://github.com/lorenzoeid) 1072419633
 
 ➡️ Mateus Aloisio Marcelino - RA:1072321293 - Conta GitHub - [MateusAMarcelino](https://github.com/MateusAMarcelino)
 
