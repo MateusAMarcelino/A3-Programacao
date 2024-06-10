@@ -9,7 +9,7 @@ cadastro de ferramentas e amigos, mas também monitore de maneira eficiente o pr
 
 ➡️ Ana Carolina Vieira Marcondes Bories - RA:1072416427 - Conta GitHub - [anacvieiracc](https://github.com/anacvieiracc)
 
-➡️ Davi Dias Perius, 10724114628, Unisul ADM  - RA:10724114628 - Conta GitHub - [Periusdv](https://github.com/Periusdv) 
+➡️ Davi Dias Perius, (10724114628, Unisul ADM)  - RA:10724114628 - Conta GitHub - [Periusdv](https://github.com/Periusdv) 
 
 ➡️ Guilherme Mitsuo Honda - RA:1072416697 - Conta GitHub - [lmitsuol](https://github.com/lmitsuol)
 
