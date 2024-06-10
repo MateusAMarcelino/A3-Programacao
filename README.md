@@ -13,7 +13,7 @@ cadastro de ferramentas e amigos, mas também monitore de maneira eficiente o pr
 
 ➡️ Guilherme Mitsuo Honda - RA:1072416697 - Conta GitHub - [lmitsuol](https://github.com/lmitsuol)
 
-➡️ Lorenzo Eid Colaferro - RA:1072419633 - Conta GitHub - [lorenzoeid](https://github.com/lorenzoeid)
+➡️ Lorenzo Eid Colaferro, 1072419633 - RA:1072419633 - Conta GitHub - [lorenzoeid](https://github.com/lorenzoeid)
 
 ➡️ Mateus Aloisio Marcelino - RA:1072321293 - Conta GitHub - [MateusAMarcelino](https://github.com/MateusAMarcelino)
 
